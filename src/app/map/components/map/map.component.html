@@ -1,4 +1,6 @@
 <div style="height: 1600px;"
      leaflet
-     [leafletOptions]="options">
+     [leafletOptions]="options"
+     [leafletLayers]="listOfPoints"
+     (leafletClick)="mapClicked($event)">
 </div>
