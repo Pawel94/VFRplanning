@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {circle, latLng, LeafletMouseEvent, Marker, marker, Polyline, polyline, tileLayer} from "leaflet";
 import {markerIconDefault} from "../../../constanst/marker.constans";
+import {WaypointsService} from "../../../shared/services/waypoints.service";
+import {Route, Waypoint} from "../../../shared/model/waypoint";
 
 @Component({
   selector: 'vfr-map',
@@ -10,8 +12,8 @@ import {markerIconDefault} from "../../../constanst/marker.constans";
 
 
 export class MapComponent implements OnInit {
-  poly: Polyline = polyline(([]));
-
+  routeBetweenMarkers: Polyline = polyline(([]));
+  listOfWayPoints: Waypoint[] = []
   options = {
     layers: [
       tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 18, attribution: '...'}),
@@ -23,6 +25,7 @@ export class MapComponent implements OnInit {
 
   };
   list?: Polyline;
+  route: Route = {listOfWaypoints: []};
   listOfMarkers: Marker[] = []
   listOfPoints = [
     circle([46.95, -122], {radius: 5000}),
@@ -30,7 +33,7 @@ export class MapComponent implements OnInit {
     polyline(([[28.635308, 77.22496], [46.879966, -121.726909]]))
   ];
 
-  constructor() {
+  constructor(private readonly waypointsService: WaypointsService) {
   }
 
   ngOnInit(): void {
@@ -41,21 +44,28 @@ export class MapComponent implements OnInit {
     this.addNewMarker($event)
     this.drawPolygone($event);
     this.createLayer();
+    this.createRoute(this.route)
   }
 
   private drawPolygone(event: LeafletMouseEvent): void {
-    this.poly.addLatLng(event.latlng)
+    this.routeBetweenMarkers.addLatLng(event.latlng)
   }
 
   private addNewMarker(event: LeafletMouseEvent) {
     this.listOfMarkers.push(marker(event.latlng, markerIconDefault))
+    this.route.listOfWaypoints.push(this.waypointsService.createWaypoint(event.latlng))
   }
 
   private createLayer() {
     this.listOfPoints = [];
     this.listOfMarkers.forEach(x => this.listOfPoints.push(x));
-    this.listOfPoints.push(this.poly)
+    this.listOfPoints.push(this.routeBetweenMarkers)
 
-    console.log(this.listOfPoints)
+  }
+
+  private createRoute(route?: Route) {
+    if (route != undefined) {
+      this.waypointsService.setRoute(route)
+    }
   }
 }
