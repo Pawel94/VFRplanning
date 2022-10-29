@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { DegreePipe } from './pipes/degree.pipe';
 
 
 
 @NgModule({
     declarations: [
-        NavbarComponent
+        NavbarComponent,
+        DegreePipe
     ],
     exports: [
-        NavbarComponent
+        NavbarComponent,
+        DegreePipe
     ],
     imports: [
 

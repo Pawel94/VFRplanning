@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {circle, latLng, LeafletMouseEvent, Marker, marker, Polyline, polyline, tileLayer} from "leaflet";
+import * as L from "leaflet";
+import {latLng, LayerGroup, LeafletMouseEvent, Marker, marker, Polyline, polyline, tileLayer} from "leaflet";
 import {markerIconDefault} from "../../../constanst/marker.constans";
-import {WaypointsService} from "../../../shared/services/waypoints.service";
+import {RouteService} from "../../../shared/services/route.service";
 import {Route, Waypoint} from "../../../shared/model/waypoint";
 
 @Component({
@@ -14,58 +15,60 @@ import {Route, Waypoint} from "../../../shared/model/waypoint";
 export class MapComponent implements OnInit {
   routeBetweenMarkers: Polyline = polyline(([]));
   listOfWayPoints: Waypoint[] = []
+  sMarkersLayer!: LayerGroup;
+  map!: L.Map;
   options = {
     layers: [
       tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 18, attribution: '...'}),
-      circle([46.95, -122], {radius: 5000}),
-      marker([46.879966, -121.726909],)
+      // circle([46.95, -122], {radius: 5000}),
+      // marker([46.879966, -121.726909],)
     ],
     zoom: 7,
     center: latLng(52.06, 19.25)
 
   };
-  list?: Polyline;
-  route: Route = {listOfWaypoints: []};
+  list?: Polyline[] = [];
+  actualRoute: Route = {listOfWaypoints: [], listOfMarkers: []};
   listOfMarkers: Marker[] = []
-  listOfPoints = [
-    circle([46.95, -122], {radius: 5000}),
-    marker([46.879966, -121.726909]),
-    polyline(([[28.635308, 77.22496], [46.879966, -121.726909]]))
-  ];
+  mapLayer: any = [];
 
-  constructor(private readonly waypointsService: WaypointsService) {
+  constructor(private readonly routeService: RouteService) {
+    this.routeService.selectedRoute$
+      .subscribe(route => {
+              this.actualRoute = route;
+        this.listOfMarkers = this.actualRoute.listOfMarkers;
+        this.calculateRouteBetweenMarkers();
+        this.prepareActualRoute();
+      })
   }
 
   ngOnInit(): void {
-
   }
 
   mapClicked($event: LeafletMouseEvent) {
     this.addNewMarker($event)
-    this.drawPolygone($event);
-    this.createLayer();
-    this.createRoute(this.route)
+    this.actualRoute.listOfMarkers = this.listOfMarkers;
+    this.routeService.setRoute(this.actualRoute)
+
   }
 
-  private drawPolygone(event: LeafletMouseEvent): void {
-    this.routeBetweenMarkers.addLatLng(event.latlng)
+  private calculateRouteBetweenMarkers(): void {
+    this.routeBetweenMarkers = polyline(([]))
+    this.listOfMarkers.forEach(marker => {
+      this.routeBetweenMarkers.addLatLng(marker.getLatLng())
+    })
+  }
+
+  private prepareActualRoute(): void {
+    this.mapLayer = [];
+    this.mapLayer.push(...this.listOfMarkers, this.routeBetweenMarkers);
   }
 
   private addNewMarker(event: LeafletMouseEvent) {
     this.listOfMarkers.push(marker(event.latlng, markerIconDefault))
-    this.route.listOfWaypoints.push(this.waypointsService.createWaypoint(event.latlng))
   }
 
-  private createLayer() {
-    this.listOfPoints = [];
-    this.listOfMarkers.forEach(x => this.listOfPoints.push(x));
-    this.listOfPoints.push(this.routeBetweenMarkers)
-
-  }
-
-  private createRoute(route?: Route) {
-    if (route != undefined) {
-      this.waypointsService.setRoute(route)
-    }
+  onMapReady(map: L.Map) {
+    this.map = map;
   }
 }

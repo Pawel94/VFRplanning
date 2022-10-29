@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {WaypointsService} from "../../../shared/services/waypoints.service";
-import {map, Observable} from "rxjs";
-import {Waypoint} from "../../../shared/model/waypoint";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Observable} from "rxjs";
+import {Marker} from "leaflet";
+
 
 @Component({
   selector: 'vfr-route-details',
@@ -10,12 +10,17 @@ import {Waypoint} from "../../../shared/model/waypoint";
 })
 export class RouteDetailsComponent implements OnInit {
 
-  constructor(private readonly waypointsService: WaypointsService) {
-  }
 
-  waypoints$: Observable<Waypoint[]> = this.waypointsService.selectedRoute$.pipe(map(x => x.listOfWaypoints));
+  @Input() waypoints$?: Observable<Marker[] | undefined>
+  @Output() removedWaypoint = new EventEmitter<Marker>();
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
+  removeWaypoint(element: Marker) {
+    this.removedWaypoint.emit(element);
+  }
 }

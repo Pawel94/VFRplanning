@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { WaypointsService } from './waypoints.service';
+import { RouteService } from './route.service';
 
 describe('WaypointsService', () => {
-  let service: WaypointsService;
+  let service: RouteService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(WaypointsService);
+    service = TestBed.inject(RouteService);
   });
 
   it('should be created', () => {

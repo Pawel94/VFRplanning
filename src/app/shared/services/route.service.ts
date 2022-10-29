@@ -5,8 +5,8 @@ import {Route, Waypoint} from "../model/waypoint";
 @Injectable({
   providedIn: 'root'
 })
-export class WaypointsService {
-  private route$ = new BehaviorSubject<Route>({listOfWaypoints: []});
+export class RouteService {
+  private route$ = new BehaviorSubject<Route>({listOfWaypoints: [], listOfMarkers: []});
   selectedRoute$ = this.route$.asObservable()
 
   constructor() {
@@ -23,4 +23,6 @@ export class WaypointsService {
     waypoint.lng = data.lng
     return waypoint
   }
+
+
 }
