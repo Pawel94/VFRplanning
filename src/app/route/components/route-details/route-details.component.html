@@ -1,5 +1,5 @@
 <ul>
-  <li *ngFor="let element of waypoints$|async">{{element.getLatLng()}}
+  <li *ngFor="let element of waypoints$|async">{{element.getLatLng().lat | degree}} {{element.getLatLng().lng | degree}}  {{element.distanceToNextPoint | distance}}
     <button class="btn-outline-danger" (click)="removeWaypoint(element)">Remove waypoint</button>
   </li>
 </ul>

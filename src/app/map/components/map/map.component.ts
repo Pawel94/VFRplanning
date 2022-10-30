@@ -28,17 +28,19 @@ export class MapComponent implements OnInit {
 
   };
   list?: Polyline[] = [];
-  actualRoute: Route = {listOfWaypoints: [], listOfMarkers: []};
+  actualRoute: Route = {listOfWaypoints: [] };
   listOfMarkers: Marker[] = []
   mapLayer: any = [];
 
   constructor(private readonly routeService: RouteService) {
     this.routeService.selectedRoute$
       .subscribe(route => {
-              this.actualRoute = route;
-        this.listOfMarkers = this.actualRoute.listOfMarkers;
+        this.actualRoute = route;
+      //  this.listOfMarkers = this.actualRoute.listOfMarkers;
+          this.listOfMarkers = this.actualRoute.listOfWaypoints;
         this.calculateRouteBetweenMarkers();
         this.prepareActualRoute();
+        console.log(this.actualRoute)
       })
   }
 
@@ -47,7 +49,8 @@ export class MapComponent implements OnInit {
 
   mapClicked($event: LeafletMouseEvent) {
     this.addNewMarker($event)
-    this.actualRoute.listOfMarkers = this.listOfMarkers;
+    //  this.actualRoute.listOfMarkers = this.listOfMarkers;
+    this.actualRoute.listOfWaypoints = this.listOfMarkers;
     this.routeService.setRoute(this.actualRoute)
 
   }
@@ -62,6 +65,7 @@ export class MapComponent implements OnInit {
   private prepareActualRoute(): void {
     this.mapLayer = [];
     this.mapLayer.push(...this.listOfMarkers, this.routeBetweenMarkers);
+
   }
 
   private addNewMarker(event: LeafletMouseEvent) {

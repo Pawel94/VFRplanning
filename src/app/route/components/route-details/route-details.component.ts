@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from "rxjs";
 import {Marker} from "leaflet";
+import {Waypoint} from "../../../shared/model/waypoint";
 
 
 @Component({
@@ -11,7 +12,7 @@ import {Marker} from "leaflet";
 export class RouteDetailsComponent implements OnInit {
 
 
-  @Input() waypoints$?: Observable<Marker[] | undefined>
+  @Input() waypoints$?: Observable<Waypoint[] | undefined>
   @Output() removedWaypoint = new EventEmitter<Marker>();
 
   constructor() {
