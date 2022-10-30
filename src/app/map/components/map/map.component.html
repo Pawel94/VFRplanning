@@ -2,6 +2,7 @@
      leaflet
      [leafletOptions]="options"
      [leafletLayers]="mapLayer"
+     (leafletMouseUp)="updateRouteOnMap($event)"
      (leafletClick)="mapClicked($event)"
      (leafletMapReady)="onMapReady($event)">
 </div>

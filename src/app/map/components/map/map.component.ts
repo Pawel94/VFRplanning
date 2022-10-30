@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import * as L from "leaflet";
 import {latLng, LayerGroup, LeafletMouseEvent, Marker, marker, Polyline, polyline, tileLayer} from "leaflet";
 import {markerIconDefault} from "../../../constanst/marker.constans";
@@ -36,8 +36,7 @@ export class MapComponent implements OnInit {
     this.routeService.selectedRoute$
       .subscribe(route => {
         this.actualRoute = route;
-      //  this.listOfMarkers = this.actualRoute.listOfMarkers;
-          this.listOfMarkers = this.actualRoute.listOfWaypoints;
+        this.listOfMarkers = this.actualRoute.listOfWaypoints;
         this.calculateRouteBetweenMarkers();
         this.prepareActualRoute();
         console.log(this.actualRoute)
@@ -49,7 +48,6 @@ export class MapComponent implements OnInit {
 
   mapClicked($event: LeafletMouseEvent) {
     this.addNewMarker($event)
-    //  this.actualRoute.listOfMarkers = this.listOfMarkers;
     this.actualRoute.listOfWaypoints = this.listOfMarkers;
     this.routeService.setRoute(this.actualRoute)
 
@@ -69,10 +67,19 @@ export class MapComponent implements OnInit {
   }
 
   private addNewMarker(event: LeafletMouseEvent) {
-    this.listOfMarkers.push(marker(event.latlng, markerIconDefault))
+    let markerToAdd = marker(event.latlng, markerIconDefault);
+    this.listOfMarkers.push(markerToAdd)
   }
 
   onMapReady(map: L.Map) {
     this.map = map;
+  }
+
+  ngAfterViewInit(): void {
+    this.calculateRouteBetweenMarkers()
+  }
+
+  updateRouteOnMap(event: any) {
+    this.routeService.setRoute(this.actualRoute)
   }
 }
