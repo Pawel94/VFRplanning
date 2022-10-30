@@ -5,10 +5,13 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class DegreePipe implements PipeTransform {
 
-  transform(valueToDegree: number | string): string {
+  transform(valueToDegree: number | string | undefined,extension: string = ''): string | null {
 
+    if (valueToDegree != undefined) {
 
-    return Number(valueToDegree).toFixed(2) + "º";
+      return Number(valueToDegree).toFixed(2) + "º" + extension;
+    }
+    return null;
   }
 
 }

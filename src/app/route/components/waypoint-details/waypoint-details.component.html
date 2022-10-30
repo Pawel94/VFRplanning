@@ -1,0 +1,32 @@
+<div class="card border-info mb-3 text-bg-dark">
+  <div class="card-header bg-transparent border-info">
+    <div class="row justify-content-between">
+      <div class="col-4">
+        One
+      </div>
+      <div class="col-4">
+        <button class="btn btn-danger" (click)="removeWaypoint(waypoint)" type="button">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <div class="container">
+      <div class="row">
+        <div class="col-4">Cord</div>
+        <div class="col">{{waypoint?.getLatLng()?.lat | degree:"N"}} {{waypoint?.getLatLng()?.lng | degree:"E"}}</div>
+      </div>
+      <div class="row">
+        <div class="col-4">Distance to next</div>
+        <div class="col card-text text-info">{{waypoint?.distanceToNextPoint | distance}} </div>
+      </div>
+      <div class="row">
+        <div class="col-4">Bearing</div>
+        <div class="col-4 card-text text-info">{{waypoint?.bearing | degree}} </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer bg-transparent border-info">Footer</div>
+</div>

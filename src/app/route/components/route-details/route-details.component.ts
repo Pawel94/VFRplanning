@@ -21,7 +21,10 @@ export class RouteDetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  removeWaypoint(element: Marker) {
-    this.removedWaypoint.emit(element);
+  // removedWaypoint($event: Marker) {
+  //
+  // }
+  removedWaypoint2($event: Marker) {
+    this.removedWaypoint.emit($event)
   }
 }

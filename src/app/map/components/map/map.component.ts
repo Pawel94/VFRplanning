@@ -15,7 +15,6 @@ import {Route, Waypoint} from "../../../shared/model/waypoint";
 export class MapComponent implements OnInit {
   routeBetweenMarkers: Polyline = polyline(([]));
   listOfWayPoints: Waypoint[] = []
-  sMarkersLayer!: LayerGroup;
   map!: L.Map;
   options = {
     layers: [

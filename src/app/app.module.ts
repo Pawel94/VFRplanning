@@ -8,12 +8,14 @@ import {CommonModule} from "./common/common.module";
 import {HttpClientModule} from "@angular/common/http";
 import { RouteDetailsComponent } from './route/components/route-details/route-details.component';
 import { RouteContainerComponent } from './route/components/route-container/route-container.component';
+import { WaypointDetailsComponent } from './route/components/waypoint-details/waypoint-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RouteDetailsComponent,
-    RouteContainerComponent
+    RouteContainerComponent,
+    WaypointDetailsComponent
   ],
   imports: [
     BrowserModule,
