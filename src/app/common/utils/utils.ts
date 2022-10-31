@@ -34,3 +34,15 @@ export function calculateBearing<T extends Waypoint, U>(list: T[]): U | null {
     }
   ), null;
 }
+
+export function addNameToPoints<T extends Waypoint>(list: T[]) {
+  list.forEach((item, index) => {
+    item.name = String.fromCharCode(index + 65)
+    item.bindTooltip("Waypoint " + item.name, //specific number,
+      {
+        permanent: false,
+        direction: 'left',
+        className: "my-labels"
+      });
+  });
+}

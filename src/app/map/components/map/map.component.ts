@@ -1,6 +1,6 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as L from "leaflet";
-import {latLng, LayerGroup, LeafletMouseEvent, Marker, marker, Polyline, polyline, tileLayer} from "leaflet";
+import {latLng, LeafletMouseEvent, Marker, marker, Polyline, polyline, tileLayer} from "leaflet";
 import {markerIconDefault} from "../../../constanst/marker.constans";
 import {RouteService} from "../../../shared/services/route.service";
 import {Route, Waypoint} from "../../../shared/model/waypoint";
@@ -27,7 +27,7 @@ export class MapComponent implements OnInit {
 
   };
   list?: Polyline[] = [];
-  actualRoute: Route = {listOfWaypoints: [] };
+  actualRoute: Route = {listOfWaypoints: []};
   listOfMarkers: Marker[] = []
   mapLayer: any = [];
 

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {Route, Waypoint} from "../model/waypoint";
-import {accumulateDistance, calculateBearing} from "../../common/utils/utils";
+import {accumulateDistance, addNameToPoints, calculateBearing} from "../../common/utils/utils";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,7 @@ export class RouteService {
     if (route.listOfWaypoints.length > 0) {
       accumulateDistance(route.listOfWaypoints);
       calculateBearing(route.listOfWaypoints);
+      addNameToPoints(route.listOfWaypoints)
     }
   }
 }

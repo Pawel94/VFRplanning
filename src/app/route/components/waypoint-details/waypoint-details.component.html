@@ -2,7 +2,7 @@
   <div class="card-header bg-transparent border-info">
     <div class="row justify-content-between">
       <div class="col-4">
-        One
+       Waypoint {{waypoint?.name}}
       </div>
       <div class="col-4">
         <button class="btn btn-danger" (click)="removeWaypoint(waypoint)" type="button">
@@ -15,15 +15,19 @@
     <h5 class="card-title"></h5>
     <div class="container">
       <div class="row">
-        <div class="col-4">Cord</div>
+        <div class="col-7">Cords</div>
         <div class="col">{{waypoint?.getLatLng()?.lat | degree:"N"}} {{waypoint?.getLatLng()?.lng | degree:"E"}}</div>
       </div>
       <div class="row">
-        <div class="col-4">Distance to next</div>
-        <div class="col card-text text-info">{{waypoint?.distanceToNextPoint | distance}} </div>
+        <div class="col-8">Dist. to next waypoint</div>
+        <div class="col card-text tex t-info">{{waypoint?.distanceToNextPoint | distance}} </div>
       </div>
       <div class="row">
-        <div class="col-4">Bearing</div>
+        <div class="col-8">Bearing to next waypoint</div>
+        <div class="col-4 card-text text-info">{{waypoint?.bearing | degree}} </div>
+      </div>
+      <div class="row">
+        <div class="col-8">Time to next waypoint</div>
         <div class="col-4 card-text text-info">{{waypoint?.bearing | degree}} </div>
       </div>
     </div>
