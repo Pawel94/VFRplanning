@@ -11,7 +11,6 @@ export class MapContainerComponent implements OnInit {
   constructor(private readonly mapService:MapService) { }
 
   ngOnInit(): void {
-    this.mapService.findAirPortsFrom("null").subscribe();
   }
 
 }

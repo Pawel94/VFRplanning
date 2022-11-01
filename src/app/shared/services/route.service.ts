@@ -1,7 +1,12 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {Route, Waypoint} from "../model/waypoint";
-import {accumulateDistance, addNameToPoints, calculateBearing} from "../../common/utils/utils";
+import {
+  accumulateDistance,
+  addNameToPoints,
+  calculateBearing,
+  calculateTimeBetweenWaypoints
+} from "../../common/utils/utils";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +20,7 @@ export class RouteService {
 
 
   setRoute(route: Route) {
-    this.calculateDistanceBetweenWaypoints(route);
+    this.prepareWaypoints(route);
     this.route$.next(route);
   }
 
@@ -26,11 +31,12 @@ export class RouteService {
     return waypoint
   }
 
-  private calculateDistanceBetweenWaypoints(route: Route) {
+  private prepareWaypoints(route: Route) {
     if (route.listOfWaypoints.length > 0) {
       accumulateDistance(route.listOfWaypoints);
       calculateBearing(route.listOfWaypoints);
       addNameToPoints(route.listOfWaypoints)
+      calculateTimeBetweenWaypoints(route.listOfWaypoints, 120)
     }
   }
 }

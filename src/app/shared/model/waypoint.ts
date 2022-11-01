@@ -7,6 +7,7 @@ export interface Waypoint extends Marker {
   isFirstPoint?: boolean;
   distanceToNextPoint?: number;
   bearing?: number;
+  timeToNextPoint?: number;
 }
 
 export interface Route {

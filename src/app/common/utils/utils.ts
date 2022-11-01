@@ -1,4 +1,5 @@
 import {Waypoint} from "../../shared/model/waypoint";
+import {hoursToMinutes} from 'date-fns'
 
 export function removeElementFromList<T>(list: T[], elementToRemove: T) {
   list.forEach((item, index) => {
@@ -45,4 +46,13 @@ export function addNameToPoints<T extends Waypoint>(list: T[]) {
         className: "my-labels"
       });
   });
+}
+
+export function calculateTimeBetweenWaypoints<T extends Waypoint, U>(list: T[], velocity: number): void {
+  list.forEach(waypoint => {
+    if (waypoint.distanceToNextPoint !== undefined) {
+      waypoint.timeToNextPoint =
+        hoursToMinutes(waypoint.distanceToNextPoint / velocity)
+    }
+  })
 }
