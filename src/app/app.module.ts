@@ -10,7 +10,7 @@ import {RouteContainerComponent} from './route/components/route-container/route-
 import {WaypointDetailsComponent} from './route/components/waypoint-details/waypoint-details.component';
 import {WaypointManagerComponent} from './route/components/waypoint-manager/waypoint-manager.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,9 +26,11 @@ import {FormsModule} from '@angular/forms';
     MapModule,
     CommonModule,
     HttpClientModule,
-    NgbModule, FormsModule
+    NgbModule, FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
