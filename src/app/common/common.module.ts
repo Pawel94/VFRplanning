@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DegreePipe } from './pipes/degree.pipe';
 import { DistancePipe } from './pipes/distance.pipe';
+import { ErrorValidationMessagesPipe } from './pipes/error-validation-messages.pipe';
 
 
 
@@ -10,12 +11,14 @@ import { DistancePipe } from './pipes/distance.pipe';
     declarations: [
         NavbarComponent,
         DegreePipe,
-        DistancePipe
+        DistancePipe,
+        ErrorValidationMessagesPipe
     ],
     exports: [
         NavbarComponent,
         DegreePipe,
-        DistancePipe
+        DistancePipe,
+        ErrorValidationMessagesPipe
     ],
     imports: [
 

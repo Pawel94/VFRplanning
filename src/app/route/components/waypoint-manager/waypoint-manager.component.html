@@ -9,7 +9,7 @@
           <div class="container">
             <div class="row">
               <div class="col-5">
-                <label>Search for a state:</label>
+                <label>Search for a airport:</label>
                 <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="model"
                        formControlName="placeByAirportName"
                        [ngbTypeahead]="search"/>
@@ -23,11 +23,24 @@
               </div>
               <div class="col-3">
                 <label for="lng">Lang:</label>
-                <input id="lng" type="text" class="form-control" formControlName="lng"/>
+                <input id="lng" type="number" class="form-control" formControlName="lng"/>
               </div>
             </div>
           </div>
-          <br />
+          {{waypointForm && waypointForm.controls['placeByAirportName'].errors}}
+          <div class="text-danger" *ngIf="waypointForm.errors && waypointForm.errors['latAndLatRequaired']">
+            {{ waypointForm.errors |errorValidationMessages}}
+            <!--          {{ newPackageForm.controls.contact.errors | errorMessages }}-->
+          </div>
+          <div class="text-danger"
+               *ngIf="waypointForm && waypointForm.controls['placeByAirportName'].errors&&
+               waypointForm.controls['placeByAirportName'].touched&&
+                 waypointForm.controls['placeByAirportName'].errors&&
+                waypointForm.controls['placeByAirportName'].dirty">
+            {{ waypointForm.controls['placeByAirportName'].errors |errorValidationMessages}}
+
+          </div>
+          <br/>
         </form>
         <div class="modal-footer">
           <button (click)="onSubmit()" class="btn btn-info">Add point</button>

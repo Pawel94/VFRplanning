@@ -3,11 +3,13 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap'
 import {MapService} from "../../../map/services/map.service";
 import {Airport} from "../../../map/model/modelForMaps";
 import {debounceTime, distinctUntilChanged, map, Observable, Subject, takeUntil} from "rxjs";
-import {FormControl, FormGroup} from "@angular/forms";
+import {AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidatorFn} from "@angular/forms";
 import {RouteService} from "../../../shared/services/route.service";
 import {Route} from 'src/app/shared/model/waypoint';
-import {LatLng, Marker} from "leaflet";
+import {DomUtil, LatLng, Marker} from "leaflet";
 import {markerIconDefault} from "../../../constanst/marker.constans";
+import {waypointForm} from "../../model";
+
 
 @Component({
   selector: 'vfr-waypoint-manager',
@@ -17,7 +19,17 @@ import {markerIconDefault} from "../../../constanst/marker.constans";
 export class WaypointManagerComponent implements OnInit, OnDestroy {
   searchedOptions: Airport[] = [];
   public model: any;
-  waypointForm!: FormGroup;
+  waypointForm: FormGroup = new FormGroup<waypointForm>({
+      placeByAirportName: new FormControl('', {
+        nonNullable: true,
+        asyncValidators: [userExistsValidator(this.mapService)]
+      },),
+      lat: new FormControl('', {nonNullable: true}),
+      lng: new FormControl(null, {nonNullable: true}),
+
+
+    }, {validators: [correctValueIsRequaired]},
+  );
   byLatLng!: FormGroup;
   acceptedAirport!: Airport;
   private actualRoute!: Route;
@@ -27,13 +39,8 @@ export class WaypointManagerComponent implements OnInit, OnDestroy {
   constructor(private readonly activeModal: NgbActiveModal,
               private readonly mapService: MapService,
               private readonly routeService: RouteService) {
-    this.waypointForm = new FormGroup({
-      placeByAirportName: new FormControl(''),
-      lat: new FormControl(''),
-      lng: new FormControl(''),
 
-
-    });
+    this.waypointForm
     this.waypointForm.valueChanges
       .pipe(
         takeUntil(this.unsubscribeSignal.asObservable()),
@@ -100,7 +107,7 @@ export class WaypointManagerComponent implements OnInit, OnDestroy {
 
   private toggleDisabledInputs(formValues: any) {
 
-    if ((formValues.lat === '' && formValues.lng === '') && (formValues.placeByAirportName === '' || formValues.placeByAirportName === undefined)) {
+    if ((formValues.lat === '' && formValues.lng === null) && (formValues.placeByAirportName === '' || formValues.placeByAirportName === undefined)) {
       this.waypointForm.get('placeByAirportName')?.enable()
       this.waypointForm.get('lat')?.enable()
       this.waypointForm.get('lng')?.enable()
@@ -117,4 +124,28 @@ export class WaypointManagerComponent implements OnInit, OnDestroy {
     }
   }
 
+}
+
+export const correctValueIsRequaired: ValidatorFn = (control: AbstractControl) => {
+  const lat = control.get('lat');
+  const lng = control.get('lng');
+  const city = control.get('placeByAirportName')
+  if (lat && lng) {
+    return lat.status !== "DISABLED" && (lat.touched || lng.touched) && (lat.value === '' || lng.value === null)
+      ? {latAndLatRequaired: true}
+      : null;
+  }
+
+  return null;
+};
+
+export function userExistsValidator(mapService: MapService): AsyncValidatorFn {
+
+  return (control: AbstractControl) => {
+    let placeByAirportName = control.value;
+    return mapService.findAirPortsFrom("null")
+      .pipe(
+        map(airport => airport.find(x => x.city === placeByAirportName) ? null : {airportNotExist: true})
+      );
+  }
 }
