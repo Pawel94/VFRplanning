@@ -1,0 +1,36 @@
+<div>
+  <div tabindex="-1" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Configure weater conditions</h5>
+      </div>
+      <div class="modal-body">
+        <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="model"
+               [ngbTypeahead]="getCityName"/>
+        <button (click)="getActualWeather()">Get actual weather for {{model}}</button>
+        <div class="modal-footer">
+          <table *ngIf="actualWeatherIMGW$" class="table">
+            <thead>
+            <tr>
+              <th scope="col">City</th>
+              <th scope="col">Speed</th>
+              <th scope="col">Direction</th>
+              <th scope="col">Source</th>
+              <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            <tr *ngFor="let element of actualWeather$ |async">
+              <td>{{element?.city }}</td>
+              <td>{{element?.windSpeed }}</td>
+              <td>{{element?.directionOfWind }}</td>
+              <td>{{element?.source }}</td>
+              <td><button class="btn btn-info">get data</button></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

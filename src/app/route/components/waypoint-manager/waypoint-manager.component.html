@@ -5,7 +5,9 @@
         <h5 class="modal-title" id="exampleModalLabel">Add new waypoint</h5>
       </div>
       <div class="modal-body">
-        <form [formGroup]="waypointForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="waypointForm" (ngSubmit)="onSubmit()"  [ngClass]="{
+              'is-valid':(airportFormControl?.dirty || airportFormControl?.touched)
+            }">
           <div class="container ">
             <div formGroupName="latAndLng" class="row p-2">
               <div class="col-4">
