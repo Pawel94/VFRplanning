@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {map, Observable} from "rxjs";
+import {catchError, map, Observable, of} from "rxjs";
 import {Weather} from "../model/indexWeater";
 
 @Injectable({
@@ -14,28 +14,30 @@ export class WeatherService {
   IMGW_LINK = " https://danepubliczne.imgw.pl/api/data/synop/station/"
   OPEN_METEO = "https://api.open-meteo.com/v1/forecast?latitude=52.17&longitude=16.4410&current_weather=true&windspeed_unit=ms"
 
-  getWeatherDataFromIMGW(city: string): Observable<Weather> {
+  getWeatherDataFromIMGW(city: string | undefined): Observable<Weather> {
 
     return this.httpRequest.get(this.IMGW_LINK + city)
       .pipe(map((response: any) =>
-        ({
-          windSpeed: response.predkosc_wiatru,
-          directionOfWind: response.kierunek_wiatru,
-          city: response.stacja,
-          source: "IMGW Poland"
-        } as Weather)))
+          ({
+            windSpeed: response.predkosc_wiatru,
+            directionOfWind: response.kierunek_wiatru,
+            city: response.stacja,
+            source: "IMGW Poland"
+          } as Weather)),
+        catchError(val => of({city: val} as Weather)))
   }
 
-  getWeatherDataFromOPEN_METEO(): Observable<any> {
+  getWeatherDataFromOPEN_METEO(lat: string | undefined, lng: string | undefined): Observable<any> {
 
-    return this.httpRequest.get(this.OPEN_METEO)
+    return this.httpRequest.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current_weather=true&windspeed_unit=ms`)
       .pipe(map((response: any) =>
-      ({
-        windSpeed: response.current_weather.windspeed,
-        directionOfWind: response.current_weather.winddirection,
-        city: response.current_weather.latitude + " " + response.current_weather.latitude,
-        source: "OPEN_METEO"
-      } as Weather)))
+        ({
+          windSpeed: response.current_weather.windspeed,
+          directionOfWind: response.current_weather.winddirection,
+          city: "",
+          source: "OPEN_METEO"
+        } as Weather)))
 
   }
+
 }

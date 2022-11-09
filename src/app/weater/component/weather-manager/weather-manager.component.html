@@ -5,9 +5,27 @@
         <h5 class="modal-title" id="exampleModalLabel">Configure weater conditions</h5>
       </div>
       <div class="modal-body">
-        <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="model"
-               [ngbTypeahead]="getCityName"/>
-        <button (click)="getActualWeather()">Get actual weather for {{model}}</button>
+        <div class="container ">
+          <div class="row p-2 m-2">
+            <label for="typeahead-basic">Find by place</label>
+            <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="model"
+                   [ngbTypeahead]="getCityName"/>
+          </div>
+          <div class="row p-2 m-2">
+            <label for="typeahead-basic">Get by lat/lng</label>
+            <div class="col-4">
+              <label for="latitude">Latitude:</label>
+              <input id="latitude" type="number" class="form-control" formControlName="latitude"/>
+            </div>
+            <div class="col-4">
+              <label for="longitude">Longitude:</label>
+              <input id="longitude" type="number" class="form-control" formControlName="longitude"/>
+            </div>
+          </div>
+          <div class="row p-2 m-2">
+            <button class="btn btn-outline-dark" (click)="getActualWeather()">Get actual weather for {{model}}</button>
+          </div>
+        </div>
         <div class="modal-footer">
           <table *ngIf="actualWeatherIMGW$" class="table">
             <thead>
@@ -21,11 +39,13 @@
             </thead>
             <tbody class="table-group-divider">
             <tr *ngFor="let element of actualWeather$ |async">
-              <td>{{element?.city }}</td>
+              <td>{{element?.city}}</td>
               <td>{{element?.windSpeed }}</td>
               <td>{{element?.directionOfWind }}</td>
               <td>{{element?.source }}</td>
-              <td><button class="btn btn-info">get data</button></td>
+              <td>
+                <button class="btn btn-info">get data</button>
+              </td>
             </tr>
             </tbody>
           </table>

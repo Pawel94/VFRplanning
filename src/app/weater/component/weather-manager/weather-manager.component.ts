@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {WeatherService} from "../../service/weather.service";
-import {combineLatest, debounceTime, distinctUntilChanged, map, Observable, OperatorFunction} from "rxjs";
+import {debounceTime, distinctUntilChanged, map, Observable} from "rxjs";
 import {Weather} from "../../model/indexWeater";
+import {CommonService} from "../../../common/services/common.service";
+import {Airport} from "../../../map/model/modelForMaps";
 
 @Component({
   selector: 'vfr-weater-manager',
@@ -9,36 +11,43 @@ import {Weather} from "../../model/indexWeater";
   styleUrls: ['./weather-manager.component.scss']
 })
 export class WeatherManagerComponent implements OnInit {
-  @Input() fromParent!: string[];
+  @Input() fromParent!: Airport[];
+  private acceptedAirport?: Airport;
 
-  constructor(private readonly weatherService: WeatherService) {
+  constructor(private readonly weatherService: WeatherService, private readonly common: CommonService) {
   }
 
   actualWeatherIMGW$?: Observable<Weather>
-  actualWeatherIMGW$2?: Observable<Weather>
-  searchedOptions?: any["Poznan"];
+  actualWeaterOpenMeteo?: Observable<Weather>
   actualWeather$?: Observable<Weather[]>
 
   ngOnInit(): void {
-    // this.weatherService.getWeatherDataFromOPEN_METEO().subscribe(x => console.log(x));
-  //
+    this.common.getCitiesFromDB().subscribe(x => console.log(x))
   }
 
   getActualWeather() {
-    this.actualWeatherIMGW$ = this.weatherService.getWeatherDataFromIMGW("poznan")
-    this.actualWeatherIMGW$2 = this.weatherService.getWeatherDataFromOPEN_METEO()
-    this.actualWeather$ = combineLatest(this.actualWeatherIMGW$, this.actualWeatherIMGW$2).pipe(
-      map(([a, b]) => [a, b])
-    );
+    this.actualWeatherIMGW$ = this.weatherService.getWeatherDataFromIMGW(this.acceptedAirport?.city)
+    this.actualWeaterOpenMeteo = this.weatherService.getWeatherDataFromOPEN_METEO(this.acceptedAirport?.lat, this.acceptedAirport?.lng)
+    this.actualWeather$ = this.actualWeaterOpenMeteo.pipe(
+      map(place => {
+        place.city = this.acceptedAirport?.city ?? ""
+        return [place]
+      }))
   }
 
-  getCityName: OperatorFunction<string, readonly string[]> = (text$: Observable<string | undefined>) =>
+  getCityName: (text$: Observable<string>) => Observable<string[]> = (text$: Observable<string>) =>
     text$.pipe(
+      // takeUntil(this.unsubscribeSignal.asObservable()),
       debounceTime(200),
       distinctUntilChanged(),
       map((term) =>
-        term === '' ? [] : this.fromParent.filter((v) => v.toLowerCase().indexOf(term!.toLowerCase()) > -1).slice(0, 10),
+        term.length < 2 ? [] : this.fromParent.filter((v) => v.city.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
       ),
+      map(x => x.map(x => {
+          this.acceptedAirport = x;
+          return x.city
+        }
+      )),
     );
 
   model: any;

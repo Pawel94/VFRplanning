@@ -9,6 +9,7 @@ import {Route} from 'src/app/shared/model/waypoint';
 import {LatLng, Marker} from "leaflet";
 import {markerIconDefault} from "../../../constanst/marker.constans";
 import {latAndLngFormGroup, waypointForm} from "../../model";
+import {CommonService} from "../../../common/services/common.service";
 
 
 @Component({
@@ -17,7 +18,7 @@ import {latAndLngFormGroup, waypointForm} from "../../model";
   styleUrls: ['./waypoint-manager.component.scss']
 })
 export class WaypointManagerComponent implements OnInit, OnDestroy {
-  private searchedOptions: Airport[] = [];
+  private searchedOptions: any[] = [];
   public model: any;
   waypointForm: FormGroup = new FormGroup<waypointForm>({
       latAndLng: new FormGroup<latAndLngFormGroup>({
@@ -25,7 +26,8 @@ export class WaypointManagerComponent implements OnInit, OnDestroy {
         longitude: new FormControl<number | null>(null, {validators: longitudeValueIsNotCorrect}),
       }, {validators: [correctValueIsRequaired]}),
       place: new FormGroup<any>({
-        airport: new FormControl('', {nonNullable: true, asyncValidators: [userExistsValidator(this.mapService)]}),
+        // airport: new FormControl('', {nonNullable: true, asyncValidators: [userExistsValidator(this.mapService)]}),
+        airport: new FormControl('', {nonNullable: true,}),
       })
 
     },
@@ -38,6 +40,7 @@ export class WaypointManagerComponent implements OnInit, OnDestroy {
   constructor(private readonly activeModal: NgbActiveModal,
               private readonly mapService: MapService,
               private readonly routeService: RouteService,
+              private readonly common: CommonService
   ) {
 
     this.waypointForm.valueChanges
@@ -73,7 +76,7 @@ export class WaypointManagerComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.mapService.findAirPortsFrom("null")
+    this.common.getCitiesFromDB()
       .pipe(
         takeUntil(this.unsubscribeSignal.asObservable()))
       .subscribe(element => {
@@ -94,14 +97,10 @@ export class WaypointManagerComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     let latLng;
-    console.log(this.latFormControl?.value)
-    console.log(this.lngFormControl?.value)
-    console.log(this.isAddedMarkerByCity)
     if (!this.isAddedMarkerByCity) {
       latLng = new LatLng(Number(this.latFormControl?.value), Number(this.lngFormControl?.value));
-      console.log(latLng)
     } else {
-      latLng = new LatLng(Number(this.acceptedAirport.lat), Number(this.acceptedAirport.lon));
+      latLng = new LatLng(Number(this.acceptedAirport.lat), Number(this.acceptedAirport.lng));
     }
     console.log(latLng)
     this.actualRoute?.listOfWaypoints.push(new Marker(latLng, markerIconDefault));

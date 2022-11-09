@@ -1,7 +1,7 @@
 export interface Airport {
   code: string
   lat: string
-  lon: string
+  lng: string
   name: string
   city: string
   state: string
@@ -18,3 +18,5 @@ export interface Airport {
   direct_flights: string
   carriers: string
 }
+
+

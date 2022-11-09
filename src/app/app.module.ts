@@ -11,6 +11,10 @@ import {WaypointDetailsComponent} from './route/components/waypoint-details/wayp
 import {WaypointManagerComponent} from './route/components/waypoint-manager/waypoint-manager.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {WeatherManagerComponent} from './weater/component/weather-manager/weather-manager.component';
+import {AngularFireModule} from "@angular/fire/compat";
+import {environment} from "../environments/environment";
+import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 
 @NgModule({
   declarations: [
@@ -18,7 +22,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     RouteDetailsComponent,
     RouteContainerComponent,
     WaypointDetailsComponent,
-    WaypointManagerComponent
+    WaypointManagerComponent,
+    WeatherManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     CommonModule,
     HttpClientModule,
     NgbModule, FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
