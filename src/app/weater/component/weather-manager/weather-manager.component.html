@@ -12,9 +12,7 @@
           <div class="modal-body">
             <vfr-search-form (dataFromForm)="addNewWeatherPoint($event)"></vfr-search-form>
           </div>
-          <div class="row p-2 m-2">
-            <button class="btn btn-outline-dark" (click)="getActualWeather()">Get actual weather for </button>
-          </div>
+
         </div>
         <div class="modal-footer">
           <table *ngIf="actualWeather$" class="table">
