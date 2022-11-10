@@ -1,0 +1,54 @@
+<form [formGroup]="waypointForm" (ngSubmit)="onSubmit()" [ngClass]="{
+'is-valid':(airportFormControl?.dirty || airportFormControl?.touched)
+}">
+  <div class="container ">
+    <div formGroupName="latAndLng" class="row p-2">
+      <div class="col-4">
+        <label for="latitude">Latitude:</label>
+        <input id="latitude" type="number" class="form-control" formControlName="latitude"/>
+      </div>
+      <div class="col-4">
+        <label for="longitude">Longitude:</label>
+        <input id="longitude" type="number" class="form-control" formControlName="longitude"/>
+      </div>
+    </div>
+    <div formGroupName="place" class="row p-2">
+      <div class="col">
+        <label for="typeahead-basic">Find by name of airport</label>
+        <input id="typeahead-basic" type="text" class="form-control"
+               formControlName="airport"
+               [(ngModel)]="inputModel"
+               [ngbTypeahead]="getCityName"/>
+      </div>
+
+      {{inputModel|json}}
+    </div>
+  </div>
+
+  <div class="text-danger"
+       *ngIf="latFormControl&& latFormControl.errors ">
+    {{ latFormControl.errors |errorValidationMessages}}
+  </div>
+
+  <div class="text-danger"
+       *ngIf="lngFormControl&& lngFormControl.errors ">
+    {{ lngFormControl.errors |errorValidationMessages}}
+  </div>
+  <div class="text-danger"
+       *ngIf="latAndLngFormGroup && latAndLngFormGroup.dirty && latAndLngFormGroup.errors ">
+
+    {{ latAndLngFormGroup.errors |errorValidationMessages}}
+  </div>
+
+  <div class="text-danger"
+       *ngIf="airportFormControl&& airportFormControl.touched && airportFormControl.errors&& airportFormControl.value !=''">
+    {{ airportFormControl.errors |errorValidationMessages}}
+
+  </div>
+  <br/>
+  <div class="modal-footer">
+    <button (click)="onSubmit()" class="btn btn-info"
+            [disabled]="latAndLngFormGroup?.errors ||airportFormControl?.errors ">Add point
+    </button>
+  </div>
+</form>

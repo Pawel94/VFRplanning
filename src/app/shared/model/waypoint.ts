@@ -1,9 +1,7 @@
 import {Marker} from "leaflet";
 
-export interface Waypoint extends Marker {
-  lat?: string;
-  lng?: string;
-  name?: string
+export interface Waypoint extends Marker,Place {
+  nameOfPoint?:string;
   isFirstPoint?: boolean;
   distanceToNextPoint?: number;
   bearing?: number;
@@ -12,5 +10,9 @@ export interface Waypoint extends Marker {
 
 export interface Route {
   listOfWaypoints: Waypoint[];
-  //listOfMarkers: Marker[];
+}
+export interface Place {
+  lat?: number;
+  lng?: number;
+  city?: string
 }

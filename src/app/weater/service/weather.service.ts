@@ -27,7 +27,7 @@ export class WeatherService {
         catchError(val => of({city: val} as Weather)))
   }
 
-  getWeatherDataFromOPEN_METEO(lat: string | undefined, lng: string | undefined): Observable<any> {
+  getWeatherDataFromOPEN_METEO(lat: number , lng: number ): Observable<Weather> {
 
     return this.httpRequest.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current_weather=true&windspeed_unit=ms`)
       .pipe(map((response: any) =>

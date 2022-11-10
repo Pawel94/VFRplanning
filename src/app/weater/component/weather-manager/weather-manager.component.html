@@ -3,31 +3,21 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Configure weater conditions</h5>
+        <button type="button" class="btn close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
         <div class="container ">
-          <div class="row p-2 m-2">
-            <label for="typeahead-basic">Find by place</label>
-            <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="model"
-                   [ngbTypeahead]="getCityName"/>
+          <div class="modal-body">
+            <vfr-search-form (dataFromForm)="addNewWeatherPoint($event)"></vfr-search-form>
           </div>
           <div class="row p-2 m-2">
-            <label for="typeahead-basic">Get by lat/lng</label>
-            <div class="col-4">
-              <label for="latitude">Latitude:</label>
-              <input id="latitude" type="number" class="form-control" formControlName="latitude"/>
-            </div>
-            <div class="col-4">
-              <label for="longitude">Longitude:</label>
-              <input id="longitude" type="number" class="form-control" formControlName="longitude"/>
-            </div>
-          </div>
-          <div class="row p-2 m-2">
-            <button class="btn btn-outline-dark" (click)="getActualWeather()">Get actual weather for {{model}}</button>
+            <button class="btn btn-outline-dark" (click)="getActualWeather()">Get actual weather for </button>
           </div>
         </div>
         <div class="modal-footer">
-          <table *ngIf="actualWeatherIMGW$" class="table">
+          <table *ngIf="actualWeather$" class="table">
             <thead>
             <tr>
               <th scope="col">City</th>
