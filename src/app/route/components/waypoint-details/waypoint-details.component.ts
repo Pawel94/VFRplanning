@@ -12,11 +12,16 @@ export class WaypointDetailsComponent implements OnInit {
   @Input()
   waypoint?:Waypoint;
   @Output() removedCurrentWaypoint = new EventEmitter<Marker>();
+  @Output() updateCurrentWaypoint = new EventEmitter<Marker>();
   constructor() { }
 
   ngOnInit(): void {
   }
   removeWaypoint(element: any) {
     this.removedCurrentWaypoint.emit(element);
+  }
+  updateWaypoint(element: any) {
+    console.log(element)
+    this.updateCurrentWaypoint.emit(element);
   }
 }

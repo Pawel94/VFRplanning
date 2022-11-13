@@ -1,5 +1,9 @@
 <div *ngFor="let waypoint of waypoints$|async">
-  <vfr-waypoint-details [waypoint]="waypoint" (removedCurrentWaypoint)="removedWaypoint2($event)"></vfr-waypoint-details>
+  <vfr-waypoint-details [waypoint]="waypoint"
+                        (removedCurrentWaypoint)="removedWaypoint2($event)"
+                        (updateCurrentWaypoint)="updateWaypoint2($event)">
+
+  </vfr-waypoint-details>
 </div>
 
 

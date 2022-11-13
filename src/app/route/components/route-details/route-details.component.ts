@@ -14,16 +14,16 @@ export class RouteDetailsComponent implements OnInit {
 
   @Input() waypoints$?: Observable<Waypoint[] | undefined>
   @Output() removedWaypoint = new EventEmitter<Marker>();
-
+  @Output() updatedWaypoint = new EventEmitter<Marker>();
   constructor() {
   }
 
   ngOnInit(): void {
   }
 
-  // removedWaypoint($event: Marker) {
-  //
-  // }
+  updateWaypoint2($event: Marker) {
+    this.updatedWaypoint.emit($event)
+  }
   removedWaypoint2($event: Marker) {
     this.removedWaypoint.emit($event)
   }

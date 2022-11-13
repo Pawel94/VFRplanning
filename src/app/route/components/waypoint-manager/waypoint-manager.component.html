@@ -8,7 +8,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <vfr-search-form (dataFromForm)="addNewWaypoint($event)"></vfr-search-form>
+        <vfr-search-form [editedWaypoint]="updateMarker"
+                         [typeOfForm]="type"
+                         (dataFromForm)="addNewWaypoint($event)"
+                         (resultOfEditedWaypoint)="editWaypoint($event)">
+        </vfr-search-form>
       </div>
     </div>
   </div>

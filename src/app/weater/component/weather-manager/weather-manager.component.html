@@ -10,7 +10,10 @@
       <div class="modal-body">
         <div class="container ">
           <div class="modal-body">
-            <vfr-search-form (dataFromForm)="addNewWeatherPoint($event)"></vfr-search-form>
+            <vfr-search-form [typeOfForm]="type"
+                             (dataFromForm)="addNewWeatherPoint($event)">
+
+            </vfr-search-form>
           </div>
 
         </div>

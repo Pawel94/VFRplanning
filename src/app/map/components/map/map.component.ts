@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import * as L from "leaflet";
-import {latLng, LeafletMouseEvent, Marker, marker, Polyline, polyline, tileLayer} from "leaflet";
+import {latLng, LeafletMouseEvent, marker, Polyline, polyline, tileLayer} from "leaflet";
 import {markerIconDefault} from "../../../constanst/marker.constans";
 import {RouteService} from "../../../shared/services/route.service";
 import {Route, Waypoint} from "../../../shared/model/waypoint";
+import {v4, v4 as uuid} from 'uuid'
 
 @Component({
   selector: 'vfr-map',
@@ -28,8 +29,9 @@ export class MapComponent implements OnInit {
   };
   list?: Polyline[] = [];
   actualRoute: Route = {listOfWaypoints: []};
-  listOfMarkers: Marker[] = []
+  listOfMarkers: Waypoint[] = []
   mapLayer: any = [];
+  markerToAdd2?: Waypoint;
 
   constructor(private readonly routeService: RouteService) {
     this.routeService.selectedRoute$
@@ -66,8 +68,10 @@ export class MapComponent implements OnInit {
   }
 
   private addNewMarker(event: LeafletMouseEvent) {
-    let markerToAdd = marker(event.latlng, markerIconDefault);
-    this.listOfMarkers.push(markerToAdd)
+    this.markerToAdd2 = {} as Waypoint
+    this.markerToAdd2 = marker(event.latlng, markerIconDefault);
+    this.markerToAdd2.id = uuid()
+    this.listOfMarkers.push(this.markerToAdd2)
   }
 
   onMapReady(map: L.Map) {

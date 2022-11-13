@@ -5,12 +5,12 @@
         Waypoint {{waypoint?.nameOfPoint}}
       </div>
       <div class="col-4">
-        <button class="btn btn-danger" (click)="removeWaypoint(waypoint)" type="button">
+        <button class="btn btn-outline-success my-2 my-sm-0" (click)="updateWaypoint(waypoint)" type="button">
           Edit Waypoint
         </button>
       </div>
       <div class="col-4">
-        <button class="btn btn-danger" (click)="removeWaypoint(waypoint)" type="button">
+        <button class="btn btn-danger" (click)="removeWaypoint(waypoint)" type="button" >
           Delete
         </button>
       </div>
@@ -36,6 +36,7 @@
         <div class="col-8">Time to next waypoint</div>
         <div class="col-4 card-text text-info">{{waypoint?.timeToNextPoint}} </div>
       </div>
+      {{waypoint?.id}}
     </div>
   </div>
   <div class="card-footer bg-transparent border-info">Footer</div>

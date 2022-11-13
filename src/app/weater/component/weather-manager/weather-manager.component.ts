@@ -14,6 +14,7 @@ import {Place} from "../../../shared/model/waypoint";
 })
 export class WeatherManagerComponent implements OnInit, OnDestroy {
   @Input() fromParent!: Airport[];
+  public type: string = "weather-form"
   actualWeatherIMGW$?: Observable<Weather>
   actualWeaterOpenMeteo?: Observable<Weather>
   actualWeather$?: Observable<Weather[]>

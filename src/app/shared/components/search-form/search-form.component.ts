@@ -1,12 +1,12 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
-import {AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidatorFn} from "@angular/forms";
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {FormControl, FormGroup} from "@angular/forms";
 
 import {latAndLngFormGroup, waypointForm} from "../../../route/model";
-import {debounceTime, delay, distinctUntilChanged, map, Observable, Subject, takeUntil, tap} from "rxjs";
-import {Airport} from "../../../map/model/modelForMaps";
-import {MapService} from "../../../map/services/map.service";
+import {debounceTime, distinctUntilChanged, map, Observable, Subject, takeUntil} from "rxjs";
 import {CommonService} from "../../../common/services/common.service";
-import {Place} from "../../model/waypoint";
+import {Waypoint} from "../../model/waypoint";
+import {v4 as uuid} from "uuid";
+import {correctValueIsRequaired, latitudeValueIsNotCorrect, longitudeValueIsNotCorrect} from '../../utils/utils-forms';
 
 @Component({
   selector: 'vfr-search-form',
@@ -15,13 +15,18 @@ import {Place} from "../../model/waypoint";
 })
 export class SearchFormComponent implements OnInit, OnDestroy {
 
-  @Output() dataFromForm = new EventEmitter<Place>();
+  @Output() dataFromForm = new EventEmitter<Waypoint>();
+  @Output() resultOfEditedWaypoint = new EventEmitter<Waypoint>();
+  @Input() public editedWaypoint?: Waypoint;
+  @Input() public typeOfForm?: string;
 
   private listOfCitiesFromDB: any[] = [];
   private isAddedPointWithLatLng: boolean = false;
   private unsubscribeSignal: Subject<void> = new Subject();
-  private placeToFind!: Place
+  private placeToFind!: Waypoint
+
   inputModel: any;
+  buttonText?: string;
 
   waypointForm: FormGroup = new FormGroup<waypointForm>({
       latAndLng: new FormGroup<latAndLngFormGroup>({
@@ -34,6 +39,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     },
   );
+
 
   constructor(public readonly common: CommonService) {
 
@@ -50,6 +56,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
       .subscribe(values => {
         this.toggleDisabledInputs();
       })
+
   }
 
   ngOnDestroy(): void {
@@ -70,19 +77,79 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.setButtonText();
+    this.latAndLngFormGroup?.patchValue({
+      latitude: this.editedWaypoint?.getLatLng().lat,
+      longitude: this.editedWaypoint?.getLatLng().lng
+    })
   }
 
-  onSubmit() {
+  submitWaypointForm() {
+    if (this.editedWaypoint) {
+      this.editExistingWaypoint();
+    } else {
+      this.addNewPoint();
+    }
+  }
+
+  private editExistingWaypoint() {
+    this.editedWaypoint!.lat = Number(this.latFormControl?.value);
+    this.editedWaypoint!.lng = Number(this.lngFormControl?.value);
+
+    if (this.isAddedPointWithLatLng) {
+      this.placeToFind = this.listOfCitiesFromDB.find(x => x.city === this.inputModel);
+      this.editedWaypoint!.lat = this.placeToFind.lat
+      this.editedWaypoint!.lng = this.placeToFind.lng
+      this.editedWaypoint!.city = this.placeToFind.city
+    }
+    this.resultOfEditedWaypoint.emit(this.editedWaypoint);
+
+  }
+
+  addNewPoint() {
     this.placeToFind = {
       lat: Number(this.latFormControl?.value),
       lng: Number(this.lngFormControl?.value),
-      city: "to make"
-    } as Place
+      city: "to make",
+      id: uuid()
+    } as Waypoint
     if (this.isAddedPointWithLatLng) {
       this.placeToFind = this.listOfCitiesFromDB.find(x => x.city === this.inputModel);
     }
-
     this.dataFromForm.emit(this.placeToFind);
+  }
+
+
+  get airportFormControl() {
+    return this.waypointForm.get("place")?.get("airport");
+  }
+
+  get latFormControl() {
+    return this.latAndLngFormGroup?.get("latitude");
+  }
+
+  get lngFormControl() {
+    return this.latAndLngFormGroup?.get("longitude");
+  }
+
+  get latAndLngFormGroup() {
+    return this.waypointForm.get("latAndLng")
+  }
+
+  checkIfLatitudeIsNull(): boolean {
+    return this.latAndLngFormGroup?.get('latitude')?.value === null && this.latAndLngFormGroup?.get('longitude')?.value === null
+  }
+
+  checkIfLongitudeIsNull(): boolean {
+    return this.latAndLngFormGroup?.get('longitude')?.value === null
+  }
+
+  isWaypointForm(): boolean {
+    return this.typeOfForm === "waypoint-form"
+  }
+
+  isWeatherForm(): boolean {
+    return this.typeOfForm === "weather-form"
   }
 
   private toggleDisabledInputs() {
@@ -101,67 +168,13 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  get airportFormControl() {
-    return this.waypointForm.get("place")?.get("airport");
-  }
-
-  get latFormControl() {
-    return this.latAndLngFormGroup?.get("latitude");
-  }
-
-  get lngFormControl() {
-    return this.latAndLngFormGroup?.get("longitude");
-  }
-
-  get latAndLngFormGroup() {
-      return this.waypointForm.get("latAndLng")
-  }
-
-  checkIfLatitudeIsNull(): boolean {
-    return this.latAndLngFormGroup?.get('latitude')?.value === null && this.latAndLngFormGroup?.get('longitude')?.value === null
-  }
-
-  checkIfLongitudeIsNull(): boolean {
-    return this.latAndLngFormGroup?.get('longitude')?.value === null
-  }
-
-}
-
-export const correctValueIsRequaired: ValidatorFn = (control: AbstractControl) => {
-  const lat = control.get('latitude');
-  const lng = control.get('longitude');
-  if (lat && lng) {
-    return (lat.dirty || lng.dirty) && ((lat.value === null && lng.value != null) || (lat.value != null && lng.value === null))
-      ? {latAndLatRequaired: true}
-      : null;
-  }
-
-  return null;
-};
-
-export const latitudeValueIsNotCorrect: ValidatorFn = (control: AbstractControl) => {
-  return (control.value > 180 || control.value < -180)
-    ? {latitudeIsNotCorrect: true}
-    : null;
-
-
-};
-export const longitudeValueIsNotCorrect: ValidatorFn = (control: AbstractControl) => {
-  return (control.value > 180 || control.value < -180)
-    ? {longitudeIsNotCorrect: true}
-    : null;
-
-
-};
-
-export function userExistsValidator(mapService: MapService): AsyncValidatorFn {
-  return (control: AbstractControl) => {
-    let placeByAirportName = control.value;
-    return mapService.findAirPortsFrom("null")
-      .pipe(
-        delay(1000),
-        distinctUntilChanged(),
-        map(airport => airport.find(x => x.city === placeByAirportName) ? null : {airportNotExist: true})
-      );
+  private setButtonText(): void {
+    if (this.isWaypointForm()) {
+      this.buttonText = this.editedWaypoint !== undefined ? "Edit waypoint" : "Add new point"
+    } else {
+      this.buttonText = "Add new point"
+    }
   }
 }
+
+

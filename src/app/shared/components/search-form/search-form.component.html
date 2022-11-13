@@ -1,4 +1,4 @@
-<form [formGroup]="waypointForm" (ngSubmit)="onSubmit()" [ngClass]="{
+<form [formGroup]="waypointForm" [ngClass]="{
 'is-valid':(airportFormControl?.dirty || airportFormControl?.touched)
 }">
   <div class="container ">
@@ -20,8 +20,6 @@
                [(ngModel)]="inputModel"
                [ngbTypeahead]="getCityName"/>
       </div>
-
-      {{inputModel|json}}
     </div>
   </div>
 
@@ -46,9 +44,14 @@
 
   </div>
   <br/>
-  <div class="modal-footer">
-    <button (click)="onSubmit()" class="btn btn-info"
-            [disabled]="latAndLngFormGroup?.errors ||airportFormControl?.errors ">Add point
+  <div *ngIf="isWaypointForm()" class="modal-footer">
+    <button (click)="submitWaypointForm()" class="btn btn-info"
+            [disabled]="latAndLngFormGroup?.errors ||airportFormControl?.errors ">{{buttonText}}
+    </button>
+  </div>
+  <div *ngIf="isWeatherForm()" class="modal-footer">
+    <button (click)="addNewPoint()" class="btn btn-info"
+            [disabled]="latAndLngFormGroup?.errors ||airportFormControl?.errors ">{{buttonText}}
     </button>
   </div>
 </form>
