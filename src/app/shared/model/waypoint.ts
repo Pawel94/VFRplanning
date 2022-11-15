@@ -13,7 +13,7 @@ export interface Route {
   listOfWaypoints: Waypoint[];
   totalDistance?: number;
   totalTime?: number;
-  planeVelocity?:number
+  planeVelocity?: number
 }
 
 export interface Place {

@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {WeatherManagerComponent} from "../../../weater/component/weather-manager/weather-manager.component";
 import {CommonService} from "../../services/common.service";
+import {
+  FlightParametersComponent
+} from "../../../flightParameters/component/flight-parameters/flight-parameters.component";
 
 @Component({
   selector: 'vfr-navbar',
@@ -16,8 +19,15 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openModal() {
-    const modalRef = this.modalService.open(WeatherManagerComponent);
+  openWeatherModal(){
+    this.openModal(WeatherManagerComponent)
+  }
+  openFlightParameterModal(){
+    this.openModal(FlightParametersComponent)
+  }
+
+  openModal(service:any) {
+    const modalRef = this.modalService.open(service);
     modalRef.result.then((result) => {
       console.log(result);
     }).catch((error) => {

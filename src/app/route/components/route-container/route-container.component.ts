@@ -7,6 +7,10 @@ import {removeElementFromList} from "../../../common/utils/utils";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {WaypointManagerComponent} from "../waypoint-manager/waypoint-manager.component";
 import {latAndLngFormGroup} from "../../model";
+import {FlightParams} from "../../../shared/model/flightParamsModel";
+import {FlightParamsService} from "../../../shared/services/flight-params.service";
+import {Weather} from "../../../weater/model/indexWeater";
+import {WeatherParamsService} from "../../../shared/services/weather-params.service";
 
 @Component({
   selector: 'vfr-route-container',
@@ -15,10 +19,15 @@ import {latAndLngFormGroup} from "../../model";
 })
 export class RouteContainerComponent implements OnInit, OnDestroy {
 
-  constructor(private readonly routeService: RouteService, public modalService: NgbModal) {
+  constructor(private readonly routeService: RouteService,
+              public readonly modalService: NgbModal,
+              private readonly flightParams:FlightParamsService,
+              private readonly weatherParams:WeatherParamsService) {
   }
 
   route$: Observable<Waypoint[]> = this.routeService.selectedRoute$.pipe(map(x => x.listOfWaypoints));
+  flightParams$:Observable<FlightParams> = this.flightParams.selectFlightParams$
+  weatherParams$:Observable<Weather> = this.weatherParams.selectWeatherParams
   actualRoute!: Route;
   editedValues?: latAndLngFormGroup = {} as latAndLngFormGroup
   model: any;

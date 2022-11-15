@@ -28,3 +28,22 @@
   --bs-accordion-active-btn-color:#111111;
 
 }
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #3a3535;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0dcaf0;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #0f219b;
+}

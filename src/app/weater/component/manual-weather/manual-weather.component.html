@@ -1,0 +1,12 @@
+<form [formGroup]="manualWeatherForm">
+  <label for="windSpeed" class="windSpeed">Wind velocity: </label>
+  <input type="range" step="1" class="form-range" min="0" max="100" id="windSpeed"
+         formControlName="windSpeed">
+
+  <label for="directionOfWind" class="directionOfWind">Direction of wind: </label>
+  <input type="range" step="1" class="form-range" min="0" max="360" id="directionOfWind"
+         formControlName="directionOfWind">
+  <button (click)="addManualWeather()" class="btn btn-info">
+    Add weather conditions
+  </button>
+</form>

@@ -16,6 +16,8 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import { SearchFormComponent } from './shared/components/search-form/search-form.component';
+import { FlightParametersComponent } from './flightParameters/component/flight-parameters/flight-parameters.component';
+import { ManualWeatherComponent } from './weater/component/manual-weather/manual-weather.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { SearchFormComponent } from './shared/components/search-form/search-form
     WaypointDetailsComponent,
     WaypointManagerComponent,
     WeatherManagerComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    FlightParametersComponent,
+    ManualWeatherComponent
   ],
   imports: [
     BrowserModule,
