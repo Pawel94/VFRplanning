@@ -1,8 +1,7 @@
 import {Marker} from "leaflet";
-import {v4 as uuid} from "uuid";
 
 export interface Waypoint extends Marker, Place {
-  id?:string;
+  id?: string;
   nameOfPoint?: string;
   isFirstPoint?: boolean;
   distanceToNextPoint?: number;
@@ -12,6 +11,9 @@ export interface Waypoint extends Marker, Place {
 
 export interface Route {
   listOfWaypoints: Waypoint[];
+  totalDistance?: number;
+  totalTime?: number;
+  planeVelocity?:number
 }
 
 export interface Place {

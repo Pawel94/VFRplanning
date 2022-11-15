@@ -56,7 +56,7 @@ export class WaypointManagerComponent implements OnInit, OnDestroy {
     this.newWaypointToAdd = {} as Waypoint;
     this.newWaypointToAdd = new Marker(latLng, markerIconDefault)
     this.newWaypointToAdd.id = uuid()
-
+    this.newWaypointToAdd.city = waypointToAdd.city
     this.actualRoute?.listOfWaypoints.push(this.newWaypointToAdd);
     this.routeService.setRoute(this.actualRoute);
   }

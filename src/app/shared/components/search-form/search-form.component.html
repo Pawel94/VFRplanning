@@ -3,18 +3,18 @@
 }">
   <div class="container ">
     <div formGroupName="latAndLng" class="row p-2">
-      <div class="col-4">
+      <div class="col">
         <label for="latitude">Latitude:</label>
         <input id="latitude" type="number" class="form-control" formControlName="latitude"/>
       </div>
-      <div class="col-4">
+      <div class="col">
         <label for="longitude">Longitude:</label>
         <input id="longitude" type="number" class="form-control" formControlName="longitude"/>
       </div>
     </div>
     <div formGroupName="place" class="row p-2">
       <div class="col">
-        <label for="typeahead-basic">Find by name of airport</label>
+        <label for="typeahead-basic">Find by name of city</label>
         <input id="typeahead-basic" type="text" class="form-control"
                formControlName="airport"
                [(ngModel)]="inputModel"

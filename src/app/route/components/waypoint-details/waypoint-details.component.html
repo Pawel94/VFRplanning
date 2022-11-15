@@ -1,20 +1,9 @@
 <div class="card border-info mb-3 text-bg-dark">
   <div class="card-header bg-transparent border-info">
-    <div class="row justify-content-between">
-      <div class="col-4">
-        Waypoint {{waypoint?.nameOfPoint}}
-      </div>
-      <div class="col-4">
-        <button class="btn btn-outline-success my-2 my-sm-0" (click)="updateWaypoint(waypoint)" type="button">
-          Edit Waypoint
-        </button>
-      </div>
-      <div class="col-4">
-        <button class="btn btn-danger" (click)="removeWaypoint(waypoint)" type="button" >
-          Delete
-        </button>
-      </div>
-    </div>
+        <div class="col-sm text-info">
+          Waypoint {{waypoint?.nameOfPoint}}
+          {{waypoint?.city}}
+        </div>
   </div>
   <div class="card-body">
     <h5 class="card-title"></h5>
@@ -24,20 +13,34 @@
         <div
           class="col-4 card-text text-info">{{waypoint?.getLatLng()?.lat | degree: true}} {{waypoint?.getLatLng()?.lng | degree:false}}</div>
       </div>
-      <div class="row">
+      <div *ngIf="waypoint?.distanceToNextPoint" class="row">
         <div class="col-8">Dist. to next waypoint</div>
         <div class="col-4 card-text tex text-info">{{waypoint?.distanceToNextPoint | distance}} </div>
       </div>
-      <div class="row">
+      <div *ngIf="waypoint?.bearing" class="row">
         <div class="col-8">Bearing to next waypoint</div>
         <div class="col-4 card-text text-info">{{waypoint?.bearing | degree}} </div>
       </div>
-      <div class="row">
+      <div *ngIf="waypoint?.timeToNextPoint" class="row">
         <div class="col-8">Time to next waypoint</div>
         <div class="col-4 card-text text-info">{{waypoint?.timeToNextPoint}} </div>
       </div>
-      {{waypoint?.id}}
     </div>
   </div>
-  <div class="card-footer bg-transparent border-info">Footer</div>
+  <div class="card-footer bg-transparent border-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm text-start">
+          <button class="btn btn-outline-success my-2 my-sm-0" (click)="updateWaypoint(waypoint)" type="button">
+            Edit waypoint
+          </button>
+        </div>
+        <div class="col-sm text-end">
+          <button class="btn btn-outline-danger my-2 my-sm-0" (click)="removeWaypoint(waypoint)" type="button">
+            Delete waypoint
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

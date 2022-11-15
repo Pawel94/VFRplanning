@@ -10,3 +10,21 @@
   -o-transform: rotate(270deg);
   width: 200px;
 }
+
+.accordion {
+  --bs-accordion-bg: #000;
+  --bs-accordion-border-color: #123;
+  --bs-accordion-color: #f00db0;
+  --bs-accordion-btn-color: #f00dbb;
+  --bs-accordion-active-bg: #111111;
+  color: #0dcaf0;
+}
+
+.accordion:hover {
+  --bs-accordion-active-bg: #0dcaf0;
+  --bs-accordion-bg: #0dcaf0;
+  --bs-accordion-border-color: #123;
+  --bs-accordion-color: rgba(240, 13, 195, 0.84);
+  --bs-accordion-active-btn-color:#111111;
+
+}

@@ -5,7 +5,8 @@ import {
   accumulateDistance,
   addNameToPoints,
   calculateBearing,
-  calculateTimeBetweenWaypoints
+  calculateTimeBetweenWaypoints,
+  calculateTotalDistance
 } from "../../common/utils/utils";
 
 @Injectable({
@@ -37,6 +38,8 @@ export class RouteService {
       calculateBearing(route.listOfWaypoints);
       addNameToPoints(route.listOfWaypoints)
       calculateTimeBetweenWaypoints(route.listOfWaypoints, 120)
+      route.totalDistance = calculateTotalDistance(route.listOfWaypoints, "distanceToNextPoint")
+      route.totalTime = calculateTotalDistance(route.listOfWaypoints, "timeToNextPoint")
     }
   }
 }

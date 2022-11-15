@@ -10,11 +10,23 @@ export function removeElementFromList<T>(list: T[], elementToRemove: T) {
 export function accumulateDistance<T extends Waypoint, U>(list: T[]): U | null {
   return list.reduce(
     (previousValue, currentValue) => {
+      console.log(previousValue)
       previousValue.distanceToNextPoint = previousValue.getLatLng().distanceTo(currentValue.getLatLng()) / 1000;
+      currentValue.distanceToNextPoint = undefined
       return currentValue;
     }
   ), null;
 }
+
+export function calculateTotalDistance<T extends Waypoint, U extends keyof Waypoint>(list: Waypoint[], key: U): number {
+  return list.reduce<number>((accumulator, obj) => {
+    if (obj[key] && typeof obj[key] == 'number') { // @ts-ignore
+      return accumulator + obj[key];
+    }
+    return accumulator;
+  }, 0);
+}
+
 
 export function calculateBearing<T extends Waypoint, U>(list: T[]): U | null {
   return list.reduce(

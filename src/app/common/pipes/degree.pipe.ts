@@ -8,8 +8,8 @@ export class DegreePipe implements PipeTransform {
   transform(valueToDegree: number | string | undefined, isLat: boolean = false): string | null {
 
 
-    if (valueToDegree != undefined) {
-    let extension = this.setDirection(isLat, Number(valueToDegree));
+    if (valueToDegree != undefined && valueToDegree !== "") {
+      let extension = this.setDirection(isLat, Number(valueToDegree));
       return Number(valueToDegree).toFixed(2) + "º" + extension;
     }
     return null;
