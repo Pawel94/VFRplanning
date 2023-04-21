@@ -15,10 +15,12 @@ import {WeatherManagerComponent} from './weater/component/weather-manager/weathe
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
-import { SearchFormComponent } from './shared/components/search-form/search-form.component';
-import { FlightParametersComponent } from './flightParameters/component/flight-parameters/flight-parameters.component';
-import { ManualWeatherComponent } from './weater/component/manual-weather/manual-weather.component';
+import {SearchFormComponent} from './shared/components/search-form/search-form.component';
+import {FlightParametersComponent} from './flightParameters/component/flight-parameters/flight-parameters.component';
+import {ManualWeatherComponent} from './weater/component/manual-weather/manual-weather.component';
 import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { TranslocoRootModule } from './transloco-root.module';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import {ToastrModule} from "ngx-toastr";
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    ToastrModule.forRoot()
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    TranslocoRootModule
   ],
   providers: [],
   bootstrap: [AppComponent]

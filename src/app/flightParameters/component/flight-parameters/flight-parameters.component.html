@@ -1,30 +1,36 @@
-<div>
-  <div tabindex="-1" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Configure your flight</h5>
-        <button type="button" class="btn close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="container ">
-          <div class="modal-body">
-            <form [formGroup]="flightPramsForm">
-                <label for="planeVelocity" class="velocity">Velocity(TAS): {{formValueVelocity}} </label>
+<ng-container *transloco="let t">
+  <div>
+    <div tabindex="-1" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{ t('flightParameters.title') }}</h5>
+          <button type="button" class="btn close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container ">
+            <div class="modal-body">
+              <form [formGroup]="flightPramsForm">
+                <label for="planeVelocity"
+                       class="velocity">{{ t('flightParameters.velocity', {params: formValueVelocity}) }}</label>
                 <input type="range" step="10" class="form-range" min="60" max="300" id="planeVelocity"
                        formControlName="planeVelocity">
 
-                <label for="flightLevel" class="flightLevel">Flight level: {{formValueFlightLevel}} </label>
+                <label for="flightLevel"
+                       class="flightLevel">{{ t('flightParameters.flightLevel', {params: formValueFlightLevel}) }}</label>
                 <input type="range" step="100" class="form-range" min="500" max="10000" id="flightLevel"
                        formControlName="flightLevel">
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button (click)="submitFlightParamsForm()" class="btn btn-info">Save
-            </button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button (click)="submitFlightParamsForm()" class="btn btn-info">{{ t('flightParameters.save') }}
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+</ng-container>

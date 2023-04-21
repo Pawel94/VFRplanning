@@ -9,9 +9,6 @@ export class FlightParamsService {
   private flightParams$ = new BehaviorSubject<FlightParams>({planeVelocity: 120, flightLevel: 1000});
   selectFlightParams$ = this.flightParams$.asObservable()
 
-  constructor() {
-  }
-
   setParams(flightParams: FlightParams) {
     this.flightParams$.next(flightParams);
   }

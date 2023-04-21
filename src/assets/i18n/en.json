@@ -1,0 +1,14 @@
+{ "hello": "Success added",
+  "common": {
+
+  },
+  "flightParameters": {
+    "success": "Success added flight parameters",
+    "error": "Error added flight parameters - check version",
+    "params": "Success added plane velocity {{planeVelocity}} knots and flight level: {{ flightLevel }}",
+    "title": "Configure your flight",
+    "save": "Save parameters",
+    "velocity": "Velocity(TAS): {{params}}",
+    "flightLevel": "Flight level: {{params}}"
+  }
+}
