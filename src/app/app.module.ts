@@ -18,6 +18,7 @@ import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import { SearchFormComponent } from './shared/components/search-form/search-form.component';
 import { FlightParametersComponent } from './flightParameters/component/flight-parameters/flight-parameters.component';
 import { ManualWeatherComponent } from './weater/component/manual-weather/manual-weather.component';
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -40,8 +41,8 @@ import { ManualWeatherComponent } from './weater/component/manual-weather/manual
     NgbModule, FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
-
+    AngularFireDatabaseModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

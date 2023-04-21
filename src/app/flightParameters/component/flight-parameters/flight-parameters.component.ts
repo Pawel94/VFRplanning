@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {FlightParamsService} from "../../../shared/services/flight-params.service";
 import {FlightParams} from "../../../shared/model/flightParamsModel";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'vfr-flight-parameters',
@@ -16,7 +17,8 @@ export class FlightParametersComponent implements OnInit {
     flightLevel: new FormControl<number | null>(1000, {})
   })
 
-  constructor(private readonly flightParams: FlightParamsService) {
+  constructor(private readonly flightParams: FlightParamsService,
+              private toastr: ToastrService) {
 
   }
 
@@ -42,5 +44,6 @@ export class FlightParametersComponent implements OnInit {
   submitFlightParamsForm() {
     const params = this.flightPramsForm?.value
     this.flightParams.setParams(params)
+    this.toastr.success('Hello world!', 'Toastr fun!');
   }
 }
