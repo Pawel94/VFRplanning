@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {Weather} from "../../weater/model/indexWeater";
-import {ToastrService} from "ngx-toastr";
-import {TranslocoService} from "@ngneat/transloco";
+import {NotificationService} from "./notification/notification.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,23 +11,15 @@ export class WeatherParamsService {
   private weatherParams = new BehaviorSubject<Weather>({windSpeed: 0, directionOfWind: 180, city: "", source: "OWN"})
   selectWeatherParams = this.weatherParams.asObservable();
 
-  constructor(private readonly notification: ToastrService,
-              private readonly transloco: TranslocoService) {
+  constructor(private readonly notification: NotificationService) {
   }
 
   setWeatherParams(weatherParams: Weather) {
     if (weatherParams) {
-      this.notification.success(this.transloco.translate(
-        'weatherParameters.params', {...weatherParams}
-      ), this.transloco.translate(
-        'weatherParameters.success'
-      ),);
+      this.notification.getSuccess('weatherParameters.params', weatherParams);
       this.weatherParams.next(weatherParams)
     } else {
-      this.notification.error(this.transloco.translate(
-        'weatherParameters.error'
-      ),);
+      this.notification.getFailure('weatherParameters.error');
     }
-
   }
 }

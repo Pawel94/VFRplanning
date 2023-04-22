@@ -1,6 +1,8 @@
 {
-  "hello": "Success added",
-  "common": {
+
+  "commonToast": {
+    "success": "Success added",
+    "error": "Error!"
   },
   "flightParameters": {
     "success": "Success added flight parameters",

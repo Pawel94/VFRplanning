@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@ang
 import {WeatherService} from "../../service/weather.service";
 import {map, Observable, Subject} from "rxjs";
 import {Weather} from "../../model/indexWeater";
-import {CommonService} from "../../../common/services/common.service";
+import {CommonService} from "../../../common/services/communication/firebase-communication/common.service";
 import {Airport} from "../../../map/model/modelForMaps";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {Place} from "../../../shared/model/waypoint";

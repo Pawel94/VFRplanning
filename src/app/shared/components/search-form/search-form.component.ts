@@ -3,7 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 
 import {latAndLngFormGroup, waypointForm} from "../../../route/model";
 import {debounceTime, distinctUntilChanged, map, Observable, Subject, takeUntil} from "rxjs";
-import {CommonService} from "../../../common/services/common.service";
+import {CommonService} from "../../../common/services/communication/firebase-communication/common.service";
 import {Waypoint} from "../../model/waypoint";
 import {v4 as uuid} from "uuid";
 import {correctValueIsRequaired, latitudeValueIsNotCorrect, longitudeValueIsNotCorrect} from '../../utils/utils-forms';

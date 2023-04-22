@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {FlightParams} from "../model/flightParamsModel";
-import {ToastrService} from "ngx-toastr";
-import {TranslocoService} from "@ngneat/transloco";
+import {NotificationService} from "./notification/notification.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,27 +10,15 @@ export class FlightParamsService {
   private flightParams$ = new BehaviorSubject<FlightParams>({planeVelocity: 120, flightLevel: 1000});
   selectFlightParams$ = this.flightParams$.asObservable()
 
-  constructor(private readonly notification: ToastrService,
-              private readonly transloco: TranslocoService) {
+  constructor(private readonly notification: NotificationService) {
   }
 
   setParams(flightParams: FlightParams) {
-
     if (flightParams) {
-      this.notification.success(this.transloco.translate(
-        'flightParameters.params', {...flightParams}
-      ), this.transloco.translate(
-        'flightParameters.success'
-      ),);
-
+      this.notification.getSuccess('flightParameters.params', flightParams);
       this.flightParams$.next(flightParams);
     } else {
-      this.notification.error(this.transloco.translate(
-        'flightParameters.error'
-      ),);
+      this.notification.getFailure('flightParameters.error');
     }
-
   }
-
-
 }

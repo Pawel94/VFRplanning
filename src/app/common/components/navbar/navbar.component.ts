@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {WeatherManagerComponent} from "../../../weater/component/weather-manager/weather-manager.component";
-import {CommonService} from "../../services/common.service";
+import {CommonService} from "../../services/communication/firebase-communication/common.service";
 import {
   FlightParametersComponent
 } from "../../../flightParameters/component/flight-parameters/flight-parameters.component";
