@@ -9,7 +9,7 @@ import {RouteDetailsComponent} from './route/components/route-details/route-deta
 import {RouteContainerComponent} from './route/components/route-container/route-container.component';
 import {WaypointDetailsComponent} from './route/components/waypoint-details/waypoint-details.component';
 import {WaypointManagerComponent} from './route/components/waypoint-manager/waypoint-manager.component';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModule, NgbNavModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {WeatherManagerComponent} from './weater/component/weather-manager/weather-manager.component';
 import {AngularFireModule} from "@angular/fire/compat";
@@ -21,6 +21,9 @@ import {ManualWeatherComponent} from './weater/component/manual-weather/manual-w
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { TranslocoRootModule } from './transloco-root.module';
+import {
+  AutomaticWeatherComponent
+} from "./weater/component/automatic-weather/automatic-weather.component";
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { TranslocoRootModule } from './transloco-root.module';
     WeatherManagerComponent,
     SearchFormComponent,
     FlightParametersComponent,
-    ManualWeatherComponent
+    ManualWeatherComponent,
+    AutomaticWeatherComponent
+
   ],
   imports: [
     BrowserModule,
@@ -45,10 +50,14 @@ import { TranslocoRootModule } from './transloco-root.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
+    NgbNavModule,
     ToastrModule.forRoot(),
-    TranslocoRootModule
+    TranslocoRootModule,
   ],
   providers: [],
+  exports: [
+    SearchFormComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

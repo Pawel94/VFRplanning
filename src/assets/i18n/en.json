@@ -1,6 +1,6 @@
-{ "hello": "Success added",
+{
+  "hello": "Success added",
   "common": {
-
   },
   "flightParameters": {
     "success": "Success added flight parameters",
@@ -10,5 +10,15 @@
     "save": "Save parameters",
     "velocity": "Velocity(TAS): {{params}}",
     "flightLevel": "Flight level: {{params}}"
+  },
+  "weatherParameters": {
+    "success": "Success added weather parameters",
+    "error": "Error added flight parameters - check version",
+    "params": "Success added wind velocity {{windSpeed}} m/s and direction of wind: {{ directionOfWind }}",
+    "successParamsCity": "Success get data for city: {{city}}",
+    "title": "Configure your flight",
+    "save": " Add weather conditions",
+    "direction": "Direction of wind: {{params}}",
+    "velocity": "Wind velocity: {{params}} m/s"
   }
 }

@@ -1,6 +1,6 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {WeatherService} from "../../service/weather.service";
-import {map, Observable, of, Subject} from "rxjs";
+import {map, Observable, Subject} from "rxjs";
 import {Weather} from "../../model/indexWeater";
 import {CommonService} from "../../../common/services/common.service";
 import {Airport} from "../../../map/model/modelForMaps";
@@ -11,7 +11,8 @@ import {WeatherParamsService} from "../../../shared/services/weather-params.serv
 @Component({
   selector: 'vfr-weater-manager',
   templateUrl: './weather-manager.component.html',
-  styleUrls: ['./weather-manager.component.scss']
+  styleUrls: ['./weather-manager.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WeatherManagerComponent implements OnInit, OnDestroy {
   @Input() fromParent!: Airport[];
@@ -45,7 +46,7 @@ export class WeatherManagerComponent implements OnInit, OnDestroy {
 
   addNewWeatherPoint(inputPlace: Place) {
     if (inputPlace.lat && inputPlace.lng) {
-      this.actualWeather$ = this.weatherService.getWeatherDataFromOPEN_METEO(inputPlace.lat, inputPlace!.lng).pipe(
+      this.actualWeather$ = this.weatherService.getWeatherDataFromOPEN_METEO(inputPlace).pipe(
         map(place => {
           place.city = inputPlace.city ?? "NOT FIND"
           this.weatherList.push(place);
@@ -54,14 +55,6 @@ export class WeatherManagerComponent implements OnInit, OnDestroy {
     }
     /*TODO */
     console.error("TO CHECK THIS LOGIC ")
-  }
-
-  addNewManualWeatherPoint(weather: Weather) {
-    this.actualWeather$ = of(weather).pipe(map(weather => {
-        this.weatherList.push(weather)
-        return this.weatherList;
-      }
-    ))
   }
 
   setWeatherConditions($event: Weather) {

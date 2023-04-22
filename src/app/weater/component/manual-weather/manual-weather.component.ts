@@ -1,13 +1,14 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {Weather} from "../../model/indexWeater";
 
 @Component({
   selector: 'vfr-manual-weather',
   templateUrl: './manual-weather.component.html',
-  styleUrls: ['./manual-weather.component.scss']
+  styleUrls: ['./manual-weather.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ManualWeatherComponent implements OnInit {
+export class ManualWeatherComponent {
   @Output() dataFromManualForm = new EventEmitter<Weather>();
 
   manualWeatherForm: FormGroup = new FormGroup<any>({
@@ -15,22 +16,16 @@ export class ManualWeatherComponent implements OnInit {
     directionOfWind: new FormControl<number | null>(100, {}),
   })
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
 
   addManualWeather() {
-    const weather = this.buildWeatherObject(this.manualWeatherForm.value);
-    this.dataFromManualForm.emit(weather)
+    this.dataFromManualForm.emit(this.manualWeatherForm.value as Weather)
+  }
+  get formValueWindSpeed() {
+    return this.manualWeatherForm?.get("windSpeed")?.value;
   }
 
-  private buildWeatherObject(formValues:any):Weather{
-    let weather = {} as Weather
-    weather = this.manualWeatherForm.value;
-    weather.source = "Manual Conditions"
-    weather.city = "-"
-    return weather
+  get formValueDirectionOfWind() {
+    return this.manualWeatherForm?.get("directionOfWind")?.value;
   }
+
 }

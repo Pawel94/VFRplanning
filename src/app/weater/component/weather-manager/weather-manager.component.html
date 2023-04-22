@@ -12,16 +12,15 @@
           <li [ngbNavItem]="1">
             <a ngbNavLink>Automatic Weather</a>
             <ng-template ngbNavContent>
-              <vfr-search-form [typeOfForm]="type"
-                               (dataFromForm)="addNewWeatherPoint($event)">
-              </vfr-search-form>
+              <vfr-automatic-weather (dataFromAutomaticForm) = "addNewWeatherPoint($event)">
+              </vfr-automatic-weather>
             </ng-template>
           </li>
           <li [ngbNavItem]="2">
             <a ngbNavLink>Manual Weather</a>
             <ng-template ngbNavContent>
               <vfr-manual-weather
-                (dataFromManualForm)="addNewManualWeatherPoint($event)">
+                (dataFromManualForm)="setWeatherConditions($event)">
               </vfr-manual-weather>
             </ng-template>
           </li>

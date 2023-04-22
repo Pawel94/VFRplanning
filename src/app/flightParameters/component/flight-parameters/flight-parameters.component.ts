@@ -2,10 +2,8 @@ import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/co
 import {FormControl, FormGroup} from "@angular/forms";
 import {FlightParamsService} from "../../../shared/services/flight-params.service";
 import {FlightParams} from "../../../shared/model/flightParamsModel";
-import {ToastrService} from "ngx-toastr";
 import {Subject, takeUntil} from "rxjs";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {TranslocoService} from "@ngneat/transloco";
 
 @Component({
   selector: 'vfr-flight-parameters',
@@ -24,9 +22,8 @@ export class FlightParametersComponent implements OnInit, OnDestroy {
   })
 
   constructor(private readonly flightParams: FlightParamsService,
-              private readonly notification: ToastrService,
               private readonly activeModal: NgbActiveModal,
-              private readonly transloco: TranslocoService) {
+  ) {
 
   }
 
@@ -54,18 +51,7 @@ export class FlightParametersComponent implements OnInit, OnDestroy {
   submitFlightParamsForm() {
     const params = this.flightPramsForm?.value
     this.flightParams.setParams(params)
-    if (this.flightPramsForm) {
-      this.notification.success(this.transloco.translate(
-        'flightParameters.params', {...params}
-      ), this.transloco.translate(
-        'flightParameters.success'
-      ),);
-      this.closeModal()
-    } else {
-      this.notification.error(this.transloco.translate(
-        'flightParameters.error'
-      ),);
-    }
+    this.closeModal()
   }
 
   ngOnDestroy() {
