@@ -1,5 +1,4 @@
 {
-
   "commonToast": {
     "success": "Success added",
     "error": "Error!"
@@ -22,5 +21,13 @@
     "save": " Add weather conditions",
     "direction": "Direction of wind: {{params}}",
     "velocity": "Wind velocity: {{params}} m/s"
+  },
+  "navbar": {
+    "time": "Total time: {{params}}'",
+    "distance": "Total distance: {{params}} km",
+    "about": "About",
+    "title": "VFR-PLANING-FLIGHT",
+    "flightParams": "Flight parameters",
+    "weatherParams":"Weather parameters"
   }
 }

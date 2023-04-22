@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {catchError, map, Observable, of, tap} from "rxjs";
 import {Weather} from "../model/indexWeater";
-import {Place} from "../../shared/model/waypoint";
-import {NotificationService} from "../../shared/services/notification/notification.service";
+import {Place} from "../../../shared/model/waypoint";
+import {NotificationService} from "../../../shared/services/notification/notification.service";
 
 @Injectable({
   providedIn: 'root'

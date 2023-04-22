@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import * as L from "leaflet";
 import {latLng, LeafletMouseEvent, marker, Polyline, polyline, tileLayer} from "leaflet";
-import {markerIconDefault} from "../../../constanst/marker.constans";
-import {RouteService} from "../../../shared/services/route.service";
-import {Route, Waypoint} from "../../../shared/model/waypoint";
+import {markerIconDefault} from "../../../../constanst/marker.constans";
+import {RouteService} from "../../../../shared/services/route.service";
+import {Route, Waypoint} from "../../../../shared/model/waypoint";
 import {v4, v4 as uuid} from 'uuid'
 
 @Component({

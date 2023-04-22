@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {FlightParamsService} from "../../../shared/services/flight-params.service";
-import {FlightParams} from "../../../shared/model/flightParamsModel";
+import {FlightParamsService} from "../../../../shared/services/flight-params.service";
+import {FlightParams} from "../../../../shared/model/flightParamsModel";
 import {Subject, takeUntil} from "rxjs";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 

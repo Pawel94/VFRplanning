@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from "rxjs";
 import {Marker} from "leaflet";
-import {Waypoint} from "../../../shared/model/waypoint";
+import {Waypoint} from "../../../../shared/model/waypoint";
 
 
 @Component({

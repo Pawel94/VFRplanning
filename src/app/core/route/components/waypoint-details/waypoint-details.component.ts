@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Waypoint} from "../../../shared/model/waypoint";
+import {Waypoint} from "../../../../shared/model/waypoint";
 import {Marker} from "leaflet";
 
 @Component({

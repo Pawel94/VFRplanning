@@ -23,7 +23,7 @@ export function calculateTotalDistance<T extends Waypoint, U extends keyof Waypo
     if (obj[key] && typeof obj[key] == 'number') { // @ts-ignore
       return accumulator + obj[key];
     }
-    return accumulator;
+    return accumulator.toFixed(0);
   }, 0);
 }
 

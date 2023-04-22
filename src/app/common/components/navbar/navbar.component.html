@@ -1,26 +1,42 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-dark text-white">
-  <div class="container-fluid">
-    <div class="collapse navbar-collapse justify-content-start">
-      <a class="navbar-brand text-white" href="#">VFR-PLANING-FLIGHT</a>
-    </div>
+<ng-container *transloco="let t">
+  <ng-container *ngIf="route$ | async as route">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark text-white">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse justify-content-start">
+          <a class="navbar-brand text-white" href="#">{{ t('navbar.title')}}</a>
+        </div>
 
-    <div class="collapse navbar-collapse justify-content-center">
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item text-white p-1">
-          <button class="btn btn-outline-success my-2 my-sm-0" (click)="openWeatherModal()">Set weather</button>
-        </li>
-        <!--        <li class="nav-item">-->
-        <!--          <a class="nav-link text-white" href="#">LOGO</a>-->
-        <!--        </li>-->
-        <li class="nav-item text-white p-1">
-          <button class="btn btn-outline-success my-2 my-sm-0" (click)="openFlightParameterModal()">Flight parameters
-          </button>
-        </li>
-      </ul>
+        <div class="collapse navbar-collapse justify-content-center">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item text-white p-1">
+              <button class="btn btn-outline-success my-2 my-sm-0"
+                      (click)="openWeatherModal()">    {{ t('navbar.weatherParams')}}</button>
+            </li>
+            <!--        <li class="nav-item">-->
+            <!--          <a class="nav-link text-white" href="#">LOGO</a>-->
+            <!--        </li>-->
+            <li class="nav-item text-white p-1">
+              <button class="btn btn-outline-success my-2 my-sm-0"
+                      (click)="openFlightParameterModal()">    {{ t('navbar.flightParams')}}
+              </button>
+            </li>
+          </ul>
+        </div>
+        <ng-container *ngIf="route.totalTime">
+          <div class=" justify-content-end">
+            <div class="row">
+              {{ t('navbar.time', {params: route.totalTime}) }}
+            </div>
+            <div class="row">
+              {{ t('navbar.distance', {params: route.totalDistance}) }}
+            </div>
+          </div>
+        </ng-container>
+        <div class="collapse navbar-collapse justify-content-end">
+          {{ t('navbar.about')}}
+        </div>
+      </div>
+    </nav>
+  </ng-container>
+</ng-container>
 
-    </div>
-    <div class="collapse navbar-collapse justify-content-end">
-      ABOUT
-    </div>
-  </div>
-</nav>

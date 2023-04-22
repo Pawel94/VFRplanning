@@ -1,38 +1,38 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {WeatherManagerComponent} from "../../../weater/component/weather-manager/weather-manager.component";
+import {WeatherManagerComponent} from "../../../core/weater/component/weather-manager/weather-manager.component";
 import {CommonService} from "../../services/communication/firebase-communication/common.service";
 import {
   FlightParametersComponent
-} from "../../../flightParameters/component/flight-parameters/flight-parameters.component";
+} from "../../../core/flight-parameters/component/flight-parameters/flight-parameters.component";
+import {Observable} from "rxjs";
+import {Route} from "../../../shared/model/waypoint";
+import {RouteService} from "../../../shared/services/route.service";
 
 @Component({
   selector: 'vfr-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
+  route$: Observable<Route> = this.routeService.selectedRoute$;
 
-  constructor(public modalService: NgbModal, public readonly common: CommonService) {
+  constructor(private modalService: NgbModal,
+              private readonly common: CommonService,
+              private readonly routeService: RouteService) {
   }
 
-  ngOnInit(): void {
-  }
 
-  openWeatherModal(){
+  openWeatherModal() {
     this.openModal(WeatherManagerComponent)
   }
-  openFlightParameterModal(){
+
+  openFlightParameterModal() {
     this.openModal(FlightParametersComponent)
   }
 
-  openModal(service:any) {
-    const modalRef = this.modalService.open(service);
-    modalRef.result.then((result) => {
-      console.log(result);
-    }).catch((error) => {
-      console.log(error);
-    });
-
+  private openModal(service: any) {
+    this.modalService.open(service);
   }
 }

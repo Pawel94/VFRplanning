@@ -1,16 +1,16 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {map, Observable} from "rxjs";
-import {RouteService} from "../../../shared/services/route.service";
+import {RouteService} from "../../../../shared/services/route.service";
 import {Marker} from "leaflet";
-import {Route, Waypoint} from "../../../shared/model/waypoint";
-import {removeElementFromList} from "../../../common/utils/utils";
+import {Route, Waypoint} from "../../../../shared/model/waypoint";
+import {removeElementFromList} from "../../../../common/utils/utils";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {WaypointManagerComponent} from "../waypoint-manager/waypoint-manager.component";
 import {latAndLngFormGroup} from "../../model";
-import {FlightParams} from "../../../shared/model/flightParamsModel";
-import {FlightParamsService} from "../../../shared/services/flight-params.service";
+import {FlightParams} from "../../../../shared/model/flightParamsModel";
+import {FlightParamsService} from "../../../../shared/services/flight-params.service";
 import {Weather} from "../../../weater/model/indexWeater";
-import {WeatherParamsService} from "../../../shared/services/weather-params.service";
+import {WeatherParamsService} from "../../../../shared/services/weather-params.service";
 
 @Component({
   selector: 'vfr-route-container',
