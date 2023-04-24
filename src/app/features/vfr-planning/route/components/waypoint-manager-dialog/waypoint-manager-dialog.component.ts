@@ -36,11 +36,11 @@ export class WaypointManagerDialogComponent implements OnInit, OnDestroy {
         this.actualRoute = route);
   }
 
-  closeModal() {
+  private closeModal():void {
     this.activeModal.close('Modal Closed');
   }
 
-  editWaypoint(waypointToAdd: Waypoint) {
+  editWaypoint(waypointToAdd: Waypoint) :void {
     const latLng = new LatLng(Number(waypointToAdd.lat), Number(waypointToAdd.lng));
     waypointToAdd.setLatLng(latLng)
     this.routeService.setRoute(this.actualRoute);
