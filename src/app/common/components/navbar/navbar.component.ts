@@ -1,10 +1,10 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {WeatherManagerComponent} from "../../../core/weater/component/weather-manager/weather-manager.component";
+import {WeatherManagerComponent} from "../../../features/vfr-parameters/weater/component/weather-manager/weather-manager.component";
 import {CommonService} from "../../services/communication/firebase-communication/common.service";
 import {
   FlightParametersComponent
-} from "../../../core/flight-parameters/component/flight-parameters/flight-parameters.component";
+} from "../../../features/vfr-parameters/flight-parameters/component/flight-parameters/flight-parameters.component";
 import {Observable} from "rxjs";
 import {Route} from "../../../shared/model/waypoint";
 import {RouteService} from "../../../shared/services/route.service";
