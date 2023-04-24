@@ -1,11 +1,53 @@
-<div *ngFor="let waypoint of waypoints$|async">
-  <vfr-waypoint-details [waypoint]="waypoint"
-                        (removedCurrentWaypoint)="removedWaypoint2($event)"
-                        (updateCurrentWaypoint)="updateWaypoint2($event)">
-
-  </vfr-waypoint-details>
-</div>
-
+<ng-container *transloco="let t">
+  <ng-container *ngFor="let waypoint of waypoints$|async">
+    <div class="card border-info mb-3 text-bg-dark">
+      <div class="card-header bg-transparent border-info">
+        <div class="col-sm text-info">
+          {{ t('route.waypoint') }} {{waypoint?.nameOfPoint}}
+          {{waypoint?.city}}
+        </div>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"></h5>
+        <div class="container">
+          <div class="row">
+            <div class="col-8">{{ t('route.cords') }} </div>
+            <div
+              class="col-4 card-text text-info">{{waypoint?.getLatLng()?.lat | degree: true}} {{waypoint?.getLatLng()?.lng | degree:false}}</div>
+          </div>
+          <div *ngIf="waypoint?.distanceToNextPoint" class="row">
+            <div class="col-8">{{ t('route.distance') }} </div>
+            <div class="col-4 card-text tex text-info">{{waypoint?.distanceToNextPoint | distance}} </div>
+          </div>
+          <div *ngIf="waypoint?.bearing" class="row">
+            <div class="col-8">{{ t('route.bearing') }}</div>
+            <div class="col-4 card-text text-info">{{waypoint?.bearing | degree}} </div>
+          </div>
+          <div *ngIf="waypoint?.timeToNextPoint" class="row">
+            <div class="col-8">{{ t('route.bearing') }}</div>
+            <div class="col-4 card-text text-info">{{waypoint?.timeToNextPoint}} </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer bg-transparent border-info">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm text-start">
+              <button class="btn btn-outline-success my-2 my-sm-0" (click)="updateWaypoint(waypoint)" type="button">
+                {{ t('route.edit') }}
+              </button>
+            </div>
+            <div class="col-sm text-end">
+              <button class="btn btn-outline-danger my-2 my-sm-0" (click)="removeWaypoint(waypoint)" type="button">
+                {{ t('route.delete') }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
 
 
 

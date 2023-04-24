@@ -3,6 +3,21 @@
     "success": "Success added",
     "error": "Error!"
   },
+  "route": {
+    "title": "Your route",
+    "details": "Show route details",
+    "fly": "Create flight plan",
+    "newPoint": "Add new point!",
+    "clearAll": "Clear all",
+    "info": "Click on map to add new points...",
+    "waypoint": "Waypoint",
+    "cords": "Cords",
+    "distance": "Dist. to next waypoint",
+    "bearing": "Bearing to next waypoint",
+    "time": "Time to next waypoint",
+    "edit": " Edit waypoint",
+    "delete": "Delete waypoint"
+  },
   "flightParameters": {
     "success": "Success added flight parameters",
     "error": "Error added flight parameters - check version",
@@ -28,6 +43,6 @@
     "about": "About",
     "title": "VFR-PLANING-FLIGHT",
     "flightParams": "Flight parameters",
-    "weatherParams":"Weather parameters"
+    "weatherParams": "Weather parameters"
   }
 }

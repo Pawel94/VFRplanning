@@ -7,6 +7,7 @@ import {CommonService} from "../../../common/services/communication/firebase-com
 import {Waypoint} from "../../model/waypoint";
 import {v4 as uuid} from "uuid";
 import {correctValueIsRequaired, latitudeValueIsNotCorrect, longitudeValueIsNotCorrect} from '../../utils/utils-forms';
+import {Marker} from "leaflet";
 
 @Component({
   selector: 'vfr-search-form',
@@ -77,6 +78,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    console.log(this.editedWaypoint)
     this.setButtonText();
     this.latAndLngFormGroup?.patchValue({
       latitude: this.editedWaypoint?.getLatLng().lat,
@@ -136,14 +138,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     return this.waypointForm.get("latAndLng")
   }
 
-  checkIfLatitudeIsNull(): boolean {
-    return this.latAndLngFormGroup?.get('latitude')?.value === null && this.latAndLngFormGroup?.get('longitude')?.value === null
-  }
-
-  checkIfLongitudeIsNull(): boolean {
-    return this.latAndLngFormGroup?.get('longitude')?.value === null
-  }
-
   isWaypointForm(): boolean {
     return this.typeOfForm === "waypoint-form"
   }
@@ -175,6 +169,8 @@ export class SearchFormComponent implements OnInit, OnDestroy {
       this.buttonText = "Add new point"
     }
   }
+
+
 }
 
 

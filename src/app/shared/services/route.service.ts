@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, map} from "rxjs";
 import {Route, Waypoint} from "../model/waypoint";
 import {
   accumulateDistance,

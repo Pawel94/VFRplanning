@@ -1,45 +1,50 @@
-<button class="btn btn-dark vertical-button" type="button" data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Show route details
-</button>
+<ng-container *transloco="let t">
+  <button class="btn btn-dark vertical-button" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">{{ t('route.details') }}
+  </button>
 
-<div class="offcanvas offcanvas-start text-bg-dark" data-bs-scroll="true" tabindex="-2" id="offcanvasWithBothOptions"
-     aria-labelledby="offcanvasWithBothOptionsLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Your route!</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <p *ngIf="actualRoute.listOfWaypoints.length===0">Click on map to add new points...</p>
+  <div class="offcanvas offcanvas-start text-bg-dark" data-bs-scroll="true" tabindex="-2" id="offcanvasWithBothOptions"
+       aria-labelledby="offcanvasWithBothOptionsLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"> {{ t('route.title') }}</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p *ngIf="actualRoute.listOfWaypoints.length===0">{{ t('route.info') }}</p>
 
-    <vfr-route-details [waypoints$]="route$"
-                       (removedWaypoint)="removeMarkerFromRoute($event)"
-                       (updatedWaypoint)="updateMarker($event)"
-                       data-bs-dismiss="offcanvas">
-    </vfr-route-details>
-  </div>
-  <div class="container">
-    <div class="row p-2">
+      <vfr-route-details [waypoints$]="route$"
+                         (removedWaypoint)="removeMarkerFromRoute($event)"
+                         (updatedWaypoint)="updateMarker($event)"
+                         data-bs-dismiss="offcanvas">
+      </vfr-route-details>
+    </div>
+    <div class="container">
+      <div class="row p-2">
 
       <span class="border border-info">
 
       </span>
-
-
-    <div class="row p-2">
-      <div class="col text-start">
-        <button class="btn btn-outline-info my-2 my-sm-0"
-                (click)="openModal()" data-bs-dismiss="offcanvas">
-          Add new point
-        </button>
-      </div>
-      <div class="col text-end">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas"
-                (click)="clearAllPoints()">Clear all
-        </button>
+        <div class="row p-2">
+          <div class="col text-center">
+            <button class="btn btn-outline-primary my-2 my-sm-0"
+                    data-bs-dismiss="offcanvas" [routerLink]="['/', 'summary']">
+              {{ t('route.fly') }}
+            </button>
+          </div>
+          <div class="col text-start">
+            <button class="btn btn-outline-info my-2 my-sm-0"
+                    (click)="openModal()" data-bs-dismiss="offcanvas">
+              {{ t('route.newPoint') }}
+            </button>
+          </div>
+          <div class="col text-end">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas"
+                    (click)="clearAllPoints()">    {{ t('route.clearAll') }}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-</div>
-
+</ng-container>
 
