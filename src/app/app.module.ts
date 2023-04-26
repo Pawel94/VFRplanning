@@ -36,6 +36,7 @@ import {
 } from "./features/vfr-parameters/weater/component/automatic-weather/automatic-weather.component";
 import {NavbarComponent} from "./common/components/navbar/navbar.component";
 import {VfrPlanningComponent} from "./features/vfr-planning/vfr-planning/vfr-planning.component";
+import {DegreePipe} from "./common/pipes/degree.pipe";
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import {VfrPlanningComponent} from "./features/vfr-planning/vfr-planning/vfr-pla
     ManualWeatherComponent,
     AutomaticWeatherComponent,
     NavbarComponent,
-    VfrPlanningComponent
+    VfrPlanningComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -64,12 +66,11 @@ import {VfrPlanningComponent} from "./features/vfr-planning/vfr-planning/vfr-pla
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    TranslocoRootModule,
-
+    TranslocoRootModule, DegreePipe,
   ],
   providers: [],
   exports: [
-    SearchFormComponent
+    SearchFormComponent,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,1 +1,8 @@
-<p>summary-page-manager works!</p>
+<div class="container">
+  <vfr-vfr-summary-table [route]="(route$ |async) ?? undefined"
+  (waypoints)="changeWaypoints($event)">
+
+  </vfr-vfr-summary-table>
+
+
+</div>

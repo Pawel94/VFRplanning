@@ -1,0 +1,32 @@
+<ng-container>
+  <table class="table table-sm table-dark">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Coordinates</th>
+      <th scope="col">Bearing to next point</th>
+      <th scope="col">Distance to next point</th>
+      <th scope="col">Time to next point</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let route of route?.listOfWaypoints">
+      <th scope="row">{{route.nameOfPoint}}</th>
+      <th scope="row">{{route?.getLatLng()?.lat | degree: true}} {{route?.getLatLng()?.lng | degree:false}}</th>
+      <td>{{route.bearing}}</td>
+      <td>{{route.distanceToNextPoint}}</td>
+      <td>{{route.timeToNextPoint}}</td>
+      <td>
+        <button type="button" class="btn btn-outline-danger" (click)="deleteWaypoint(route.id)">Delete</button>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">{{route?.totalTime}}</td>
+      <td colspan="2">{{route?.totalDistance}}</td>
+      <td colspan="2">{{route?.planeVelocity}}</td>
+    </tr>
+
+    </tbody>
+  </table>
+</ng-container>
