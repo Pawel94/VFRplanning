@@ -1,9 +1,10 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {FlightParamsService} from "../../../../../shared/services/flight-params.service";
+import {FlightParamsService} from "../../../../../shared/services/state/flight-state/flight-params.service";
 import {FlightParams} from "../../../../../shared/model/flightParamsModel";
 import {Subject, takeUntil} from "rxjs";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {RouteService} from "../../../../../shared/services/state/route-state/route.service";
 
 @Component({
   selector: 'vfr-flight-parameters',
@@ -22,6 +23,7 @@ export class FlightParametersComponent implements OnInit, OnDestroy {
   })
 
   constructor(private readonly flightParams: FlightParamsService,
+              private readonly roteService: RouteService,
               private readonly activeModal: NgbActiveModal,
   ) {
 
@@ -51,6 +53,7 @@ export class FlightParametersComponent implements OnInit, OnDestroy {
   submitFlightParamsForm() {
     const params = this.flightPramsForm?.value
     this.flightParams.setParams(params)
+    this.roteService.setVelocity(params.planeVelocity)
     this.closeModal()
   }
 

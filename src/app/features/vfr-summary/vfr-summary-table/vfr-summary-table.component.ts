@@ -24,11 +24,13 @@ export class VfrSummaryTableComponent implements OnInit {
   }
 
   deleteWaypoint(id?: string) {
-    const news = this.route!.listOfWaypoints.filter(el => el.id !== id);
-    const newRoute: Route = {
-      ...this.route,
-      listOfWaypoints: news,
+    if (this.route) {
+      const news = this.route!.listOfWaypoints.filter(el => el.id !== id);
+      const newRoute: Route = {
+        ...this.route,
+        listOfWaypoints: news,
+      }
+      this.waypoints.emit(newRoute)
     }
-    this.waypoints.emit(newRoute)
   }
 }

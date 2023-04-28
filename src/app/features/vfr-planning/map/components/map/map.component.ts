@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import * as L from "leaflet";
 import {latLng, LeafletMouseEvent, marker, Polyline, polyline, tileLayer} from "leaflet";
 import {markerIconDefault} from "../../../../../constanst/marker.constans";
-import {RouteService} from "../../../../../shared/services/route.service";
+import {RouteService} from "../../../../../shared/services/state/route-state/route.service";
 import {Route, Waypoint} from "../../../../../shared/model/waypoint";
 import {v4, v4 as uuid} from 'uuid'
 
@@ -28,7 +28,7 @@ export class MapComponent implements OnInit {
 
   };
   list?: Polyline[] = [];
-  actualRoute: Route = {listOfWaypoints: []};
+  actualRoute?: Route;
   listOfMarkers: Waypoint[] = []
   mapLayer: any = [];
   markerToAdd2?: Waypoint;
@@ -49,8 +49,8 @@ export class MapComponent implements OnInit {
 
   mapClicked($event: LeafletMouseEvent) {
     this.addNewMarker($event)
-    this.actualRoute.listOfWaypoints = this.listOfMarkers;
-    this.routeService.setRoute(this.actualRoute)
+    this.actualRoute!.listOfWaypoints = this.listOfMarkers;
+    this.routeService.setRoute(this.actualRoute!)
 
   }
 
@@ -83,6 +83,6 @@ export class MapComponent implements OnInit {
   }
 
   updateRouteOnMap(event: any) {
-    this.routeService.setRoute(this.actualRoute)
+    this.routeService.setRoute(this.actualRoute!)
   }
 }

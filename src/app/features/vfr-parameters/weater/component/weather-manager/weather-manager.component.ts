@@ -6,7 +6,7 @@ import {CommonService} from "../../../../../common/services/communication/fireba
 import {Airport} from "../../../../vfr-planning/map/model/modelForMaps";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {Place} from "../../../../../shared/model/waypoint";
-import {WeatherParamsService} from "../../../../../shared/services/weather-params.service";
+import {WeatherParamsService} from "../../../../../shared/services/state/weather-state/weather-params.service";
 
 @Component({
   selector: 'vfr-weater-manager',

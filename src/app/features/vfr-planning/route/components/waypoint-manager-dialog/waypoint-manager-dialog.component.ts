@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap'
 import {MapService} from "../../../map/services/map.service";
 import {Subject, takeUntil} from "rxjs";
-import {RouteService} from "../../../../../shared/services/route.service";
+import {RouteService} from "../../../../../shared/services/state/route-state/route.service";
 import {Route, Waypoint} from 'src/app/shared/model/waypoint';
 import {LatLng} from "leaflet";
 

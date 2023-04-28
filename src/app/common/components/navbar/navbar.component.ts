@@ -7,7 +7,7 @@ import {
 } from "../../../features/vfr-parameters/flight-parameters/component/flight-parameters/flight-parameters.component";
 import {Observable} from "rxjs";
 import {Route} from "../../../shared/model/waypoint";
-import {RouteService} from "../../../shared/services/route.service";
+import {RouteService} from "../../../shared/services/state/route-state/route.service";
 
 @Component({
   selector: 'vfr-navbar',

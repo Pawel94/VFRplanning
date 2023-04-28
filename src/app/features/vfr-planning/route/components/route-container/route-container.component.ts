@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {map, Observable, Subject} from "rxjs";
-import {RouteService} from "../../../../../shared/services/route.service";
+import {RouteService} from "../../../../../shared/services/state/route-state/route.service";
 import {Marker} from "leaflet";
 import {Route, Waypoint} from "../../../../../shared/model/waypoint";
 import {removeElementFromList} from "../../../../../common/utils/utils";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {WaypointManagerDialogComponent} from "../waypoint-manager-dialog/waypoint-manager-dialog.component";
-import {FlightParamsService} from "../../../../../shared/services/flight-params.service";
-import {WeatherParamsService} from "../../../../../shared/services/weather-params.service";
+import {FlightParamsService} from "../../../../../shared/services/state/flight-state/flight-params.service";
+import {WeatherParamsService} from "../../../../../shared/services/state/weather-state/weather-params.service";
 
 @Component({
   selector: 'vfr-route-container',
@@ -39,8 +39,7 @@ export class RouteContainerComponent implements OnInit, OnDestroy {
   }
 
   clearAllPoints(): void {
-    this.routeService.setRoute({listOfWaypoints: []});
-
+    this.routeService.clearRoute();
   }
 
   removeMarkerFromRoute(marker: Marker) {

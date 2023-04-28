@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {VfrSummaryTableComponent} from "../vfr-summary-table/vfr-summary-table.component";
-import {RouteService} from "../../../shared/services/route.service";
+import {RouteService} from "../../../shared/services/state/route-state/route.service";
 import {Observable} from "rxjs";
 import {Route} from "../../../shared/model/waypoint";
 
