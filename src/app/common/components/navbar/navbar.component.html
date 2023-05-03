@@ -5,7 +5,7 @@
         <div class="collapse navbar-collapse justify-content-start">
           <a class="navbar-brand text-white" href="#">{{ t('navbar.title')}}</a>
         </div>
-
+        <ng-container *ngIf="((activatedRoute$ |async)!=='/summary') ">
         <div class="collapse navbar-collapse justify-content-center">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item text-white p-1">
@@ -22,6 +22,7 @@
             </li>
           </ul>
         </div>
+        </ng-container>
         <ng-container *ngIf="route.totalTime">
           <div class=" justify-content-end">
             <div class="row">

@@ -1,13 +1,16 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {WeatherManagerComponent} from "../../../features/vfr-parameters/weater/component/weather-manager/weather-manager.component";
+import {
+  WeatherManagerComponent
+} from "../../../features/vfr-parameters/weater/component/weather-manager/weather-manager.component";
 import {CommonService} from "../../services/communication/firebase-communication/common.service";
 import {
   FlightParametersComponent
 } from "../../../features/vfr-parameters/flight-parameters/component/flight-parameters/flight-parameters.component";
-import {Observable} from "rxjs";
+import {filter, map, Observable} from "rxjs";
 import {Route} from "../../../shared/model/waypoint";
 import {RouteService} from "../../../shared/services/state/route-state/route.service";
+import {NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'vfr-navbar',
@@ -18,11 +21,17 @@ import {RouteService} from "../../../shared/services/state/route-state/route.ser
 export class NavbarComponent {
   route$: Observable<Route> = this.routeService.selectedRoute$;
 
-  constructor(private modalService: NgbModal,
-              private readonly common: CommonService,
-              private readonly routeService: RouteService) {
-  }
+  activatedRoute$: Observable<string> = this.router.events.pipe(
+    filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+    map((el: NavigationEnd) => el.url))
 
+  constructor(private readonly modalService: NgbModal,
+              private readonly common: CommonService,
+              private readonly routeService: RouteService,
+              private readonly router: Router,
+  ) {
+
+  }
 
   openWeatherModal() {
     this.openModal(WeatherManagerComponent)

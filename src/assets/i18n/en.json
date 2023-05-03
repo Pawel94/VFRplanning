@@ -44,5 +44,37 @@
     "title": "VFR-PLANING-FLIGHT",
     "flightParams": "Flight parameters",
     "weatherParams": "Weather parameters"
+  },
+  "summary":{
+  "planeVelocity": "Plane velocity: {{params}} km/h",
+    "totalDistance": "Total distance: {{params}} km",
+    "totalTime": "Total time: {{params}} ' ",
+    "hash": "#",
+    "cordinates": "Coordinates",
+    "bearing": "Bearing to next point",
+    "distance": "Distance to next point ",
+    "time": "Time to next point",
+    "pdf": "PDF generator",
+    "delate": "Delete",
+    "actions": "Actions",
+    "noData": "no data",
+    "flightLevel": "Plane flight: {{params}} ft",
+    "fuel": "Fuel: {{params}} L",
+    "planeType": "Plane type: {{params}} ",
+    "maxHours": "Max hours in air: {{params}} ",
+    "editFParams": "Edit plane parameters",
+    "editWParams": "Edit weather parameters",
+    "routeSummary": "Route summary",
+    "weatherSummary": "Weather summary",
+    "windDirection": "Direction of wind: {{params}}",
+    "windVelocity": "Wind velocity: {{params}} m/s",
+    "temperature": "Temperature: {{params}}",
+    "endPDF": "Create PDF",
+    "endSummaryPDF": "Generate PDF and take real plan to your flight.",
+    "endEdit": "Edit route",
+    "endSummaryEdit": "Are you not sure with flight plan? Go back and change waypoints.",
+    "endSave": "Save route",
+    "endSummarySave": "This is great flight plan - save it, and reload it leter"
+
   }
 }

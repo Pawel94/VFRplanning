@@ -1,20 +1,15 @@
 import {NgModule} from '@angular/core';
-
-import {DistancePipe} from './pipes/distance.pipe';
-import {ErrorValidationMessagesPipe} from './pipes/error-validation-messages.pipe';
+import {ErrorValidationMessagesPipe} from './pipes/error-pipe/error-validation-messages.pipe';
 import {AsyncPipe} from "@angular/common";
 import {TranslocoRootModule} from "../transloco-root.module";
 
 
 @NgModule({
   declarations: [
+    ErrorValidationMessagesPipe,
 
-    DistancePipe,
-    ErrorValidationMessagesPipe
   ],
   exports: [
-
-    DistancePipe,
     ErrorValidationMessagesPipe
   ],
   imports: [

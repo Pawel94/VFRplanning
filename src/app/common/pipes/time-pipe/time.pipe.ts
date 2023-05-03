@@ -1,0 +1,25 @@
+import {Pipe, PipeTransform} from '@angular/core';
+
+@Pipe({
+  name: 'time',
+  standalone: true
+})
+export class TimePipe implements PipeTransform {
+
+  transform(value?: number, toHours: boolean = false): string {
+
+    if (value && toHours) {
+      const val = this.calculateHours(value)
+      return val
+    }
+
+    return `${value}'`;
+  }
+
+  private calculateHours(value: number) {
+    const hours = Math.floor(value / 60);
+    const minutes = Math.floor(value % 60);
+    return `${hours} h ${minutes}'`;
+
+  }
+}

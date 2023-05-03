@@ -1,27 +1,25 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 
 import {Route} from "../../../shared/model/waypoint";
-import {DegreePipe} from "../../../common/pipes/degree.pipe";
+import {DegreePipe} from "../../../common/pipes/degree-pipe/degree.pipe";
 import {CommonModule} from "@angular/common";
+import {TranslocoModule} from "@ngneat/transloco";
+import {DistancePipe} from "../../../common/pipes/distance-pipe/distance.pipe";
+import {TimePipe} from "../../../common/pipes/time-pipe/time.pipe";
 
 
 @Component({
   selector: 'vfr-vfr-summary-table',
   standalone: true,
-  imports: [CommonModule, DegreePipe],
+  imports: [CommonModule, DegreePipe, TranslocoModule, DistancePipe, TimePipe],
   templateUrl: './vfr-summary-table.component.html',
-  styleUrls: ['./vfr-summary-table.component.scss']
+  styleUrls: ['./vfr-summary-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VfrSummaryTableComponent implements OnInit {
+export class VfrSummaryTableComponent {
   @Input() route?: Route;
   @Output() waypoints = new EventEmitter<Route>();
 
-  constructor() {
-    console.log(this.route?.listOfWaypoints)
-  }
-
-  ngOnInit(): void {
-  }
 
   deleteWaypoint(id?: string) {
     if (this.route) {

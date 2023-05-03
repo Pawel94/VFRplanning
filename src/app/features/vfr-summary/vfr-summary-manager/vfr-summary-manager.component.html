@@ -1,8 +1,13 @@
 <div class="container">
+
   <vfr-vfr-summary-table [route]="(route$ |async) ?? undefined"
   (waypoints)="changeWaypoints($event)">
 
   </vfr-vfr-summary-table>
-
-
+  <vfr-vfr-summary-panel
+    [flightParams]="(flightParams$ |async) ?? undefined"
+    [weatherParams]="(weatherParams$ |async) ?? undefined"
+    (openFlightParamsDialog)="openFlightParamsDialog()"
+    (openWeatherDialog)="openWeatherDialog()">
+  ></vfr-vfr-summary-panel>
 </div>
