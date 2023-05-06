@@ -1,6 +1,6 @@
 import {FormControl, FormGroup} from "@angular/forms";
 
-export interface waypointForm {
+export interface WaypointForm {
   place: FormGroup<placeFormGroup>
   latAndLng: FormGroup<latAndLngFormGroup>
 }

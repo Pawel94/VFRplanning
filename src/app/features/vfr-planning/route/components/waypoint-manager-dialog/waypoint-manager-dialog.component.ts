@@ -4,7 +4,6 @@ import {MapService} from "../../../map/services/map.service";
 import {Subject, takeUntil} from "rxjs";
 import {RouteService} from "../../../../../shared/services/state/route-state/route.service";
 import {Route, Waypoint} from 'src/app/shared/model/waypoint';
-import {LatLng} from "leaflet";
 
 
 @Component({
@@ -15,8 +14,6 @@ import {LatLng} from "leaflet";
 export class WaypointManagerDialogComponent implements OnInit, OnDestroy {
   @Input() public updateMarker?: Waypoint;
 
-
-  public type: string = "waypoint-form"
 
   private actualRoute!: Route;
   private unsubscribeSignal: Subject<void> = new Subject();
@@ -33,17 +30,27 @@ export class WaypointManagerDialogComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.unsubscribeSignal.asObservable()))
       .subscribe(route =>
-        this.actualRoute = route);
+        this.actualRoute = route
+      );
   }
 
-  public closeModal():void {
+  public closeModal(): void {
     this.activeModal.close('Modal Closed');
   }
 
-  public editWaypoint(waypointToAdd: Waypoint) :void {
-    const latLng = new LatLng(Number(waypointToAdd.lat), Number(waypointToAdd.lng));
-    waypointToAdd.setLatLng(latLng)
-    this.routeService.setRoute(this.actualRoute);
+
+  public editOrAddNewWaypoint(waypointToAdd: Waypoint): void {
+    const listOfWaypoints = [...this.actualRoute.listOfWaypoints]
+
+    const index = listOfWaypoints.findIndex(obj => obj.id === waypointToAdd.id);
+    if (index === -1) {
+      listOfWaypoints.push(waypointToAdd);
+    } else {
+      listOfWaypoints[index] = waypointToAdd;
+    }
+
+    this.actualRoute.listOfWaypoints = [...listOfWaypoints]
+    this.routeService.setRoute({...this.actualRoute});
 
     this.closeModal()
   }

@@ -5,7 +5,7 @@ import {Weather} from "../../model/indexWeater";
 import {CommonService} from "../../../../../common/services/communication/firebase-communication/common.service";
 import {Airport} from "../../../../vfr-planning/map/model/modelForMaps";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {Place} from "../../../../../shared/model/waypoint";
+import {Waypoint} from "../../../../../shared/model/waypoint";
 import {WeatherParamsService} from "../../../../../shared/services/state/weather-state/weather-params.service";
 
 @Component({
@@ -44,17 +44,13 @@ export class WeatherManagerComponent implements OnInit, OnDestroy {
     this.unsubscribeSignal.unsubscribe();
   }
 
-  addNewWeatherPoint(inputPlace: Place) {
-    if (inputPlace.lat && inputPlace.lng) {
-      this.actualWeather$ = this.weatherService.getWeatherDataFromOPEN_METEO(inputPlace).pipe(
-        map(place => {
-          place.city = inputPlace.city ?? "NOT FIND"
-          this.weatherList.push(place);
-          return this.weatherList
-        }))
-    }
-    /*TODO */
-    console.error("TO CHECK THIS LOGIC ")
+  addNewWeatherPoint(inputPlace: Waypoint) {
+    this.actualWeather$ = this.weatherService.getWeatherDataFromOPEN_METEO(inputPlace).pipe(
+      map(place => {
+        place.city = inputPlace.city ?? "NOT FIND"
+        this.weatherList.push(place);
+        return this.weatherList
+      }))
   }
 
   setWeatherConditions($event: Weather) {

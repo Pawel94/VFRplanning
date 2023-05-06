@@ -2,6 +2,11 @@ import {Injectable} from '@angular/core';
 import {Observable, shareReplay, switchMap} from "rxjs";
 import {AngularFireDatabase} from "@angular/fire/compat/database";
 import {FlightParamsService} from "../../../../shared/services/state/flight-state/flight-params.service";
+import {CityDto} from "../../../../shared/model/city";
+import {
+  PlaneType,
+  PlaneTypeForSelect
+} from "../../../../features/vfr-parameters/flight-parameters/component/model/model";
 
 @Injectable({
   providedIn: 'root'
@@ -13,19 +18,19 @@ export class CommonService {
   }
 
 
-  getCitiesFromDB(): Observable<any> {
-    return this.db.list('/cities').valueChanges()
+  getCitiesFromDB(): Observable<CityDto[]> {
+    return this.db.list<CityDto>('/cities').valueChanges()
   }
 
-  getPlanesFromDB(): Observable<any> {
-    return this.db.list('/planes').valueChanges().pipe(shareReplay())
+  getPlanesFromDB(): Observable<PlaneTypeForSelect[]> {
+    return this.db.list<PlaneTypeForSelect>('/planes').valueChanges().pipe(shareReplay())
   }
 
-  getDirectInfoAboutPlane(id: any): Observable<any> {
-    return this.db.object(`planes/${id}`).valueChanges()
+  getDirectInfoAboutPlane(id: number): Observable<PlaneType | null> {
+    return this.db.object<PlaneType>(`planes/${id}`).valueChanges()
   }
 
-  getPlaneFromDB(): Observable<any> {
+  getPlaneFromDB(): Observable<PlaneType | null> {
     return this.flightService.selectFlightParams$.pipe(switchMap(params => this.getDirectInfoAboutPlane(params.planeTypeId)))
   }
 }

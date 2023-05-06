@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {catchError, map, Observable, of, tap} from "rxjs";
 import {Weather} from "../model/indexWeater";
-import {Place} from "../../../../shared/model/waypoint";
+import { Waypoint} from "../../../../shared/model/waypoint";
 import {NotificationService} from "../../../../shared/services/notification/notification.service";
 
 @Injectable({
@@ -31,9 +31,9 @@ export class WeatherService {
         catchError(val => of({city: val} as Weather)))
   }
 
-  getWeatherDataFromOPEN_METEO(input: Place): Observable<Weather> {
+  getWeatherDataFromOPEN_METEO(input: Waypoint): Observable<Weather> {
 
-    return this.httpRequest.get(`https://api.open-meteo.com/v1/forecast?latitude=${input.lat}&longitude=${input.lng}&current_weather=true&windspeed_unit=ms`)
+    return this.httpRequest.get(`https://api.open-meteo.com/v1/forecast?latitude=${input.getLatLng().lat}&longitude=${input.getLatLng().lng}&current_weather=true&windspeed_unit=ms`)
       .pipe(map((response: any) =>
           ({
             windSpeed: response.current_weather.windspeed,
@@ -41,14 +41,14 @@ export class WeatherService {
             city: input.city,
             source: "OPEN_METEO"
           } as Weather)),
-        tap(() => this.toastSuccess(input)),
+        tap(() => this.toastSuccess(input.getLatLng().lat)),
         catchError(() => {
           this.toastFail();
           return of()
         }))
   }
 
-  private toastSuccess(params: Place) {
+  private toastSuccess(params: any) {
     this.notification.getSuccess('weatherParameters.successParamsCity', params);
   }
 

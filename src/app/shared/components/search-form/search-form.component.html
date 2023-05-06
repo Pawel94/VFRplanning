@@ -1,57 +1,64 @@
-<form [formGroup]="waypointForm" [ngClass]="{
+<ng-container *transloco="let t">
+  <form [formGroup]="waypointForm" [ngClass]="{
 'is-valid':(airportFormControl?.dirty || airportFormControl?.touched)
 }">
-  <div class="container ">
-    <div formGroupName="latAndLng" class="row p-2">
-      <div class="col">
-        <label for="latitude">Latitude:</label>
-        <input id="latitude" type="number" class="form-control" formControlName="latitude"/>
+    <div class="container ">
+      <div formGroupName="latAndLng" class="row p-2">
+        <div class="col">
+          <label for="latitude">Latitude:</label>
+          <input id="latitude" type="number" class="form-control" formControlName="latitude"/>
+        </div>
+        <div class="col">
+          <label for="longitude">Longitude:</label>
+          <input id="longitude" type="number" class="form-control" formControlName="longitude"/>
+        </div>
       </div>
-      <div class="col">
-        <label for="longitude">Longitude:</label>
-        <input id="longitude" type="number" class="form-control" formControlName="longitude"/>
+      <div formGroupName="place" class="row p-2">
+        <div class="col">
+          <label for="typeahead-basic">Find by name of city</label>
+          <input id="typeahead-basic" type="text" class="form-control"
+                 formControlName="airport"
+                 [(ngModel)]="inputModel"
+                 [ngbTypeahead]="search"
+                 (selectItem)="onSelectedCity($event)"/>
+        </div>
       </div>
     </div>
-    <div formGroupName="place" class="row p-2">
-      <div class="col">
-        <label for="typeahead-basic">Find by name of city</label>
-        <input id="typeahead-basic" type="text" class="form-control"
-               formControlName="airport"
-               [(ngModel)]="inputModel"
-               [ngbTypeahead]="getCityName"/>
-      </div>
+
+    <div class="text-danger"
+         *ngIf="latFormControl&& latFormControl.errors ">
+      {{ latFormControl.errors |errorValidationMessages}}
     </div>
-  </div>
 
-  <div class="text-danger"
-       *ngIf="latFormControl&& latFormControl.errors ">
-    {{ latFormControl.errors |errorValidationMessages}}
-  </div>
+    <div class="text-danger"
+         *ngIf="lngFormControl&& lngFormControl.errors ">
+      {{ lngFormControl.errors |errorValidationMessages}}
+    </div>
+    <div class="text-danger"
+         *ngIf="latAndLngFormGroup && latAndLngFormGroup.dirty && latAndLngFormGroup.errors ">
 
-  <div class="text-danger"
-       *ngIf="lngFormControl&& lngFormControl.errors ">
-    {{ lngFormControl.errors |errorValidationMessages}}
-  </div>
-  <div class="text-danger"
-       *ngIf="latAndLngFormGroup && latAndLngFormGroup.dirty && latAndLngFormGroup.errors ">
+      {{ latAndLngFormGroup.errors |errorValidationMessages}}
+    </div>
 
-    {{ latAndLngFormGroup.errors |errorValidationMessages}}
-  </div>
+    <div class="text-danger"
+         *ngIf="airportFormControl&& airportFormControl.touched && airportFormControl.errors&& airportFormControl.value !=''">
+      {{ airportFormControl.errors |errorValidationMessages}}
 
-  <div class="text-danger"
-       *ngIf="airportFormControl&& airportFormControl.touched && airportFormControl.errors&& airportFormControl.value !=''">
-    {{ airportFormControl.errors |errorValidationMessages}}
+    </div>
+    <br/>
 
-  </div>
-  <br/>
-  <div *ngIf="isWaypointForm()" class="modal-footer">
-    <button (click)="submitWaypointForm()" class="btn btn-info"
-            [disabled]="latAndLngFormGroup?.errors ||airportFormControl?.errors ">{{buttonText}}
-    </button>
-  </div>
-  <div *ngIf="isWeatherForm()" class="modal-footer">
-    <button (click)="addNewPoint()" class="btn btn-info"
-            [disabled]="latAndLngFormGroup?.errors ||airportFormControl?.errors ">{{buttonText}}
-    </button>
-  </div>
-</form>
+    <div class="modal-footer">
+      <button (click)="submitWaypointForm()" class="btn btn-info"
+              [disabled]="latAndLngFormGroup?.errors ||airportFormControl?.errors ">
+        <ng-container *ngIf="this.editedWaypoint else notEdit">
+          {{ t('searchForm.buttonTextEdit')}}
+        </ng-container>
+      </button>
+    </div>
+  </form>
+
+  <ng-template #notEdit>
+    {{ t('searchForm.buttonTextNew')}}
+  </ng-template>
+</ng-container>
+

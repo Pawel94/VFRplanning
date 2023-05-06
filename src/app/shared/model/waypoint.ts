@@ -1,12 +1,13 @@
 import {Marker} from "leaflet";
 
-export interface Waypoint extends Marker, Place {
+export interface Waypoint extends Marker {
   id?: string;
   nameOfPoint?: string;
   isFirstPoint?: boolean;
   distanceToNextPoint?: number;
   bearing?: number;
   timeToNextPoint?: number;
+  city?:string
 }
 
 export interface Route {
@@ -16,8 +17,4 @@ export interface Route {
   planeVelocity: number
 }
 
-export interface Place {
-  lat?: number;
-  lng?: number;
-  city?: string
-}
+

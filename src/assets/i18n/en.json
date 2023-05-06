@@ -81,5 +81,10 @@
     "endSave": "Save route",
     "endSummarySave": "This is great flight plan - save it, and reload it leter"
 
+  },
+  "searchForm":{
+    "buttonTextEdit": "Edit waypoint",
+    "buttonTextNew": "Add new point"
+
   }
 }

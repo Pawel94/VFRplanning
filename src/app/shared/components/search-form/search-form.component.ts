@@ -1,12 +1,15 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 
-import {latAndLngFormGroup, waypointForm} from "../../../features/vfr-planning/route/model";
-import {debounceTime, distinctUntilChanged, map, Observable, Subject, takeUntil} from "rxjs";
+import {latAndLngFormGroup, WaypointForm} from "../../../features/vfr-planning/route/model";
+import {debounceTime, distinctUntilChanged, map, Observable, Subject} from "rxjs";
 import {CommonService} from "../../../common/services/communication/firebase-communication/common.service";
 import {Waypoint} from "../../model/waypoint";
 import {v4 as uuid} from "uuid";
 import {correctValueIsRequaired, latitudeValueIsNotCorrect, longitudeValueIsNotCorrect} from '../../utils/utils-forms';
+import {LatLng, Marker} from "leaflet";
+import {markerIconDefault} from "../../../constanst/marker.constans";
+import {CityDto} from "../../model/city";
 
 @Component({
   selector: 'vfr-search-form',
@@ -15,20 +18,18 @@ import {correctValueIsRequaired, latitudeValueIsNotCorrect, longitudeValueIsNotC
 })
 export class SearchFormComponent implements OnInit, OnDestroy {
 
-  @Output() dataFromForm = new EventEmitter<Waypoint>();
-  @Output() resultOfEditedWaypoint = new EventEmitter<Waypoint>();
+
+  @Output() addOrEditWaypoint = new EventEmitter<Waypoint>();
+
   @Input() public editedWaypoint?: Waypoint;
-  @Input() public typeOfForm?: string;
 
-  private listOfCitiesFromDB: any[] = [];
-  private isAddedPointWithLatLng: boolean = false;
+  private listOfCitiesFromDB: CityDto[] = [];
+
   private unsubscribeSignal: Subject<void> = new Subject();
-  private placeToFind!: Waypoint
 
-  inputModel: any;
-  buttonText?: string;
+  inputModel: string = "";
 
-  waypointForm: FormGroup = new FormGroup<waypointForm>({
+  waypointForm: FormGroup = new FormGroup<WaypointForm>({
       latAndLng: new FormGroup<latAndLngFormGroup>({
         latitude: new FormControl<number | null>(null, {validators: latitudeValueIsNotCorrect}),
         longitude: new FormControl<number | null>(null, {validators: longitudeValueIsNotCorrect}),
@@ -41,23 +42,8 @@ export class SearchFormComponent implements OnInit, OnDestroy {
   );
 
 
-  constructor(public readonly common: CommonService) {  }
-
-  ngOnDestroy(): void {
-    this.unsubscribeSignal.next();
-    this.unsubscribeSignal.unsubscribe();
+  constructor(public readonly common: CommonService) {
   }
-
-
-  getCityName: (text$: Observable<string>) => Observable<string[]> = (text$: Observable<string>) =>
-    text$.pipe(
-      // takeUntil(this.unsubscribeSignal.asObservable()),
-      debounceTime(1000),
-      distinctUntilChanged(),
-      map((term) =>
-        term.length < 2 ? [] : this.listOfCitiesFromDB.filter((v) => v.city.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
-      ),
-      map(x => x.map(x => x.city)))
 
 
   ngOnInit(): void {
@@ -65,56 +51,22 @@ export class SearchFormComponent implements OnInit, OnDestroy {
       .subscribe(element => {
         this.listOfCitiesFromDB = element;
       });
-    this.waypointForm.valueChanges
-      .pipe(
-        takeUntil(this.unsubscribeSignal.asObservable()),
-        debounceTime(500),
-        distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)))
-      .subscribe(values => {
-        this.toggleDisabledInputs();
-      })
 
-    this.setButtonText();
-    this.latAndLngFormGroup?.patchValue({
-      latitude: this.editedWaypoint?.getLatLng().lat,
-      longitude: this.editedWaypoint?.getLatLng().lng
-    })
+    this.setInitialFormValues();
   }
 
-  submitWaypointForm() {
+  submitWaypointForm(): void {
+    const latLng = new LatLng(Number(this.latFormControl?.value), Number(this.lngFormControl?.value));
     if (this.editedWaypoint) {
-      this.editExistingWaypoint();
+      this.editedWaypoint.city = this.inputModel;
+      this.editedWaypoint?.setLatLng(latLng)
+      this.addOrEditWaypoint.emit(this.editedWaypoint)
     } else {
-      this.addNewPoint();
+      const markerToAdd = new Marker(latLng, markerIconDefault) as Waypoint;
+      markerToAdd.city = this.inputModel;
+      markerToAdd.id = uuid()
+      this.addOrEditWaypoint.emit(markerToAdd)
     }
-  }
-
-  private editExistingWaypoint() {
-    this.editedWaypoint!.lat = Number(this.latFormControl?.value);
-    this.editedWaypoint!.lng = Number(this.lngFormControl?.value);
-
-    if (this.isAddedPointWithLatLng) {
-      this.placeToFind = this.listOfCitiesFromDB.find(x => x.city === this.inputModel);
-      this.editedWaypoint!.lat = this.placeToFind.lat
-      this.editedWaypoint!.lng = this.placeToFind.lng
-      this.editedWaypoint!.city = this.placeToFind.city
-    }
-    this.resultOfEditedWaypoint.emit(this.editedWaypoint);
-
-  }
-
-  addNewPoint() {
-    this.placeToFind = {
-      lat: Number(this.latFormControl?.value),
-      lng: Number(this.lngFormControl?.value),
-      city: "to make",
-      id: uuid()
-    } as Waypoint
-    if (this.isAddedPointWithLatLng) {
-      this.placeToFind = this.listOfCitiesFromDB.find(x => x.city === this.inputModel);
-    }
-    console.log(this.placeToFind)
-    this.dataFromForm.emit(this.placeToFind);
   }
 
 
@@ -134,39 +86,36 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     return this.waypointForm.get("latAndLng")
   }
 
-  isWaypointForm(): boolean {
-    return this.typeOfForm === "waypoint-form"
+
+  onSelectedCity(object: any) {
+
+    const {city, ...rest} = this.listOfCitiesFromDB.find(el => el.city === object.item) ?? {}
+    this.latAndLngFormGroup?.patchValue({
+      ...rest
+    })
   }
 
-  isWeatherForm(): boolean {
-    return this.typeOfForm === "weather-form"
-  }
-
-  private toggleDisabledInputs() {
-    if (this.latAndLngFormGroup?.dirty && this.latAndLngFormGroup?.get('latitude')?.value != null || this.latAndLngFormGroup?.get('longitude')?.value != null) {
-      this.airportFormControl?.disable();
-      this.isAddedPointWithLatLng = false;
-    } else if (this.airportFormControl?.dirty && this.airportFormControl.value != '') {
-      this.latAndLngFormGroup?.get('latitude')?.disable()
-      this.latAndLngFormGroup?.get('longitude')?.disable()
-      this.isAddedPointWithLatLng = true;
-    } else {
-      this.latAndLngFormGroup?.get('latitude')?.enable()
-      this.latAndLngFormGroup?.get('longitude')?.enable()
-      this.airportFormControl?.enable();
-
+  private setInitialFormValues() {
+    if (this.editedWaypoint) {
+      this.latAndLngFormGroup!.patchValue({
+        latitude: this.editedWaypoint.getLatLng().lat,
+        longitude: this.editedWaypoint.getLatLng().lng
+      })
     }
   }
 
-  private setButtonText(): void {
-    if (this.isWaypointForm()) {
-      this.buttonText = this.editedWaypoint !== undefined ? "Edit waypoint" : "Add new point"
-    } else {
-      this.buttonText = "Add new point"
-    }
+  ngOnDestroy(): void {
+    this.unsubscribeSignal.next();
+    this.unsubscribeSignal.unsubscribe();
   }
 
-
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 2 ? []
+        : this.listOfCitiesFromDB.map(place => place.city).filter(c => c.toLowerCase().startsWith(term.toLowerCase())).slice(0, 10)),
+    );
 }
 
 

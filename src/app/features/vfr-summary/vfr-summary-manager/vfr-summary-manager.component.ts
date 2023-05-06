@@ -33,13 +33,13 @@ export class VfrSummaryManagerComponent {
 
   weatherParams$?: Observable<Weather> = this.weatherService.selectWeatherParams;
 
-  planeTypeInformation$: Observable<PlaneType> = this.dateBase.getPlaneFromDB();
+  planeTypeInformation$: Observable<PlaneType | null> = this.dateBase.getPlaneFromDB();
 
   constructor(private readonly routeService: RouteService,
               private readonly flightService: FlightParamsService,
               private readonly weatherService: WeatherParamsService,
               private readonly modalService: NgbModal,
-              public readonly dateBase: CommonService) {
+              private readonly dateBase: CommonService) {
   }
 
   changeWaypoints($event: Route) {
