@@ -2,9 +2,11 @@ import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/co
 import {FormControl, FormGroup} from "@angular/forms";
 import {FlightParamsService} from "../../../../../shared/services/state/flight-state/flight-params.service";
 import {FlightParams} from "../../../../../shared/model/flightParamsModel";
-import {Subject, takeUntil} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {RouteService} from "../../../../../shared/services/state/route-state/route.service";
+import {CommonService} from "../../../../../common/services/communication/firebase-communication/common.service";
+import {PlaneTypeForSelect} from "../model/model";
 
 @Component({
   selector: 'vfr-flight-parameters',
@@ -14,17 +16,22 @@ import {RouteService} from "../../../../../shared/services/state/route-state/rou
 })
 export class FlightParametersComponent implements OnInit, OnDestroy {
 
+
+  planesFromDateBase$: Observable<PlaneTypeForSelect[]> = this.dateBase.getPlanesFromDB();
   private flightParamsData!: FlightParams
   private unsubscribe$ = new Subject<void>;
 
   flightPramsForm: FormGroup = new FormGroup<any>({
     planeVelocity: new FormControl<number | null>(0, {}),
-    flightLevel: new FormControl<number | null>(1000, {})
+    flightLevel: new FormControl<number | null>(1000, {}),
+    planeFuel: new FormControl<number | null>(1000, {}),
+    planeType: new FormControl<PlaneTypeForSelect>({id: 1, name: ""})
   })
 
   constructor(private readonly flightParams: FlightParamsService,
               private readonly roteService: RouteService,
               private readonly activeModal: NgbActiveModal,
+              public readonly dateBase: CommonService
   ) {
 
   }
@@ -36,6 +43,7 @@ export class FlightParametersComponent implements OnInit, OnDestroy {
 
     this.flightPramsForm?.get("planeVelocity")?.setValue(this.flightParamsData.planeVelocity)
     this.flightPramsForm?.get("flightLevel")?.setValue(this.flightParamsData.flightLevel)
+    this.flightPramsForm?.get("planeFuel")?.setValue(this.flightParamsData.planeFuel)
   }
 
   closeModal() {
@@ -48,6 +56,10 @@ export class FlightParametersComponent implements OnInit, OnDestroy {
 
   get formValueFlightLevel() {
     return this.flightPramsForm?.get("flightLevel")?.value;
+  }
+
+  get formValuePlaneFuel() {
+    return this.flightPramsForm?.get("planeFuel")?.value;
   }
 
   submitFlightParamsForm() {

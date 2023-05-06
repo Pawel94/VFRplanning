@@ -25,7 +25,10 @@
     "title": "Configure your flight",
     "save": "Save parameters",
     "velocity": "Velocity(TAS): {{params}}",
-    "flightLevel": "Flight level: {{params}}"
+    "flightLevel": "Flight level: {{params}}",
+    "planeFuel": "Plane fuel level: {{params}}L",
+    "planeType": "Plane type:",
+    "fuelConsumption": "Fuel consumption: {{params}}L/H"
   },
   "weatherParameters": {
     "success": "Success added weather parameters",
@@ -60,6 +63,8 @@
     "noData": "no data",
     "flightLevel": "Plane flight: {{params}} ft",
     "fuel": "Fuel: {{params}} L",
+    "fuelTakeOff": "Fuel take-off: {{params}} L",
+    "fuelConsumption": "Fuel consumption: {{params}} L/H",
     "planeType": "Plane type: {{params}} ",
     "maxHours": "Max hours in air: {{params}} ",
     "editFParams": "Edit plane parameters",

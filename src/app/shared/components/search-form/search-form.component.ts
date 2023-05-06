@@ -7,7 +7,6 @@ import {CommonService} from "../../../common/services/communication/firebase-com
 import {Waypoint} from "../../model/waypoint";
 import {v4 as uuid} from "uuid";
 import {correctValueIsRequaired, latitudeValueIsNotCorrect, longitudeValueIsNotCorrect} from '../../utils/utils-forms';
-import {Marker} from "leaflet";
 
 @Component({
   selector: 'vfr-search-form',
@@ -42,23 +41,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
   );
 
 
-  constructor(public readonly common: CommonService) {
-
-    this.common.getCitiesFromDB()
-      .subscribe(element => {
-        this.listOfCitiesFromDB = element;
-      });
-
-    this.waypointForm.valueChanges
-      .pipe(
-        takeUntil(this.unsubscribeSignal.asObservable()),
-        debounceTime(500),
-        distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)))
-      .subscribe(values => {
-        this.toggleDisabledInputs();
-      })
-
-  }
+  constructor(public readonly common: CommonService) {  }
 
   ngOnDestroy(): void {
     this.unsubscribeSignal.next();
@@ -74,11 +57,23 @@ export class SearchFormComponent implements OnInit, OnDestroy {
       map((term) =>
         term.length < 2 ? [] : this.listOfCitiesFromDB.filter((v) => v.city.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
       ),
-      map(x => x.map(x => x.city),))
+      map(x => x.map(x => x.city)))
 
 
   ngOnInit(): void {
-    console.log(this.editedWaypoint)
+    this.common.getCitiesFromDB()
+      .subscribe(element => {
+        this.listOfCitiesFromDB = element;
+      });
+    this.waypointForm.valueChanges
+      .pipe(
+        takeUntil(this.unsubscribeSignal.asObservable()),
+        debounceTime(500),
+        distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)))
+      .subscribe(values => {
+        this.toggleDisabledInputs();
+      })
+
     this.setButtonText();
     this.latAndLngFormGroup?.patchValue({
       latitude: this.editedWaypoint?.getLatLng().lat,
@@ -118,6 +113,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     if (this.isAddedPointWithLatLng) {
       this.placeToFind = this.listOfCitiesFromDB.find(x => x.city === this.inputModel);
     }
+    console.log(this.placeToFind)
     this.dataFromForm.emit(this.placeToFind);
   }
 

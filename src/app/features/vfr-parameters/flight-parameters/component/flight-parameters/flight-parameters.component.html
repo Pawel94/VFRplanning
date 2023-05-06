@@ -21,6 +21,20 @@
                        class="flightLevel">{{ t('flightParameters.flightLevel', {params: formValueFlightLevel}) }}</label>
                 <input type="range" step="100" class="form-range" min="500" max="10000" id="flightLevel"
                        formControlName="flightLevel">
+                <label for="planeFuel"
+                       class="planeFuel">{{ t('flightParameters.planeFuel', {params: formValuePlaneFuel}) }}</label>
+                <input type="range" step="5" class="form-range" min="0" max="120" id="planeFuel"
+                       formControlName="planeFuel">
+                <ng-container *ngIf="planesFromDateBase$ |async as planes">
+                  <label for="planeType"
+                         class="planeType">{{ t('flightParameters.planeType')}}</label>
+                  <select class="form-control" id="planeType" formControlName="planeType">
+                    <option *ngFor="let plane of planes"
+                            [value]="plane.id">
+                      {{plane.name}}
+                    </option>
+                  </select>
+                </ng-container>
               </form>
             </div>
             <div class="modal-footer">

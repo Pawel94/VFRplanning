@@ -7,7 +7,6 @@ import {Route} from "../../../shared/model/waypoint";
 import {VfrSummaryPanelComponent} from "../vfr-summary-panel/vfr-summary-panel.component";
 import {FlightParamsService} from "../../../shared/services/state/flight-state/flight-params.service";
 import {FlightParams} from "../../../shared/model/flightParamsModel";
-import {WeatherService} from "../../vfr-parameters/weater/service/weather.service";
 import {Weather} from "../../vfr-parameters/weater/model/indexWeater";
 import {
   FlightParametersComponent
@@ -15,6 +14,8 @@ import {
 import {WeatherManagerComponent} from "../../vfr-parameters/weater/component/weather-manager/weather-manager.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {WeatherParamsService} from "../../../shared/services/state/weather-state/weather-params.service";
+import {CommonService} from "../../../common/services/communication/firebase-communication/common.service";
+import {PlaneType} from "../../vfr-parameters/flight-parameters/component/model/model";
 
 @Component({
   selector: 'vfr-summary-page-manager',
@@ -30,12 +31,15 @@ export class VfrSummaryManagerComponent {
   route$?: Observable<Route> = this.routeService.selectedRoute$;
   flightParams$?: Observable<FlightParams> = this.flightService.selectFlightParams$;
 
-  weatherParams$?:Observable<Weather> =this.weatherService.selectWeatherParams;
+  weatherParams$?: Observable<Weather> = this.weatherService.selectWeatherParams;
+
+  planeTypeInformation$: Observable<PlaneType> = this.dateBase.getPlaneFromDB();
 
   constructor(private readonly routeService: RouteService,
               private readonly flightService: FlightParamsService,
-              private readonly weatherService:WeatherParamsService,
-              private modalService: NgbModal) {
+              private readonly weatherService: WeatherParamsService,
+              private readonly modalService: NgbModal,
+              public readonly dateBase: CommonService) {
   }
 
   changeWaypoints($event: Route) {

@@ -7,7 +7,12 @@ import {NotificationService} from "../../notification/notification.service";
   providedIn: 'root'
 })
 export class FlightParamsService {
-  private flightParams$ = new BehaviorSubject<FlightParams>({planeVelocity: 120, flightLevel: 1000});
+  private flightParams$ = new BehaviorSubject<FlightParams>({
+    planeVelocity: 120,
+    flightLevel: 1000,
+    planeFuel:10,
+    planeTypeId: 1
+  });
   selectFlightParams$ = this.flightParams$.asObservable()
 
   constructor(private readonly notification: NotificationService) {
@@ -21,4 +26,5 @@ export class FlightParamsService {
       this.notification.getFailure('flightParameters.error');
     }
   }
+
 }

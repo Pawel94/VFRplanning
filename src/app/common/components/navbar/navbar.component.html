@@ -22,7 +22,7 @@
             </li>
           </ul>
         </div>
-        </ng-container>
+
         <ng-container *ngIf="route.totalTime">
           <div class=" justify-content-end">
             <div class="row">
@@ -32,6 +32,7 @@
               {{ t('navbar.distance', {params: route.totalDistance}) }}
             </div>
           </div>
+        </ng-container>
         </ng-container>
         <div class="collapse navbar-collapse justify-content-end">
           {{ t('navbar.about')}}
