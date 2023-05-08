@@ -1,8 +1,10 @@
 # VFRplanning
 Project in build stage. Platform for pilots to plan their VFR flight. Stey tuned :) 
- Check link with stable version: vfr-flight.web.app/
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.7.
+
+## Check my work - stable version: 
+[VFR - planning](vfr-flight.web.app/)
 
 ## Features
 
