@@ -9,8 +9,10 @@
           <p class="card-text">{{ t('summary.flightLevel', {params: flightParams?.flightLevel}) }}</p>
           <p class="card-text">{{ t('summary.planeType', {params: planeTypeInformation?.name}) }}</p>
           <p class="card-text">{{ t('summary.fuel', {params: flightParams?.planeFuel}) }}</p>
-          <p class="card-text">{{ t('summary.fuelTakeOff', {params: planeTypeInformation?.fuelConsumption?.takeoff}) }}</p>
-          <p class="card-text">{{ t('summary.fuelConsumption', {params: planeTypeInformation?.fuelConsumption?.cruise}) }}</p>
+          <p
+            class="card-text">{{ t('summary.fuelTakeOff', {params: planeTypeInformation?.fuelConsumption?.takeoff}) }}</p>
+          <p
+            class="card-text">{{ t('summary.fuelConsumption', {params: planeTypeInformation?.fuelConsumption?.cruise}) }}</p>
           <p class="card-text">{{ t('summary.maxHours', {}) }}</p>
           <button class="btn btn-primary" (click)="editFlightParams()">{{ t('summary.editFParams') }}</button>
         </div>
@@ -26,7 +28,7 @@
             <p class="card-text">{{ t('summary.windVelocity', {params: weatherParams?.directionOfWind}) }}</p>
             <p class="card-text">{{ t('summary.temperature', {}) }}</p>
           </div>
-          <button  class="btn btn-primary" (click)="editWeather()">{{ t('summary.editWParams') }}</button>
+          <button class="btn btn-primary" (click)="editWeather()">{{ t('summary.editWParams') }}</button>
         </div>
       </div>
     </div>
@@ -54,7 +56,7 @@
           <div class="col-md-5">
             <img src="/assets/pictures/flightPlan.jpg" class="img-fluid rounded-start h-100" alt="...">
           </div>
-          <div  class="col-md-7">
+          <div class="col-md-7">
             <div class="card-body">
               <p><small> {{ t('summary.endSummaryEdit') }}</small></p>
             </div>
@@ -73,9 +75,14 @@
           <div class="col-md-7">
             <div class="card-body">
               <p><small> {{ t('summary.endSummarySave') }}</small></p>
+              <ng-container *ngIf="(userState | async) ===null">
+                <p class="text-danger"><small> {{ t('summary.notLogged') }}</small></p>
+              </ng-container>
             </div>
+
             <div class="card-footer text-bg-light text-start">
-              <a href="#" class="btn btn-primary">{{ t('summary.endSave') }}</a>
+              <button href="#" class="btn btn-primary"
+                      [disabled]="!(userState | async)">{{ t('summary.endSave') }}</button>
             </div>
           </div>
         </div>

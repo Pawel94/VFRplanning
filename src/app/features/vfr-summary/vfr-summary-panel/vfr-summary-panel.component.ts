@@ -4,6 +4,8 @@ import {TranslocoModule} from "@ngneat/transloco";
 import {FlightParams} from "../../../shared/model/flightParamsModel";
 import {Weather} from "../../vfr-parameters/weater/model/indexWeater";
 import {PlaneType} from "../../vfr-parameters/flight-parameters/component/model/model";
+import {AuthService} from "../../../common/services/auth/auth.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'vfr-vfr-summary-panel',
@@ -15,11 +17,14 @@ import {PlaneType} from "../../vfr-parameters/flight-parameters/component/model/
 export class VfrSummaryPanelComponent {
   @Input() flightParams?: FlightParams;
   @Input() items = ["a,b,c"]
-  @Input() planeTypeInformation?:PlaneType;
+  @Input() planeTypeInformation?: PlaneType;
   @Input() weatherParams?: Weather;
   @Output() openWeatherDialog = new EventEmitter<void>();
   @Output() openFlightParamsDialog = new EventEmitter<void>();
+  userState: Observable<any> = this.auth.authState$;
 
+  constructor(private readonly auth: AuthService) {
+  }
 
   editWeather(): void {
     this.openWeatherDialog.emit()

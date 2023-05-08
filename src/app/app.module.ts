@@ -39,6 +39,7 @@ import {VfrPlanningComponent} from "./features/vfr-planning/vfr-planning/vfr-pla
 import {DegreePipe} from "./common/pipes/degree-pipe/degree.pipe";
 import {DistancePipe} from "./common/pipes/distance-pipe/distance.pipe";
 import {TimePipe} from "./common/pipes/time-pipe/time.pipe";
+import {LoginStatusDirective} from "./common/directive/login-status.directive";
 
 
 @NgModule({
@@ -71,7 +72,7 @@ import {TimePipe} from "./common/pipes/time-pipe/time.pipe";
     TranslocoRootModule,
     DegreePipe,
     DistancePipe,
-    TimePipe
+    TimePipe, LoginStatusDirective
   ],
   providers: [],
   exports: [

@@ -11,6 +11,7 @@ import {filter, map, Observable} from "rxjs";
 import {Route} from "../../../shared/model/waypoint";
 import {RouteService} from "../../../shared/services/state/route-state/route.service";
 import {NavigationEnd, Router} from "@angular/router";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'vfr-navbar',
@@ -21,6 +22,7 @@ import {NavigationEnd, Router} from "@angular/router";
 export class NavbarComponent {
   route$: Observable<Route> = this.routeService.selectedRoute$;
 
+  isLogged: Observable<any> = this.auth.authState$;
   activatedRoute$: Observable<string> = this.router.events.pipe(
     filter((event): event is NavigationEnd => event instanceof NavigationEnd),
     map((el: NavigationEnd) => el.url))
@@ -29,6 +31,7 @@ export class NavbarComponent {
               private readonly common: CommonService,
               private readonly routeService: RouteService,
               private readonly router: Router,
+              private readonly auth: AuthService
   ) {
 
   }

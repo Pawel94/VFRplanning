@@ -46,7 +46,9 @@
     "about": "About",
     "title": "VFR-PLANING-FLIGHT",
     "flightParams": "Flight parameters",
-    "weatherParams": "Weather parameters"
+    "weatherParams": "Weather parameters",
+    "login": " Login ",
+    "logout": " Logout! "
   },
   "summary":{
   "planeVelocity": "Plane velocity: {{params}} km/h",
@@ -79,12 +81,21 @@
     "endEdit": "Edit route",
     "endSummaryEdit": "Are you not sure with flight plan? Go back and change waypoints.",
     "endSave": "Save route",
-    "endSummarySave": "This is great flight plan - save it, and reload it leter"
+    "endSummarySave": "This is great flight plan - save it, and reload it letter.",
+    "notLogged": "To continue this action you have to login"
 
   },
   "searchForm":{
     "buttonTextEdit": "Edit waypoint",
     "buttonTextNew": "Add new point"
 
+  },
+  "login":{
+    "success": "Success log in: {{params.email}}",
+    "fail": "Some errors"
+  },
+  "loginOut":{
+    "success": "Success log out!",
+    "fail": "Some errors"
   }
 }

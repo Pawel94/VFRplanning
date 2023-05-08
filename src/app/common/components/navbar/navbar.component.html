@@ -6,37 +6,38 @@
           <a class="navbar-brand text-white" href="#">{{ t('navbar.title')}}</a>
         </div>
         <ng-container *ngIf="((activatedRoute$ |async)!=='/summary') ">
-        <div class="collapse navbar-collapse justify-content-center">
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item text-white p-1">
-              <button class="btn btn-outline-success my-2 my-sm-0"
-                      (click)="openWeatherModal()">    {{ t('navbar.weatherParams')}}</button>
-            </li>
-            <!--        <li class="nav-item">-->
-            <!--          <a class="nav-link text-white" href="#">LOGO</a>-->
-            <!--        </li>-->
-            <li class="nav-item text-white p-1">
-              <button class="btn btn-outline-success my-2 my-sm-0"
-                      (click)="openFlightParameterModal()">    {{ t('navbar.flightParams')}}
-              </button>
-            </li>
-          </ul>
-        </div>
+          <div class="collapse navbar-collapse justify-content-center">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item text-white p-1">
+                <button class="btn btn-outline-success my-2 my-sm-0"
+                        (click)="openWeatherModal()">    {{ t('navbar.weatherParams')}}</button>
+              </li>
+              <li class="nav-item text-white p-1">
+                <button class="btn btn-outline-success my-2 my-sm-0"
+                        (click)="openFlightParameterModal()">    {{ t('navbar.flightParams')}}
+                </button>
+              </li>
+            </ul>
+          </div>
 
-        <ng-container *ngIf="route.totalTime">
-          <div class=" justify-content-end">
-            <div class="row">
-              {{ t('navbar.time', {params: route.totalTime}) }}
+          <ng-container *ngIf="route.totalTime">
+            <div class=" justify-content-end">
+              <div class="row">
+                {{ t('navbar.time', {params: route.totalTime}) }}
+              </div>
+              <div class="row">
+                {{ t('navbar.distance', {params: route.totalDistance}) }}
+              </div>
             </div>
-            <div class="row">
-              {{ t('navbar.distance', {params: route.totalDistance}) }}
-            </div>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="((activatedRoute$ |async)!=='/login') ">
+          <div class="collapse navbar-collapse justify-content-end">
+            <div class="m-2">{{ t('navbar.about')}}</div>
+            <div class="m-2" vfrLoginStatus [isLoggedIn]="(isLogged |async)"><i></i></div>
           </div>
         </ng-container>
-        </ng-container>
-        <div class="collapse navbar-collapse justify-content-end">
-          {{ t('navbar.about')}}
-        </div>
       </div>
     </nav>
   </ng-container>
