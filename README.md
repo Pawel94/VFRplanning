@@ -22,6 +22,8 @@ To use Airplane Route Creator, simply clone this repository and install its depe
 git clone https://github.com/Pawel94/VFRplanning.git
 cd airplane-route-creator
 npm install
+```
+
 
 ## Extra
 Feel free to contanct me or add PR.
