@@ -1,8 +1,11 @@
-<div style="height: 1600px;"
-     leaflet
-     [leafletOptions]="options"
-     [leafletLayers]="mapLayer"
-     (leafletMouseUp)="updateRouteOnMap($event)"
-     (leafletClick)="mapClicked($event)"
-     (leafletMapReady)="onMapReady($event)">
-</div>
+<ng-container *ngIf="mapLayers$ |async">
+  <div style="height: 1600px;"
+       leaflet
+       [leafletOptions]="options"
+       [leafletLayers]="mapLayer"
+       (leafletMouseUp)="updateRouteOnMap($event)"
+       (leafletClick)="mapClicked($event)"
+       (leafletMapReady)="onMapReady($event)"
+       [leafletLayersControl]="mapLayers">
+  </div>
+</ng-container>

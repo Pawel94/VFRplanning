@@ -1,7 +1,7 @@
 export interface Airport {
   code: string
-  lat: string
-  lng: string
+  lat: number
+  lon: number
   name: string
   city: string
   state: string

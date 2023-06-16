@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TranslocoModule} from "@ngneat/transloco";
 import {FlightParams} from "../../../shared/model/flightParamsModel";
-import {Weather} from "../../vfr-parameters/weater/model/indexWeater";
-import {PlaneType} from "../../vfr-parameters/flight-parameters/component/model/model";
+import {Weather} from "../../vfr-parameters/types/weater";
+import {PlaneType} from "../../vfr-parameters/types/plane";
 import {AuthService} from "../../../common/services/auth/auth.service";
 import {Observable} from "rxjs";
 

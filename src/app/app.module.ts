@@ -72,7 +72,8 @@ import {LoginStatusDirective} from "./common/directive/login-status.directive";
     TranslocoRootModule,
     DegreePipe,
     DistancePipe,
-    TimePipe, LoginStatusDirective
+    TimePipe,
+    LoginStatusDirective
   ],
   providers: [],
   exports: [

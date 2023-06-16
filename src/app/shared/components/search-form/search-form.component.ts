@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 
-import {latAndLngFormGroup, WaypointForm} from "../../../features/vfr-planning/route/model";
+import {latAndLngFormGroup, WaypointForm} from "../../../features/vfr-planning/types/form-control";
 import {debounceTime, distinctUntilChanged, map, Observable, Subject} from "rxjs";
 import {CommonService} from "../../../common/services/communication/firebase-communication/common.service";
 import {Waypoint} from "../../model/waypoint";

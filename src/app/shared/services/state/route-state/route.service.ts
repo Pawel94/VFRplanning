@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {Route} from "../../../model/waypoint";
+import {Route, Waypoint} from "../../../model/waypoint";
 import {
   accumulateDistance,
   addNameToPoints,
@@ -20,7 +20,14 @@ export class RouteService {
   setRoute(route: Route) {
     this.route$.next(route);
     this.calculateRoute()
+  }
 
+  addWaypointsInRoute(listOfWaypoints: Waypoint[]) {
+    this.route$.next({
+      ...this.route$.value,
+      listOfWaypoints
+    });
+    this.calculateRoute()
   }
 
   clearRoute() {

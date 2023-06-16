@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import * as L from "leaflet";
-import {latLng, LeafletMouseEvent, marker, Polyline, polyline, tileLayer} from "leaflet";
+import {Circle, latLng, layerGroup, LeafletMouseEvent, marker, Polyline, polyline, tileLayer} from "leaflet";
 import {markerIconDefault} from "../../../../../constanst/marker.constans";
 import {RouteService} from "../../../../../shared/services/state/route-state/route.service";
 import {Route, Waypoint} from "../../../../../shared/model/waypoint";
-import {v4, v4 as uuid} from 'uuid'
+import {v4 as uuid} from 'uuid'
+import {map, Observable} from "rxjs";
 
 @Component({
   selector: 'vfr-map',
@@ -14,8 +15,26 @@ import {v4, v4 as uuid} from 'uuid'
 
 
 export class MapComponent implements OnInit {
+  @Input() airports$?: Observable<Circle[]>
+
+  mapLayers$ = this.airports$?.pipe(map(el => this.mapLayers.overlays = {
+    ...this.mapLayers.overlays,
+    'Airports': layerGroup(el),
+  }))
   routeBetweenMarkers: Polyline = polyline(([]));
-  listOfWayPoints: Waypoint[] = []
+
+  mapLayers = {
+    baseLayers: {
+      'Open Street Map': tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '...'
+      }),
+    },
+    overlays: {
+      'Airports': layerGroup(),
+      'Zones': layerGroup(),
+    }
+  }
   map!: L.Map;
   options = {
     layers: [
@@ -27,31 +46,27 @@ export class MapComponent implements OnInit {
     center: latLng(52.06, 19.25)
 
   };
-  list?: Polyline[] = [];
   actualRoute?: Route;
   listOfMarkers: Waypoint[] = []
   mapLayer: any = [];
-  markerToAdd2?: Waypoint;
 
   constructor(private readonly routeService: RouteService) {
+  }
+
+  ngOnInit(): void {
     this.routeService.selectedRoute$
       .subscribe(route => {
         this.actualRoute = route;
         this.listOfMarkers = this.actualRoute.listOfWaypoints;
         this.calculateRouteBetweenMarkers();
         this.prepareActualRoute();
-        console.log(this.actualRoute)
+        console.log(this.mapLayers)
       })
   }
 
-  ngOnInit(): void {
-  }
-
-  mapClicked($event: LeafletMouseEvent) {
+  mapClicked($event: LeafletMouseEvent): void {
     this.addNewMarker($event)
-    this.actualRoute!.listOfWaypoints = this.listOfMarkers;
-    this.routeService.setRoute(this.actualRoute!)
-
+    this.routeService.addWaypointsInRoute(this.listOfMarkers)
   }
 
   private calculateRouteBetweenMarkers(): void {
@@ -64,22 +79,16 @@ export class MapComponent implements OnInit {
   private prepareActualRoute(): void {
     this.mapLayer = [];
     this.mapLayer.push(...this.listOfMarkers, this.routeBetweenMarkers);
-
   }
 
   private addNewMarker(event: LeafletMouseEvent) {
-    this.markerToAdd2 = {} as Waypoint
-    this.markerToAdd2 = marker(event.latlng, markerIconDefault);
-    this.markerToAdd2.id = uuid()
-    this.listOfMarkers.push(this.markerToAdd2)
+    const newWaypoint = marker(event.latlng, markerIconDefault) as Waypoint
+    newWaypoint.id = uuid()
+    this.listOfMarkers.push(newWaypoint)
   }
 
   onMapReady(map: L.Map) {
     this.map = map;
-  }
-
-  ngAfterViewInit(): void {
-    this.calculateRouteBetweenMarkers()
   }
 
   updateRouteOnMap(event: any) {

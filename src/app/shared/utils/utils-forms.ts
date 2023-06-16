@@ -1,5 +1,5 @@
 import {AbstractControl, AsyncValidatorFn, ValidatorFn} from "@angular/forms";
-import {MapService} from "../../features/vfr-planning/map/services/map.service";
+import {MapService} from "../../common/services/api/map.service";
 import {delay, distinctUntilChanged, map} from "rxjs";
 
 export const correctValueIsRequaired: ValidatorFn = (control: AbstractControl) => {
@@ -28,14 +28,14 @@ export const longitudeValueIsNotCorrect: ValidatorFn = (control: AbstractControl
 
 };
 
-export function userExistsValidator(mapService: MapService): AsyncValidatorFn {
-  return (control: AbstractControl) => {
-    let placeByAirportName = control.value;
-    return mapService.findAirPortsFrom("null")
-      .pipe(
-        delay(1000),
-        distinctUntilChanged(),
-        map(airport => airport.find(x => x.city === placeByAirportName) ? null : {airportNotExist: true})
-      );
-  }
-}
+// export function userExistsValidator(mapService: MapService): AsyncValidatorFn {
+//   return (control: AbstractControl) => {
+//     let placeByAirportName = control.value;
+//     return mapService.findAirportsFrom("null")
+//       .pipe(
+//         delay(1000),
+//         distinctUntilChanged(),
+//         map(airport => airport.find(x => x.city === placeByAirportName) ? null : {airportNotExist: true})
+//       );
+//   }
+// }

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {Weather} from "../../../../features/vfr-parameters/weater/model/indexWeater";
+import {Weather} from "@features/vfr-parameters";
 import {NotificationService} from "../../notification/notification.service";
 
 @Injectable({

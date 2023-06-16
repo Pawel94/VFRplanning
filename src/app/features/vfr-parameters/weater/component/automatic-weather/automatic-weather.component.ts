@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
-import {Waypoint} from "../../../../../shared/model/waypoint";
+import {Waypoint} from "@shared";
 
 @Component({
   selector: 'vfr-automatic-weather',

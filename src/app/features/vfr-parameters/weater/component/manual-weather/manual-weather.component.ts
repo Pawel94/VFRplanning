@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {Weather} from "../../model/indexWeater";
+import {Weather} from "@features/vfr-parameters";
 
 @Component({
   selector: 'vfr-manual-weather',

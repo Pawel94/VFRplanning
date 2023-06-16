@@ -6,7 +6,7 @@ import {Observable, Subject, takeUntil} from "rxjs";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {RouteService} from "../../../../../shared/services/state/route-state/route.service";
 import {CommonService} from "../../../../../common/services/communication/firebase-communication/common.service";
-import {PlaneTypeForSelect} from "../model/model";
+import {PlaneTypeForSelect} from "../../../types/plane";
 
 @Component({
   selector: 'vfr-flight-parameters',

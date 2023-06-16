@@ -1,12 +1,13 @@
 import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {WeatherService} from "../../service/weather.service";
+import {WeatherService} from "../../../../../common/services/api/weather.service";
 import {map, Observable, Subject} from "rxjs";
-import {Weather} from "../../model/indexWeater";
+import {Weather} from "../../../types/weater";
 import {CommonService} from "../../../../../common/services/communication/firebase-communication/common.service";
-import {Airport} from "../../../../vfr-planning/map/model/modelForMaps";
+
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {Waypoint} from "../../../../../shared/model/waypoint";
 import {WeatherParamsService} from "../../../../../shared/services/state/weather-state/weather-params.service";
+import {Airport} from '@features/vfr-planning';
 
 @Component({
   selector: 'vfr-weater-manager',

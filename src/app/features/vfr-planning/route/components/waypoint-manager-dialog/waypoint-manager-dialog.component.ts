@@ -1,6 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap'
-import {MapService} from "../../../map/services/map.service";
 import {Subject, takeUntil} from "rxjs";
 import {RouteService} from "../../../../../shared/services/state/route-state/route.service";
 import {Route, Waypoint} from 'src/app/shared/model/waypoint';
@@ -19,7 +18,6 @@ export class WaypointManagerDialogComponent implements OnInit, OnDestroy {
   private unsubscribeSignal: Subject<void> = new Subject();
 
   constructor(private readonly activeModal: NgbActiveModal,
-              private readonly mapService: MapService,
               private readonly routeService: RouteService,
   ) {
 

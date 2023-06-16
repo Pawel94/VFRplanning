@@ -22,8 +22,20 @@
       "es2020",
       "dom"
     ],
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "paths": {
+      "@features/vfr-planning": [
+        "src/app/features/vfr-planning/index.ts"
+      ],
+      "@features/vfr-parameters": [
+        "src/app/features/vfr-parameters/index.ts"
+      ],
+      "@shared": [
+        "src/app/shared/index.ts"
+      ]
+    }
   },
+
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

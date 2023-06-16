@@ -3,11 +3,11 @@ import {CommonModule} from '@angular/common';
 import {VfrSummaryTableComponent} from "../vfr-summary-table/vfr-summary-table.component";
 import {RouteService} from "../../../shared/services/state/route-state/route.service";
 import {Observable} from "rxjs";
-import {Route} from "../../../shared/model/waypoint";
+import {Route} from "@shared";
 import {VfrSummaryPanelComponent} from "../vfr-summary-panel/vfr-summary-panel.component";
 import {FlightParamsService} from "../../../shared/services/state/flight-state/flight-params.service";
-import {FlightParams} from "../../../shared/model/flightParamsModel";
-import {Weather} from "../../vfr-parameters/weater/model/indexWeater";
+import {FlightParams} from "@shared";
+import {Weather} from "@features/vfr-parameters";
 import {
   FlightParametersComponent
 } from "../../vfr-parameters/flight-parameters/component/flight-parameters/flight-parameters.component";
@@ -15,7 +15,7 @@ import {WeatherManagerComponent} from "../../vfr-parameters/weater/component/wea
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {WeatherParamsService} from "../../../shared/services/state/weather-state/weather-params.service";
 import {CommonService} from "../../../common/services/communication/firebase-communication/common.service";
-import {PlaneType} from "../../vfr-parameters/flight-parameters/component/model/model";
+import {PlaneType} from "@features/vfr-parameters";
 
 @Component({
   selector: 'vfr-summary-page-manager',
