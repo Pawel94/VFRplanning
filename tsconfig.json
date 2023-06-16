@@ -32,6 +32,15 @@
       ],
       "@shared": [
         "src/app/shared/index.ts"
+      ],
+      "@common/services": [
+        "src/app/common/services/index.ts"
+      ],
+      "@shared/services": [
+        "src/app/common/services/state/index.ts"
+      ],
+      "@common/constant": [
+        "src/app/constant/index.ts"
       ]
     }
   },

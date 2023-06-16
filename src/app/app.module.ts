@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {MapModule} from "./features/vfr-planning/map/map.module";
 import {CommonModule} from "./common/common.module";
 import {HttpClientModule} from "@angular/common/http";
 import {RouteDetailsComponent} from './features/vfr-planning/route/components/route-details/route-details.component';
@@ -40,6 +39,7 @@ import {DegreePipe} from "./common/pipes/degree-pipe/degree.pipe";
 import {DistancePipe} from "./common/pipes/distance-pipe/distance.pipe";
 import {TimePipe} from "./common/pipes/time-pipe/time.pipe";
 import {LoginStatusDirective} from "./common/directive/login-status.directive";
+import {MapComponent} from "./features/vfr-planning/map/components/map.component";
 
 
 @NgModule({
@@ -60,7 +60,6 @@ import {LoginStatusDirective} from "./common/directive/login-status.directive";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MapModule,
     CommonModule,
     HttpClientModule,
     NgbModule, FormsModule,
@@ -73,7 +72,8 @@ import {LoginStatusDirective} from "./common/directive/login-status.directive";
     DegreePipe,
     DistancePipe,
     TimePipe,
-    LoginStatusDirective
+    LoginStatusDirective,
+    MapComponent
   ],
   providers: [],
   exports: [

@@ -8,7 +8,7 @@ import {Waypoint} from "../../model/waypoint";
 import {v4 as uuid} from "uuid";
 import {correctValueIsRequaired, latitudeValueIsNotCorrect, longitudeValueIsNotCorrect} from '../../utils/utils-forms';
 import {LatLng, Marker} from "leaflet";
-import {markerIconDefault} from "../../../constanst/marker.constans";
+import {markerIconDefault} from "../../../constant/marker.constant";
 import {CityDto} from "../../model/city";
 
 @Component({
