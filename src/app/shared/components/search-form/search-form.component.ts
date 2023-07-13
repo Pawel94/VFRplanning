@@ -1,20 +1,34 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 
-import {latAndLngFormGroup, WaypointForm} from "../../../features/vfr-planning/types/form-control";
+import {latAndLngFormGroup, WaypointForm} from "@features/vfr-planning";
 import {debounceTime, distinctUntilChanged, map, Observable, Subject} from "rxjs";
 import {CommonService} from "../../../common/services/communication/firebase-communication/common.service";
-import {Waypoint} from "../../model/waypoint";
+import {Waypoint} from "@shared";
 import {v4 as uuid} from "uuid";
 import {correctValueIsRequaired, latitudeValueIsNotCorrect, longitudeValueIsNotCorrect} from '../../utils/utils-forms';
 import {LatLng, Marker} from "leaflet";
-import {markerIconDefault} from "../../../constant/marker.constant";
-import {CityDto} from "../../model/city";
+import {markerIconDefault} from "@common/constant";
+import {CityDto} from "@shared";
+
+import {NgbTypeaheadModule} from "@ng-bootstrap/ng-bootstrap";
+import {CommonModule, NgClass} from "@angular/common";
+import {ErrorValidationMessagesPipe} from "../../../common/pipes/error-pipe/error-validation-messages.pipe";
+import {TranslocoRootModule} from "../../../transloco-root.module";
 
 @Component({
   selector: 'vfr-search-form',
   templateUrl: './search-form.component.html',
-  styleUrls: ['./search-form.component.scss']
+  styleUrls: ['./search-form.component.scss'],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    NgbTypeaheadModule,
+    NgClass,
+    ErrorValidationMessagesPipe,
+    TranslocoRootModule
+  ],
+  standalone: true
 })
 export class SearchFormComponent implements OnInit, OnDestroy {
 
@@ -41,12 +55,10 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     },
   );
 
-
   constructor(public readonly common: CommonService) {
   }
-
-
   ngOnInit(): void {
+    console.log("START")
     this.common.getCitiesFromDB()
       .subscribe(element => {
         this.listOfCitiesFromDB = element;

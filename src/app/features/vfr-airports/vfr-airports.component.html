@@ -1,0 +1,28 @@
+
+<ng-container *transloco="let t">
+  <div>
+    <div tabindex="-1" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{ t('flightParameters.title') }}</h5>
+          <button type="button" class="btn close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container ">
+            <div class="modal-body">
+              <vfr-search-form (addOrEditWaypoint)="addNewWeatherPoint($event)">
+              </vfr-search-form>
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-container>

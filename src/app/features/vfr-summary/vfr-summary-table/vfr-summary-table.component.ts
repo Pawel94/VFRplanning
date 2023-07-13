@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 
-import {Route} from "../../../shared/model/waypoint";
+import {Route} from "@shared";
 import {DegreePipe} from "../../../common/pipes/degree-pipe/degree.pipe";
 import {CommonModule} from "@angular/common";
 import {TranslocoModule} from "@ngneat/transloco";

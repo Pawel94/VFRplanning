@@ -5,7 +5,7 @@ import {Weather} from "../../../types/weater";
 import {CommonService} from "../../../../../common/services/communication/firebase-communication/common.service";
 
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {Waypoint} from "../../../../../shared/model/waypoint";
+import {Waypoint} from "@shared";
 import {WeatherParamsService} from "../../../../../shared/services/state/weather-state/weather-params.service";
 import {Airport} from '@features/vfr-planning';
 

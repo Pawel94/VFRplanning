@@ -5,7 +5,7 @@ import {Marker} from "leaflet";
 import {Route, Waypoint} from "../../../../../shared/model/waypoint";
 import {removeElementFromList} from "../../../../../common/utils/utils";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {WaypointManagerDialogComponent} from "../waypoint-manager-dialog/waypoint-manager-dialog.component";
+import {WaypointManagerDialogComponent} from "../../../../vfr-waypoints/waypoint-manager-dialog.component";
 import {FlightParamsService} from "../../../../../shared/services/state/flight-state/flight-params.service";
 import {WeatherParamsService} from "../../../../../shared/services/state/weather-state/weather-params.service";
 

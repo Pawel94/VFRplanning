@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap'
 import {Subject, takeUntil} from "rxjs";
-import {RouteService} from "../../../../../shared/services/state/route-state/route.service";
+import {RouteService} from "../../shared/services/state";
 import {Route, Waypoint} from 'src/app/shared/model/waypoint';
 
 

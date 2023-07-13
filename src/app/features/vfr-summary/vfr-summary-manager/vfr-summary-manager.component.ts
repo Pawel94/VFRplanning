@@ -17,6 +17,7 @@ import {WeatherParamsService} from "../../../shared/services/state/weather-state
 import {CommonService} from "../../../common/services/communication/firebase-communication/common.service";
 import {PlaneType} from "@features/vfr-parameters";
 
+
 @Component({
   selector: 'vfr-summary-page-manager',
   standalone: true,

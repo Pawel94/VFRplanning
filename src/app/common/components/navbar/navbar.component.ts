@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ComponentFactory, ComponentFactoryResolver, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {
   WeatherManagerComponent
@@ -8,10 +8,13 @@ import {
   FlightParametersComponent
 } from "../../../features/vfr-parameters/flight-parameters/component/flight-parameters/flight-parameters.component";
 import {filter, map, Observable} from "rxjs";
-import {Route} from "../../../shared/model/waypoint";
-import {RouteService} from "../../../shared/services/state/route-state/route.service";
+import {Route} from "@shared";
+import {RouteService} from "../../../shared/services/state";
 import {NavigationEnd, Router} from "@angular/router";
 import {AuthService} from "../../services/auth/auth.service";
+import {WaypointManagerDialogComponent} from "../../../features/vfr-waypoints/waypoint-manager-dialog.component";
+import {PopoverFlightDataComponent} from "../popover-flight-data/popover-flight-data.component";
+
 
 @Component({
   selector: 'vfr-navbar',
@@ -19,8 +22,9 @@ import {AuthService} from "../../services/auth/auth.service";
   styleUrls: ['./navbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   route$: Observable<Route> = this.routeService.selectedRoute$;
+  componentFactory!: ComponentFactory<any>;
 
   isLogged: Observable<any> = this.auth.authState$;
   activatedRoute$: Observable<string> = this.router.events.pipe(
@@ -31,17 +35,27 @@ export class NavbarComponent {
               private readonly common: CommonService,
               private readonly routeService: RouteService,
               private readonly router: Router,
-              private readonly auth: AuthService
+              private readonly auth: AuthService,
+              private componentFactoryResolver: ComponentFactoryResolver
   ) {
 
   }
 
-  openWeatherModal() {
+  ngOnInit() {
+    this.componentFactory =
+      this.componentFactoryResolver.resolveComponentFactory(PopoverFlightDataComponent);
+  }
+
+  openWeatherModal(): void {
     this.openModal(WeatherManagerComponent)
   }
 
-  openFlightParameterModal() {
+  openFlightParameterModal(): void {
     this.openModal(FlightParametersComponent)
+  }
+
+  openAirportModal(): void {
+    this.openModal(WaypointManagerDialogComponent);
   }
 
   private openModal(service: any) {

@@ -2,16 +2,14 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {CommonModule} from "./common/common.module";
+
 import {HttpClientModule} from "@angular/common/http";
 import {RouteDetailsComponent} from './features/vfr-planning/route/components/route-details/route-details.component';
 import {
   RouteContainerComponent
 } from './features/vfr-planning/route/components/route-container/route-container.component';
 
-import {
-  WaypointManagerDialogComponent
-} from './features/vfr-planning/route/components/waypoint-manager-dialog/waypoint-manager-dialog.component';
+import {WaypointManagerDialogComponent} from './features/vfr-waypoints/waypoint-manager-dialog.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
@@ -38,8 +36,10 @@ import {VfrPlanningComponent} from "./features/vfr-planning/vfr-planning/vfr-pla
 import {DegreePipe} from "./common/pipes/degree-pipe/degree.pipe";
 import {DistancePipe} from "./common/pipes/distance-pipe/distance.pipe";
 import {TimePipe} from "./common/pipes/time-pipe/time.pipe";
-import {LoginStatusDirective} from "./common/directive/login-status.directive";
+import {LoginStatusDirective} from "./common/directive/login-status/login-status.directive";
 import {MapComponent} from "./features/vfr-planning/map/components/map.component";
+import {DynamicComponent} from "./common/directive/dynamic-component/dynamic-component.directive";
+import {PopoverFlightDataComponent} from "./common/components/popover-flight-data/popover-flight-data.component";
 
 
 @NgModule({
@@ -49,18 +49,18 @@ import {MapComponent} from "./features/vfr-planning/map/components/map.component
     RouteContainerComponent,
     WaypointManagerDialogComponent,
     WeatherManagerComponent,
-    SearchFormComponent,
     FlightParametersComponent,
     ManualWeatherComponent,
     AutomaticWeatherComponent,
     NavbarComponent,
     VfrPlanningComponent,
+    DynamicComponent,
+    PopoverFlightDataComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CommonModule,
     HttpClientModule,
     NgbModule, FormsModule,
     ReactiveFormsModule,
@@ -73,12 +73,10 @@ import {MapComponent} from "./features/vfr-planning/map/components/map.component
     DistancePipe,
     TimePipe,
     LoginStatusDirective,
-    MapComponent
+    MapComponent, SearchFormComponent,
   ],
   providers: [],
-  exports: [
-    SearchFormComponent,
-  ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

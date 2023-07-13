@@ -48,7 +48,9 @@
     "flightParams": "Flight parameters",
     "weatherParams": "Weather parameters",
     "login": " Login ",
-    "logout": " Logout! "
+    "logout": " Logout! ",
+    "waypoint": "Add new point",
+    "flightInfo": "Flight info"
   },
   "summary":{
   "planeVelocity": "Plane velocity: {{params}} km/h",

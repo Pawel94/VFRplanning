@@ -2,8 +2,10 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {ValidationErrors} from "@angular/forms";
 
 @Pipe({
-  name: 'errorValidationMessages'
+  name: 'errorValidationMessages',
+  standalone: true
 })
+
 export class ErrorValidationMessagesPipe implements PipeTransform {
 
   transform(errors: ValidationErrors | null): string {
@@ -20,6 +22,6 @@ export class ErrorValidationMessagesPipe implements PipeTransform {
 export const validationMessages: { [key: string]: string } = {
   latAndLatRequaired: 'This fields needs to be completed - missing latitude or longitude',
   airportNotExist: "Airport not exist",
-  latitudeIsNotCorrect:"Latitude is not correct",
-  longitudeIsNotCorrect:"Longitude is not correct"
+  latitudeIsNotCorrect: "Latitude is not correct",
+  longitudeIsNotCorrect: "Longitude is not correct"
 };

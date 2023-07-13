@@ -17,21 +17,21 @@
                         (click)="openFlightParameterModal()">    {{ t('navbar.flightParams')}}
                 </button>
               </li>
+              <li class="nav-item text-white p-1">
+                <button class="btn btn-outline-success my-2 my-sm-0"
+                        (click)="openAirportModal()">    {{ t('navbar.waypoint')}}
+                </button>
+              </li>
+              <li class="nav-item text-white p-1">
+                <button class="btn btn-outline-success my-2 my-sm-0"
+                        [ngbPopover]="popContent" triggers="mouseenter:mouseleave"><i class="bi bi-info-square "
+                >  {{ t('navbar.flightInfo')}}</i>
+                </button>
+
+              </li>
             </ul>
           </div>
-
-          <ng-container *ngIf="route.totalTime">
-            <div class=" justify-content-end">
-              <div class="row">
-                {{ t('navbar.time', {params: route.totalTime}) }}
-              </div>
-              <div class="row">
-                {{ t('navbar.distance', {params: route.totalDistance}) }}
-              </div>
-            </div>
-          </ng-container>
         </ng-container>
-
         <ng-container *ngIf="((activatedRoute$ |async)!=='/login') ">
           <div class="collapse navbar-collapse justify-content-end">
             <div class="m-2">{{ t('navbar.about')}}</div>
@@ -43,3 +43,7 @@
   </ng-container>
 </ng-container>
 
+<ng-template #popContent>
+  <ng-container [componentHost]="componentFactory">
+  </ng-container>
+</ng-template>

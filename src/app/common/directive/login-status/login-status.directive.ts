@@ -1,7 +1,7 @@
 import { Directive, ElementRef, HostListener, Input, OnChanges, Renderer2} from '@angular/core';
 import {TranslocoService} from "@ngneat/transloco";
 import {Router} from "@angular/router";
-import {AuthService} from "../services/auth/auth.service";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Directive({
   selector: '[vfrLoginStatus]',
