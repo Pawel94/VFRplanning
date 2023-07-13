@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, ComponentFactory, ComponentFactoryResolver, OnInit} from '@angular/core';
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbPopoverModule} from "@ng-bootstrap/ng-bootstrap";
 import {
   WeatherManagerComponent
 } from "../../../features/vfr-parameters/weater/component/weather-manager/weather-manager.component";
@@ -14,6 +14,10 @@ import {NavigationEnd, Router} from "@angular/router";
 import {AuthService} from "../../services/auth/auth.service";
 import {WaypointManagerDialogComponent} from "../../../features/vfr-waypoints/waypoint-manager-dialog.component";
 import {PopoverFlightDataComponent} from "../popover-flight-data/popover-flight-data.component";
+import {TranslocoModule} from "@ngneat/transloco";
+import {LoginStatusDirective} from "../../directive/login-status/login-status.directive";
+import {AsyncPipe, NgIf} from "@angular/common";
+import {DynamicComponent} from "../../directive/dynamic-component/dynamic-component.directive";
 
 
 @Component({
@@ -21,6 +25,15 @@ import {PopoverFlightDataComponent} from "../popover-flight-data/popover-flight-
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslocoModule,
+    NgbPopoverModule,
+    LoginStatusDirective,
+    AsyncPipe,
+    DynamicComponent,
+    NgIf
+  ],
+  standalone: true,
 })
 export class NavbarComponent implements OnInit {
   route$: Observable<Route> = this.routeService.selectedRoute$;

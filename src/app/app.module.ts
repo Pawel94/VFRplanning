@@ -39,7 +39,6 @@ import {TimePipe} from "./common/pipes/time-pipe/time.pipe";
 import {LoginStatusDirective} from "./common/directive/login-status/login-status.directive";
 import {MapComponent} from "./features/vfr-planning/map/components/map.component";
 import {DynamicComponent} from "./common/directive/dynamic-component/dynamic-component.directive";
-import {PopoverFlightDataComponent} from "./common/components/popover-flight-data/popover-flight-data.component";
 
 
 @NgModule({
@@ -52,10 +51,7 @@ import {PopoverFlightDataComponent} from "./common/components/popover-flight-dat
     FlightParametersComponent,
     ManualWeatherComponent,
     AutomaticWeatherComponent,
-    NavbarComponent,
     VfrPlanningComponent,
-    DynamicComponent,
-    PopoverFlightDataComponent
 
   ],
   imports: [
@@ -73,10 +69,11 @@ import {PopoverFlightDataComponent} from "./common/components/popover-flight-dat
     DistancePipe,
     TimePipe,
     LoginStatusDirective,
-    MapComponent, SearchFormComponent,
+    MapComponent, SearchFormComponent,NavbarComponent
   ],
   providers: [],
-  exports: [],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

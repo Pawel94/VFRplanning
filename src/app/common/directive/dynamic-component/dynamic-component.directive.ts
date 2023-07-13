@@ -2,16 +2,14 @@ import {ComponentFactory, Directive, Input, ViewContainerRef} from '@angular/cor
 
 @Directive({
   selector: '[componentHost]',
+  standalone:true
 })
 export class DynamicComponent {
 
   @Input() set componentHost(factory: ComponentFactory<any>) {
     if (factory) {
-      console.log('Component factory:', factory.componentType);
       this.viewContainerRef.clear();
       this.viewContainerRef.createComponent(factory);
-    } else {
-      console.log('no component factory');
     }
   }
 

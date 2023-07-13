@@ -1,0 +1,12 @@
+<ng-container *transloco="let t">
+  <ng-container *ngIf="route$ | async as route">
+    <div class=" justify-content-end">
+      <div class="row">
+        {{ t('navbar.time', {params: route.totalTime}) }}
+      </div>
+      <div class="row">
+        {{ t('navbar.distance', {params: route.totalDistance}) }}
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
