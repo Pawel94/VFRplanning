@@ -8,12 +8,13 @@ export class TimePipe implements PipeTransform {
 
   transform(value?: number, toHours: boolean = false): string {
 
+    if (value) return `${value}'`
+
     if (value && toHours) {
       const val = this.calculateHours(value)
       return val
     }
-
-    return `${value}'`;
+    return ``
   }
 
   private calculateHours(value: number) {

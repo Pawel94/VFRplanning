@@ -16,9 +16,9 @@ import {WaypointManagerDialogComponent} from "../vfr-waypoints/waypoint-manager-
 import {PopoverFlightDataComponent} from "../popover-flight-data/popover-flight-data.component";
 import {TranslocoModule} from "@ngneat/transloco";
 import {LoginStatusDirective} from "../../shared/directive/login-status/login-status.directive";
-import {AsyncPipe, NgIf} from "@angular/common";
+import {AsyncPipe, JsonPipe, NgIf} from "@angular/common";
 import {DynamicComponent} from "../../shared/directive/dynamic-component/dynamic-component.directive";
-import {RouteService} from "../../shared/+state";
+import {RouteService} from "@state";
 
 
 @Component({
@@ -32,7 +32,8 @@ import {RouteService} from "../../shared/+state";
     LoginStatusDirective,
     AsyncPipe,
     DynamicComponent,
-    NgIf
+    NgIf,
+    JsonPipe
   ],
   standalone: true,
 })

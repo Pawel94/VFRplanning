@@ -1,3 +1,5 @@
+
+
 export interface Airport {
   code: string
   lat: number
@@ -19,4 +21,11 @@ export interface Airport {
   carriers: string
 }
 
+export interface AirportsDTO {
+ code:string
+  coordinates:{
+    latitude:number
+    longitude:number
+  }
+}
 

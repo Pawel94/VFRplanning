@@ -16,7 +16,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 import {CommonService} from "../../../shared/services";
 import {PlaneType} from "@features/vfr-parameters";
-import {FlightParamsService, RouteService, WeatherParamsService} from "../../../shared/+state";
+import {FlightParamsService, RouteService, WeatherParamsService} from "@state";
 
 
 @Component({

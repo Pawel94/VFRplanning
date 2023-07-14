@@ -5,11 +5,12 @@ import {MAP_LAYERS, MAP_OPTIONS, markerIconDefault} from "../../../../shared/con
 
 import {Route, Waypoint} from "@shared";
 import {v4 as uuid} from 'uuid'
-import {map} from "rxjs";
+import {map, tap} from "rxjs";
 import {MapService} from "../../../../shared/services";
 import {CommonModule} from "@angular/common";
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
-import {RouteService} from "../../../../shared/+state";
+import {RouteService} from "@state";
+import {ta} from "date-fns/locale";
 
 @Component({
   selector: 'vfr-map',
@@ -23,10 +24,11 @@ import {RouteService} from "../../../../shared/+state";
 
 export class MapComponent implements OnInit {
 
-  mapLayers$ = this.mapService?.findAirportsFrom().pipe(map(el => this.mapLayers.overlays = {
+  mapLayers$ = this.mapService?.findAirportsFromDB().pipe(tap(console.warn),map(el => this.mapLayers.overlays = {
     ...this.mapLayers.overlays,
     'Airports': layerGroup(el),
   }))
+
 
   routeBetweenMarkers: Polyline = polyline(([]));
 
@@ -37,7 +39,8 @@ export class MapComponent implements OnInit {
   listOfMarkers: Waypoint[] = []
   mapLayer: any = [];
 
-  constructor(private readonly routeService: RouteService, private readonly mapService: MapService) {
+  constructor(private readonly routeService: RouteService,
+              private readonly mapService: MapService) {
   }
 
   ngOnInit(): void {
@@ -77,7 +80,7 @@ export class MapComponent implements OnInit {
     this.map = map;
   }
 
-  updateRouteOnMap(event: any) {
+  updateRouteOnMap(event?: any) {
     this.routeService.setRoute(this.actualRoute!)
   }
 }

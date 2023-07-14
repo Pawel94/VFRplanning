@@ -6,11 +6,12 @@ import {Weather} from "@features/vfr-parameters";
 import {PlaneType} from "@features/vfr-parameters";
 import {AuthService} from "../../../shared/services/auth/auth.service";
 import {Observable} from "rxjs";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'vfr-vfr-summary-panel',
   standalone: true,
-  imports: [CommonModule, TranslocoModule],
+  imports: [CommonModule, TranslocoModule, RouterLink],
   templateUrl: './vfr-summary-panel.component.html',
   styleUrls: ['./vfr-summary-panel.component.scss']
 })

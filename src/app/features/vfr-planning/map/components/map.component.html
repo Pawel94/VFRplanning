@@ -4,6 +4,7 @@
        [leafletOptions]="options"
        [leafletLayers]="mapLayer"
        (leafletMouseUp)="updateRouteOnMap($event)"
+       (leafletMouseMove)="updateRouteOnMap($event)"
        (leafletClick)="mapClicked($event)"
        (leafletMapReady)="onMapReady($event)"
        [leafletLayersControl]="mapLayers">
