@@ -8,8 +8,8 @@ describe('FlightParametersComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FlightParametersComponent ]
-    })
+    imports: [FlightParametersComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(FlightParametersComponent);

@@ -4,16 +4,28 @@ import {map, Observable, Subject} from "rxjs";
 import {Weather} from "../../../types/weater";
 import {CommonService} from "../../../../../shared/services";
 
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import { NgbActiveModal, NgbNavModule } from "@ng-bootstrap/ng-bootstrap";
 import {Waypoint} from "@shared";
 import {WeatherParamsService} from "@state";
 import {Airport} from '@features/vfr-planning';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { ManualWeatherComponent } from '../manual-weather/manual-weather.component';
+import { AutomaticWeatherComponent } from '../automatic-weather/automatic-weather.component';
 
 @Component({
-  selector: 'vfr-weater-manager',
-  templateUrl: './weather-manager.component.html',
-  styleUrls: ['./weather-manager.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'vfr-weater-manager',
+    templateUrl: './weather-manager.component.html',
+    styleUrls: ['./weather-manager.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgbNavModule,
+        AutomaticWeatherComponent,
+        ManualWeatherComponent,
+        NgIf,
+        NgFor,
+        AsyncPipe,
+    ],
 })
 export class WeatherManagerComponent implements OnInit, OnDestroy {
   @Input() fromParent!: Airport[];

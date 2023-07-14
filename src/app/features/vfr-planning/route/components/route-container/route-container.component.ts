@@ -7,12 +7,18 @@ import {removeElementFromList} from "../../../../../shared/utils/utils";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {WaypointManagerDialogComponent} from "../../../../vfr-waypoints/waypoint-manager-dialog.component";
 import {FlightParamsService, RouteService, WeatherParamsService} from "../../../../../shared/+state";
+import { RouterLink } from '@angular/router';
+import { RouteDetailsComponent } from '../route-details/route-details.component';
+import { NgIf } from '@angular/common';
+import { TranslocoModule } from '@ngneat/transloco';
 
 
 @Component({
-  selector: 'vfr-route-container',
-  templateUrl: './route-container.component.html',
-  styleUrls: ['./route-container.component.scss']
+    selector: 'vfr-route-container',
+    templateUrl: './route-container.component.html',
+    styleUrls: ['./route-container.component.scss'],
+    standalone: true,
+    imports: [TranslocoModule, NgIf, RouteDetailsComponent, RouterLink]
 })
 export class RouteContainerComponent implements OnInit, OnDestroy {
 

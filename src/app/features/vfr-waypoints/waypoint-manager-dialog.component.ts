@@ -4,12 +4,15 @@ import {Subject, takeUntil} from "rxjs";
 
 import {Route, Waypoint} from 'src/app/shared/model/waypoint';
 import {RouteService} from "../../shared/+state/route-state/route.service";
+import { SearchFormComponent } from '../../shared/components/search-form/search-form.component';
 
 
 @Component({
-  selector: 'vfr-waypoint-manager',
-  templateUrl: './waypoint-manager-dialog.component.html',
-  styleUrls: ['./waypoint-manager-dialog.component.scss']
+    selector: 'vfr-waypoint-manager',
+    templateUrl: './waypoint-manager-dialog.component.html',
+    styleUrls: ['./waypoint-manager-dialog.component.scss'],
+    standalone: true,
+    imports: [SearchFormComponent]
 })
 export class WaypointManagerDialogComponent implements OnInit, OnDestroy {
   @Input() public updateMarker?: Waypoint;

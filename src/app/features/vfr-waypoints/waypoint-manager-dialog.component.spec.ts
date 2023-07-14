@@ -8,8 +8,8 @@ describe('WaypointManagerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WaypointManagerDialogComponent ]
-    })
+    imports: [WaypointManagerDialogComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(WaypointManagerDialogComponent);

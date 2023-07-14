@@ -1,12 +1,19 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {Weather} from "@features/vfr-parameters";
+import { TranslocoModule } from '@ngneat/transloco';
 
 @Component({
-  selector: 'vfr-manual-weather',
-  templateUrl: './manual-weather.component.html',
-  styleUrls: ['./manual-weather.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'vfr-manual-weather',
+    templateUrl: './manual-weather.component.html',
+    styleUrls: ['./manual-weather.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        TranslocoModule,
+        FormsModule,
+        ReactiveFormsModule,
+    ],
 })
 export class ManualWeatherComponent {
   @Output() dataFromManualForm = new EventEmitter<Weather>();

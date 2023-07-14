@@ -2,13 +2,26 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
 import {Observable} from "rxjs";
 import {Marker} from "leaflet";
 import {Waypoint} from "@shared";
+import { DistancePipe } from '../../../../../shared/pipes/distance-pipe/distance.pipe';
+import { DegreePipe } from '../../../../../shared/pipes/degree-pipe/degree.pipe';
+import { NgFor, NgIf, AsyncPipe } from '@angular/common';
+import { TranslocoModule } from '@ngneat/transloco';
 
 
 @Component({
-  selector: 'vfr-route-details',
-  templateUrl: './route-details.component.html',
-  styleUrls: ['./route-details.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'vfr-route-details',
+    templateUrl: './route-details.component.html',
+    styleUrls: ['./route-details.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        TranslocoModule,
+        NgFor,
+        NgIf,
+        AsyncPipe,
+        DegreePipe,
+        DistancePipe,
+    ],
 })
 export class RouteDetailsComponent {
 
