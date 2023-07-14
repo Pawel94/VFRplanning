@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {catchError, map, Observable, of, tap} from "rxjs";
 import {Weather} from "@features/vfr-parameters";
 import { Waypoint} from "@shared";
-import {NotificationService} from "../../../shared/services/notification/notification.service";
+import {NotificationService} from "../notification/notification.service";
 
 @Injectable({
   providedIn: 'root'

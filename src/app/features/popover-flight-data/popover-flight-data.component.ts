@@ -1,9 +1,10 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {Observable} from "rxjs";
 import {Route} from "@shared";
-import {RouteService} from "../../../shared/services/state";
+
 import {TranslocoModule} from "@ngneat/transloco";
 import {AsyncPipe, NgIf} from "@angular/common";
+import {RouteService} from "../../shared/+state";
 
 
 @Component({

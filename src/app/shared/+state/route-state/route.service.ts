@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {Route, Waypoint} from "../../../model/waypoint";
+import {Route, Waypoint} from "@shared";
 import {
   accumulateDistance,
   addNameToPoints,
   calculateBearing,
   calculateTimeBetweenWaypoints,
   calculateTotalDistance
-} from "../../../../common/utils/utils";
+} from "../../utils/utils";
 
 
 @Injectable({

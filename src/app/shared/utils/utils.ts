@@ -1,4 +1,4 @@
-import {Waypoint} from "../../shared/model/waypoint";
+import {Waypoint} from "../model/waypoint";
 import {hoursToMinutes} from 'date-fns'
 
 export function removeElementFromList<T>(list: T[], elementToRemove: T) {

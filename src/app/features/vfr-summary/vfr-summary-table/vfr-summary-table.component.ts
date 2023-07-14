@@ -1,11 +1,11 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 
 import {Route} from "@shared";
-import {DegreePipe} from "../../../common/pipes/degree-pipe/degree.pipe";
+import {DegreePipe} from "../../../shared/pipes/degree-pipe/degree.pipe";
 import {CommonModule} from "@angular/common";
 import {TranslocoModule} from "@ngneat/transloco";
-import {DistancePipe} from "../../../common/pipes/distance-pipe/distance.pipe";
-import {TimePipe} from "../../../common/pipes/time-pipe/time.pipe";
+import {DistancePipe} from "../../../shared/pipes/distance-pipe/distance.pipe";
+import {TimePipe} from "../../../shared/pipes/time-pipe/time.pipe";
 
 
 @Component({

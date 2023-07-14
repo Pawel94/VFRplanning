@@ -4,7 +4,7 @@ import {TranslocoModule} from "@ngneat/transloco";
 import {FlightParams} from "@shared";
 import {Weather} from "@features/vfr-parameters";
 import {PlaneType} from "@features/vfr-parameters";
-import {AuthService} from "../../../common/services/auth/auth.service";
+import {AuthService} from "../../../shared/services/auth/auth.service";
 import {Observable} from "rxjs";
 
 @Component({

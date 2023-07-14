@@ -1,12 +1,12 @@
 import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {WeatherService} from "../../../../../common/services/api/weather.service";
+import {WeatherService} from "../../../../../shared/services";
 import {map, Observable, Subject} from "rxjs";
 import {Weather} from "../../../types/weater";
-import {CommonService} from "../../../../../common/services/communication/firebase-communication/common.service";
+import {CommonService} from "../../../../../shared/services";
 
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {Waypoint} from "@shared";
-import {WeatherParamsService} from "../../../../../shared/services/state/weather-state/weather-params.service";
+import {WeatherParamsService} from "@state";
 import {Airport} from '@features/vfr-planning';
 
 @Component({

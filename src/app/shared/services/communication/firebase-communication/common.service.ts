@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, shareReplay, switchMap} from "rxjs";
 import {AngularFireDatabase} from "@angular/fire/compat/database";
-import {FlightParamsService} from "../../../../shared/services/state/flight-state/flight-params.service";
+import {FlightParamsService} from "../../../+state/flight-state/flight-params.service";
 import {CityDto} from "@shared";
 import {
   PlaneType,

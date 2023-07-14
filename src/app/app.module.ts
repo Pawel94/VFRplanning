@@ -31,14 +31,14 @@ import {TranslocoRootModule} from './transloco-root.module';
 import {
   AutomaticWeatherComponent
 } from "./features/vfr-parameters/weater/component/automatic-weather/automatic-weather.component";
-import {NavbarComponent} from "./common/components/navbar/navbar.component";
+import {NavbarComponent} from "./features/navbar/navbar.component";
 import {VfrPlanningComponent} from "./features/vfr-planning/vfr-planning/vfr-planning.component";
-import {DegreePipe} from "./common/pipes/degree-pipe/degree.pipe";
-import {DistancePipe} from "./common/pipes/distance-pipe/distance.pipe";
-import {TimePipe} from "./common/pipes/time-pipe/time.pipe";
-import {LoginStatusDirective} from "./common/directive/login-status/login-status.directive";
+import {DegreePipe} from "./shared/pipes/degree-pipe/degree.pipe";
+import {DistancePipe} from "./shared/pipes/distance-pipe/distance.pipe";
+import {TimePipe} from "./shared/pipes/time-pipe/time.pipe";
+import {LoginStatusDirective} from "./shared/directive/login-status/login-status.directive";
 import {MapComponent} from "./features/vfr-planning/map/components/map.component";
-import {DynamicComponent} from "./common/directive/dynamic-component/dynamic-component.directive";
+
 
 
 @NgModule({

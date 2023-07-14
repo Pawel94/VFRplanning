@@ -1,15 +1,15 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import * as L from "leaflet";
 import {layerGroup, LeafletMouseEvent, marker, Polyline, polyline} from "leaflet";
-import {markerIconDefault} from "@common/constant";
-import {RouteService} from "../../../../shared/services/state";
+import {MAP_LAYERS, MAP_OPTIONS, markerIconDefault} from "../../../../shared/constant";
+
 import {Route, Waypoint} from "@shared";
 import {v4 as uuid} from 'uuid'
 import {map} from "rxjs";
-import {MapService} from "@common/services";
+import {MapService} from "../../../../shared/services";
 import {CommonModule} from "@angular/common";
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
-import {MAP_LAYERS, MAP_OPTIONS} from "@common/constant";
+import {RouteService} from "../../../../shared/+state";
 
 @Component({
   selector: 'vfr-map',

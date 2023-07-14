@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {Weather} from "@features/vfr-parameters";
-import {NotificationService} from "../../notification/notification.service";
+import {NotificationService} from "../../services";
 
 @Injectable({
   providedIn: 'root'

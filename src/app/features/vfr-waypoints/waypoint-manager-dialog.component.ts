@@ -1,8 +1,9 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap'
 import {Subject, takeUntil} from "rxjs";
-import {RouteService} from "../../shared/services/state";
+
 import {Route, Waypoint} from 'src/app/shared/model/waypoint';
+import {RouteService} from "../../shared/+state/route-state/route.service";
 
 
 @Component({
@@ -39,7 +40,6 @@ export class WaypointManagerDialogComponent implements OnInit, OnDestroy {
 
   public editOrAddNewWaypoint(waypointToAdd: Waypoint): void {
     const listOfWaypoints = [...this.actualRoute.listOfWaypoints]
-
     const index = listOfWaypoints.findIndex(obj => obj.id === waypointToAdd.id);
     if (index === -1) {
       listOfWaypoints.push(waypointToAdd);

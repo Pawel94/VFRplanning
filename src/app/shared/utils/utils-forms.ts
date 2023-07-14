@@ -1,5 +1,5 @@
 import {AbstractControl, AsyncValidatorFn, ValidatorFn} from "@angular/forms";
-import {MapService} from "../../common/services/api/map.service";
+import {MapService} from "../services/api/map.service";
 import {delay, distinctUntilChanged, map} from "rxjs";
 
 export const correctValueIsRequaired: ValidatorFn = (control: AbstractControl) => {

@@ -1,11 +1,11 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {FlightParamsService} from "../../../../../shared/services/state/flight-state/flight-params.service";
+import {FlightParamsService} from "../../../../../shared/+state/flight-state/flight-params.service";
 import {FlightParams} from "../../../../../shared/model/flightParamsModel";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {RouteService} from "../../../../../shared/services/state/route-state/route.service";
-import {CommonService} from "../../../../../common/services/communication/firebase-communication/common.service";
+import {RouteService} from "../../../../../shared/+state/route-state/route.service";
+import {CommonService} from "../../../../../shared/services/communication/firebase-communication/common.service";
 import {PlaneTypeForSelect} from "../../../types/plane";
 
 @Component({

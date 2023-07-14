@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {map, Observable, Subject} from "rxjs";
-import {RouteService} from "../../../../../shared/services/state/route-state/route.service";
+
 import {Marker} from "leaflet";
-import {Route, Waypoint} from "../../../../../shared/model/waypoint";
-import {removeElementFromList} from "../../../../../common/utils/utils";
+import {Route, Waypoint} from "@shared";
+import {removeElementFromList} from "../../../../../shared/utils/utils";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {WaypointManagerDialogComponent} from "../../../../vfr-waypoints/waypoint-manager-dialog.component";
-import {FlightParamsService} from "../../../../../shared/services/state/flight-state/flight-params.service";
-import {WeatherParamsService} from "../../../../../shared/services/state/weather-state/weather-params.service";
+import {FlightParamsService, RouteService, WeatherParamsService} from "../../../../../shared/+state";
+
 
 @Component({
   selector: 'vfr-route-container',

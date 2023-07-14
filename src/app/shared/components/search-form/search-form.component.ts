@@ -3,17 +3,17 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 
 import {latAndLngFormGroup, WaypointForm} from "@features/vfr-planning";
 import {debounceTime, distinctUntilChanged, map, Observable, Subject} from "rxjs";
-import {CommonService} from "../../../common/services/communication/firebase-communication/common.service";
+import {CommonService} from "../../services/communication/firebase-communication/common.service";
 import {Waypoint} from "@shared";
 import {v4 as uuid} from "uuid";
 import {correctValueIsRequaired, latitudeValueIsNotCorrect, longitudeValueIsNotCorrect} from '../../utils/utils-forms';
 import {LatLng, Marker} from "leaflet";
-import {markerIconDefault} from "@common/constant";
+import {markerIconDefault} from "../../constant";
 import {CityDto} from "@shared";
 
 import {NgbTypeaheadModule} from "@ng-bootstrap/ng-bootstrap";
 import {CommonModule, NgClass} from "@angular/common";
-import {ErrorValidationMessagesPipe} from "../../../common/pipes/error-pipe/error-validation-messages.pipe";
+import {ErrorValidationMessagesPipe} from "../../pipes/error-pipe/error-validation-messages.pipe";
 import {TranslocoRootModule} from "../../../transloco-root.module";
 
 @Component({

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {FlightParams} from "../../../model/flightParamsModel";
-import {NotificationService} from "../../notification/notification.service";
+import {FlightParams} from "@shared";
+import {NotificationService} from "../../services";
 
 @Injectable({
   providedIn: 'root'

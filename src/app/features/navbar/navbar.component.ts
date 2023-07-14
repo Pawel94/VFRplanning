@@ -2,22 +2,23 @@ import {ChangeDetectionStrategy, Component, ComponentFactory, ComponentFactoryRe
 import {NgbModal, NgbPopoverModule} from "@ng-bootstrap/ng-bootstrap";
 import {
   WeatherManagerComponent
-} from "../../../features/vfr-parameters/weater/component/weather-manager/weather-manager.component";
-import {CommonService} from "../../services/communication/firebase-communication/common.service";
+} from "../vfr-parameters/weater/component/weather-manager/weather-manager.component";
+import {CommonService} from "../../shared/services";
 import {
   FlightParametersComponent
-} from "../../../features/vfr-parameters/flight-parameters/component/flight-parameters/flight-parameters.component";
+} from "../vfr-parameters/flight-parameters/component/flight-parameters/flight-parameters.component";
 import {filter, map, Observable} from "rxjs";
 import {Route} from "@shared";
-import {RouteService} from "../../../shared/services/state";
+
 import {NavigationEnd, Router} from "@angular/router";
-import {AuthService} from "../../services/auth/auth.service";
-import {WaypointManagerDialogComponent} from "../../../features/vfr-waypoints/waypoint-manager-dialog.component";
+import {AuthService} from "../../shared/services";
+import {WaypointManagerDialogComponent} from "../vfr-waypoints/waypoint-manager-dialog.component";
 import {PopoverFlightDataComponent} from "../popover-flight-data/popover-flight-data.component";
 import {TranslocoModule} from "@ngneat/transloco";
-import {LoginStatusDirective} from "../../directive/login-status/login-status.directive";
+import {LoginStatusDirective} from "../../shared/directive/login-status/login-status.directive";
 import {AsyncPipe, NgIf} from "@angular/common";
-import {DynamicComponent} from "../../directive/dynamic-component/dynamic-component.directive";
+import {DynamicComponent} from "../../shared/directive/dynamic-component/dynamic-component.directive";
+import {RouteService} from "../../shared/+state";
 
 
 @Component({

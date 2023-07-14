@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import firebase from "firebase/compat";
 import {Router} from "@angular/router";
-import {NotificationService} from "../../../shared/services/notification/notification.service";
+import {NotificationService} from "../notification/notification.service";
 import User = firebase.User;
 
 
