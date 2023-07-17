@@ -3,7 +3,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap'
 import {Subject, takeUntil} from "rxjs";
 
 import {Route, Waypoint} from 'src/app/shared/model/waypoint';
-import {RouteService} from "../../shared/+state/route-state/route.service";
+import {RouteService, TriggerService} from "@state";
 import { SearchFormComponent } from '../../shared/components/search-form/search-form.component';
 
 
@@ -23,7 +23,7 @@ export class WaypointManagerDialogComponent implements OnInit, OnDestroy {
 
   constructor(private readonly activeModal: NgbActiveModal,
               private readonly routeService: RouteService,
-  ) {
+              private readonly trigger:TriggerService) {
 
   }
 
@@ -52,7 +52,7 @@ export class WaypointManagerDialogComponent implements OnInit, OnDestroy {
 
     this.actualRoute.listOfWaypoints = [...listOfWaypoints]
     this.routeService.setRoute({...this.actualRoute});
-
+    this.trigger.sendEvent({state:true});
     this.closeModal()
   }
 

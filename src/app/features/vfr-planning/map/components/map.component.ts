@@ -1,16 +1,16 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import * as L from "leaflet";
 import {layerGroup, LeafletMouseEvent, marker, Polyline, polyline} from "leaflet";
 import {MAP_LAYERS, MAP_OPTIONS, markerIconDefault} from "../../../../shared/constant";
 
 import {Route, Waypoint} from "@shared";
 import {v4 as uuid} from 'uuid'
-import {map, tap} from "rxjs";
+import {map, Subject, takeUntil, tap} from "rxjs";
 import {MapService} from "../../../../shared/services";
 import {CommonModule} from "@angular/common";
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
-import {RouteService} from "@state";
-import {ta} from "date-fns/locale";
+import {RouteService, TriggerService} from "@state";
+
 
 @Component({
   selector: 'vfr-map',
@@ -22,12 +22,14 @@ import {ta} from "date-fns/locale";
 })
 
 
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
 
-  mapLayers$ = this.mapService?.findAirportsFromDB().pipe(tap(console.warn),map(el => this.mapLayers.overlays = {
+  mapLayers$ = this.mapService?.findAirportsFromDB().pipe(tap(console.warn), map(el => this.mapLayers.overlays = {
     ...this.mapLayers.overlays,
     'Airports': layerGroup(el),
   }))
+
+  private unsubscribeSignal: Subject<void> = new Subject();
 
 
   routeBetweenMarkers: Polyline = polyline(([]));
@@ -40,17 +42,21 @@ export class MapComponent implements OnInit {
   mapLayer: any = [];
 
   constructor(private readonly routeService: RouteService,
-              private readonly mapService: MapService) {
+              private readonly mapService: MapService,
+              private readonly trigger: TriggerService,
+              private changeDetector: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
-    this.routeService.selectedRoute$
+    this.routeService.selectedRoute$.pipe(
+      takeUntil(this.unsubscribeSignal.asObservable()))
       .subscribe(route => {
         this.actualRoute = route;
         this.listOfMarkers = this.actualRoute.listOfWaypoints;
         this.calculateRouteBetweenMarkers();
         this.prepareActualRoute();
       })
+    this.detectChanges();
   }
 
   mapClicked($event: LeafletMouseEvent): void {
@@ -80,7 +86,21 @@ export class MapComponent implements OnInit {
     this.map = map;
   }
 
+  private detectChanges(): void {
+    this.trigger.triggered$.pipe(takeUntil(this.unsubscribeSignal.asObservable()))
+      .subscribe(() => {
+        this.changeDetector.detectChanges();
+        this.updateRouteOnMap()
+      }
+    )
+  }
+
   updateRouteOnMap(event?: any) {
     this.routeService.setRoute(this.actualRoute!)
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeSignal.next();
+    this.unsubscribeSignal.unsubscribe();
   }
 }

@@ -1,4 +1,4 @@
-import {Waypoint} from "../model/waypoint";
+import {Waypoint} from "@shared";
 import {hoursToMinutes} from 'date-fns'
 
 export function removeElementFromList<T>(list: T[], elementToRemove: T) {
@@ -10,7 +10,6 @@ export function removeElementFromList<T>(list: T[], elementToRemove: T) {
 export function accumulateDistance<T extends Waypoint, U>(list: T[]): U | null {
   return list.reduce(
     (previousValue, currentValue) => {
-      console.log(previousValue)
       previousValue.distanceToNextPoint = previousValue.getLatLng().distanceTo(currentValue.getLatLng()) / 1000;
       currentValue.distanceToNextPoint = undefined
       return currentValue;
