@@ -58,7 +58,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
   constructor(public readonly common: CommonService) {
   }
   ngOnInit(): void {
-    console.log("START")
     this.common.getCitiesFromDB()
       .subscribe(element => {
         this.listOfCitiesFromDB = element;

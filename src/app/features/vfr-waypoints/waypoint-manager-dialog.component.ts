@@ -4,15 +4,15 @@ import {Subject, takeUntil} from "rxjs";
 
 import {Route, Waypoint} from 'src/app/shared/model/waypoint';
 import {RouteService, TriggerService} from "@state";
-import { SearchFormComponent } from '../../shared/components/search-form/search-form.component';
+import {SearchFormComponent} from '../../shared/components/search-form/search-form.component';
 
 
 @Component({
-    selector: 'vfr-waypoint-manager',
-    templateUrl: './waypoint-manager-dialog.component.html',
-    styleUrls: ['./waypoint-manager-dialog.component.scss'],
-    standalone: true,
-    imports: [SearchFormComponent]
+  selector: 'vfr-waypoint-manager',
+  templateUrl: './waypoint-manager-dialog.component.html',
+  styleUrls: ['./waypoint-manager-dialog.component.scss'],
+  standalone: true,
+  imports: [SearchFormComponent]
 })
 export class WaypointManagerDialogComponent implements OnInit, OnDestroy {
   @Input() public updateMarker?: Waypoint;
@@ -23,7 +23,7 @@ export class WaypointManagerDialogComponent implements OnInit, OnDestroy {
 
   constructor(private readonly activeModal: NgbActiveModal,
               private readonly routeService: RouteService,
-              private readonly trigger:TriggerService) {
+              private readonly trigger: TriggerService) {
 
   }
 
@@ -52,7 +52,7 @@ export class WaypointManagerDialogComponent implements OnInit, OnDestroy {
 
     this.actualRoute.listOfWaypoints = [...listOfWaypoints]
     this.routeService.setRoute({...this.actualRoute});
-    this.trigger.sendEvent({state:true});
+    this.trigger.sendEvent({state: true});
     this.closeModal()
   }
 

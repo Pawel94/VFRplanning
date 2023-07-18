@@ -1,11 +1,34 @@
 <ng-container *transloco="let t">
-  <ng-container *ngIf="route$ | async as route">
+  <ng-container *ngIf="vw$ | async as vm">
     <div class=" justify-content-end">
       <div class="row">
-        {{ t('navbar.time', {params: route.totalTime}) }}
+        {{ t('navbar.time', {params: vm.route.totalTime ?? '-'}) }}
       </div>
       <div class="row">
-        {{ t('navbar.distance', {params: route.totalDistance}) }}
+        {{ t('navbar.distance', {params: vm.route.totalDistance ?? '-'}) }}
+      </div>
+      <div class="row">
+        {{ t('navbar.nrPoints', {params: vm.route.listOfWaypoints.length ?? '0'}) }}
+      </div>
+      <div class="row">
+        {{ t('navbar.totalTime', {params: vm.route.totalTime ?? '-'}) }}
+      </div>
+      <hr>
+      <div class="row">
+        {{ t('navbar.planeVelocity', {params: vm.flight.planeVelocity }) }}
+      </div>
+      <div class="row">
+        {{ t('navbar.planeFlightLevel', {params: vm.flight.flightLevel }) }}
+      </div>
+      <div class="row">
+        {{ t('navbar.totalPlaneFuel', {params: vm.flight.planeFuel }) }}
+      </div>
+      <hr>
+      <div class="row">
+        {{ t('navbar.totalPlaneFuel', {params: vm.weather.windSpeed }) }}
+      </div>
+      <div class="row">
+        {{ t('navbar.totalPlaneFuel', {params: vm.weather.directionOfWind }) }}
       </div>
     </div>
   </ng-container>

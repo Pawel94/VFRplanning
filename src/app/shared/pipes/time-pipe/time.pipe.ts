@@ -8,7 +8,7 @@ export class TimePipe implements PipeTransform {
 
   transform(value?: number, toHours: boolean = false): string {
 
-    if (value) return `${value}'`
+    if (value && !toHours) return `${value}'`
 
     if (value && toHours) {
       const val = this.calculateHours(value)
@@ -18,7 +18,9 @@ export class TimePipe implements PipeTransform {
   }
 
   private calculateHours(value: number) {
+    console.log(value)
     const hours = Math.floor(value / 60);
+    console.log(value)
     const minutes = Math.floor(value % 60);
     return `${hours} h ${minutes}'`;
 

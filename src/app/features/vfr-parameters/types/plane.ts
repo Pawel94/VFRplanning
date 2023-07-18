@@ -1,12 +1,12 @@
 export interface PlaneType {
   id: number,
   name: string,
-  fuelConsumption: planeFuel
+  fuelConsumption: PlaneFuel
 }
 export type PlaneTypeForSelect = Omit<PlaneType, "fuelConsumption">;
 
 
-type planeFuel = {
+type PlaneFuel = {
   cruise:number
   takeoff:number
 }

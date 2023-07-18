@@ -50,7 +50,13 @@
     "login": " Login ",
     "logout": " Logout! ",
     "waypoint": "Add new point",
-    "flightInfo": "Flight info"
+    "flightInfo": "Flight info",
+    "nrPoints": "Number of waypoints: {{params}}",
+    "totalTime": "Total time: {{params}}'",
+    "planeVelocity": "Avg. plane velocity: {{params}} km/h",
+    "planeFlightLevel": "Avg. plane FL: {{params}} ft",
+    "totalPlaneFuel": "Total plane fuel: {{params}} L",
+    "windVelocity": "Wind velocity: {{params}} m/s"
   },
   "summary":{
   "planeVelocity": "Plane velocity: {{params}} km/h",

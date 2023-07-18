@@ -21,7 +21,7 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
     providers: [
-        importProvidersFrom(BrowserModule, AppRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, AngularFireModule.initializeApp(environment.firebase), AngularFireDatabaseModule, ToastrModule.forRoot(), TranslocoRootModule),
+        importProvidersFrom(AppRoutingModule, NgbModule, FormsModule, ReactiveFormsModule, AngularFireModule.initializeApp(environment.firebase), AngularFireDatabaseModule, ToastrModule.forRoot(), TranslocoRootModule),
         provideHttpClient(withInterceptorsFromDi()),
         provideAnimations()
     ]

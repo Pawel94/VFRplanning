@@ -14,7 +14,7 @@
             class="card-text">{{ t('summary.fuelTakeOff', {params: planeTypeInformation?.fuelConsumption?.takeoff}) }}</p>
           <p
             class="card-text">{{ t('summary.fuelConsumption', {params: planeTypeInformation?.fuelConsumption?.cruise}) }}</p>
-          <p class="card-text">{{ t('summary.maxHours', {}) }}</p>
+          <p class="card-text">{{ t('summary.maxHours', {})  }} {{(planeTypeInformation | maxHours:flightParams ) | time:true }} </p>
           <hr>
           <button class="btn btn-primary" (click)="editFlightParams()">{{ t('summary.editFParams') }}</button>
         </div>

@@ -24,7 +24,7 @@ import {RouteService, TriggerService} from "@state";
 
 export class MapComponent implements OnInit, OnDestroy {
 
-  mapLayers$ = this.mapService?.findAirportsFromDB().pipe(tap(console.warn), map(el => this.mapLayers.overlays = {
+  mapLayers$ = this.mapService?.findAirportsFromDB().pipe(map(el => this.mapLayers.overlays = {
     ...this.mapLayers.overlays,
     'Airports': layerGroup(el),
   }))
