@@ -9,24 +9,24 @@
           <div class="collapse navbar-collapse justify-content-center">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               <li class="nav-item text-white p-1">
-                <button class="btn btn-outline-success my-2 my-sm-0"
+                <button class="btn btn-outline-success my-2 my-sm-0 tw-rounded-full hover:tw-bg-emerald-800 tw-shadow-lg tw-shadow-emerald-500/20"
                         (click)="openWeatherModal()">    {{ t('navbar.weatherParams')}}</button>
               </li>
               <li class="nav-item text-white p-1">
-                <button class="btn btn-outline-success my-2 my-sm-0"
+                <button class="btn btn-outline-success my-2 my-sm-0 tw-rounded-full hover:tw-bg-emerald-800 tw-shadow-lg tw-shadow-emerald-500/20"
                         (click)="openFlightParameterModal()">    {{ t('navbar.flightParams')}}
                 </button>
               </li>
               <li class="nav-item text-white p-1">
-                <button class="btn btn-outline-success my-2 my-sm-0"
+                <button class="btn btn-outline-success my-2 my-sm-0 tw-rounded-full  hover:tw-bg-emerald-800 tw-shadow-lg tw-shadow-emerald-500/20"
                         (click)="openAirportModal()">    {{ t('navbar.waypoint')}}
                 </button>
               </li>
               <li class="nav-item text-white p-1">
-                <button class="btn btn-outline-info my-2 my-sm-0 position-relative"
+                <button class="btn btn-outline-info my-2 my-sm-0 position-relative tw-rounded-full tw-bg-sky-500/20 hover:tw-bg-sky-700 tw-shadow-lg tw-shadow-cyan-500/40"
                         [ngbPopover]="popContent" triggers="mouseenter:mouseleave">
                   <span *ngIf="route.listOfWaypoints.length>0"
-                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">!</span>
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill  tw-bg-rose-500 tw-shadow-cyan-500/40">!</span>
                   <i class="bi bi-info-square "
                   >  {{ t('navbar.flightInfo')}}</i>
 
