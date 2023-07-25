@@ -1,32 +1,33 @@
 <ng-container *transloco="let t">
-  <table class="table table-sm table-striped table-bordered">
-    <thead class="thead-dark">
-    <tr class="text-bg-dark">
-      <th scope="col">{{ t('summary.hash')}}</th>
-      <th scope="col">{{ t('summary.cordinates')}}</th>
-      <th scope="col">{{ t('summary.bearing')}}</th>
-      <th scope="col">{{ t('summary.distance')}}</th>
-      <th scope="col">{{ t('summary.time')}}</th>
-      <th scope="col">{{ t('summary.actions')}}</th>
+  <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg">
+  <table class="tw-w-full tw-text-lg tw-text-left tw-text-gray-500" >
+    <thead class="tw-text-xl tw-text-gray-700 tw-uppercase tw-bg-gray-50">
+    <tr class="tw-text-lg tw-text-gray-700 tw-uppercase tw-bg-gray-50 hover:tw-bg-gray-50">
+      <th scope="col" class="tw-px-6 tw-py-3">{{ t('summary.hash')}}</th>
+      <th scope="col" class="tw-px-6 tw-py-3">{{ t('summary.cordinates')}}</th>
+      <th scope="col" class="tw-px-6 tw-py-3">{{ t('summary.bearing')}}</th>
+      <th scope="col" class="tw-px-6 tw-py-3">{{ t('summary.distance')}}</th>
+      <th scope="col" class="tw-px-6 tw-py-3">{{ t('summary.time')}}</th>
+      <th scope="col" class="tw-px-6 tw-py-3">{{ t('summary.actions')}}</th>
     </tr>
     </thead>
     <tbody>
-    <tr class="table-secondary" *ngFor="let route of route?.listOfWaypoints">
-      <th scope="row">{{route.nameOfPoint}}</th>
-      <th scope="row">{{route?.getLatLng()?.lat | degree: true}} {{route?.getLatLng()?.lng | degree:false}}</th>
-      <td>{{route.bearing | degree:false: true }}</td>
-      <td>{{route.distanceToNextPoint | distance}}</td>
-      <td>{{route.timeToNextPoint|time}}</td>
-      <td class="text-center">
-        <button type="button" class="btn btn-outline-danger" (click)="deleteWaypoint(route.id)">Delete</button>
+    <tr class="tw-bg-white tw-border-b hover:tw-bg-gray-50 hover:tw-text-blue-400" *ngFor="let route of route?.listOfWaypoints">
+      <th scope="row" class="tw-px-6 tw-py-4">{{route.nameOfPoint}}</th>
+      <th scope="row"class="tw-px-6 tw-py-4">{{route?.getLatLng()?.lat | degree: true}} {{route?.getLatLng()?.lng | degree:false}}</th>
+      <td class="tw-px-6 tw-py-4">{{route.bearing | degree:false: true }}</td>
+      <td class="tw-px-6 tw-py-4">{{route.distanceToNextPoint | distance}}</td>
+      <td class="tw-px-6 tw-py-4">{{route.timeToNextPoint|time}}</td>
+      <td class="tw-px-6 tw-py-4">
+        <a type="button" class="tw-font-medium tw-text-red-600 hover:tw-underline hover:tw-text-red-800 " (click)="deleteWaypoint(route.id)">Delete</a>
       </td>
     </tr>
     <ng-container *ngIf="route && route.totalTime else noData">
-      <tr class="table-dark">
-        <td colspan="2"></td>
-        <td colspan="1"></td>
-        <td colspan="1">{{ t('summary.totalDistance', {params: route.totalDistance}) }}</td>
-        <td colspan="1">{{ t('summary.totalTime', {params: route.totalTime}) }}</td>
+      <tr class="tw-text-lg  tw-text-gray-700 tw-uppercase tw-bg-gray-50">
+        <td colspan="2" class="tw-px-6 tw-py-4"></td>
+        <td colspan="1" class="tw-px-6 tw-py-4"></td>
+        <td colspan="1" class="tw-px-6 tw-py-4 hover:tw-text-blue-400 ">{{ t('summary.totalDistance', {params: route.totalDistance}) }}</td>
+        <td colspan="1" class="tw-px-6 tw-py-4 hover:tw-text-blue-400 ">{{ t('summary.totalTime', {params: route.totalTime}) }}</td>
         <td>
 
         </td>
@@ -34,15 +35,16 @@
     </ng-container>
     </tbody>
   </table>
+  </div>
 
   <ng-template #noData>
-    <tr class="table-info">
-      <td colspan="1"></td>
-      <td colspan="1">{{ t('summary.noData') }}</td>
-      <td colspan="1">{{ t('summary.noData') }}</td>
-      <td colspan="1">{{ t('summary.noData') }}</td>
-      <td colspan="1">{{ t('summary.noData') }}</td>
-      <td colspan="1">{{ t('summary.noData') }}</td>
+    <tr class="table-info tw-text-lg ">
+      <td colspan="1" class="tw-px-6 tw-py-4"></td>
+      <td colspan="1" class="tw-px-6 tw-py-4">{{ t('summary.noData') }}</td>
+      <td colspan="1" class="tw-px-6 tw-py-4">{{ t('summary.noData') }}</td>
+      <td colspan="1" class="tw-px-6 tw-py-4">{{ t('summary.noData') }}</td>
+      <td colspan="1" class="tw-px-6 tw-py-4">{{ t('summary.noData') }}</td>
+      <td colspan="1" class="tw-px-6 tw-py-4">{{ t('summary.noData') }}</td>
     </tr>
   </ng-template>
 </ng-container>

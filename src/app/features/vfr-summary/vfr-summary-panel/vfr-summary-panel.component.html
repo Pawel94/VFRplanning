@@ -1,100 +1,97 @@
 <ng-container *transloco="let t">
-  <div class="row justify-content-between">
-    <div class="col-sm-3 mb-3 mb-sm-0">
-      <div class="card text-bg-dark column">
-        <img src="assets/pictures/plane.jpg" class="card-img-top picture" alt="plane">
-        <div class="card-body">
-          <h5 class="card-title text-center">{{ t('summary.routeSummary') }}</h5>
-          <hr>
-          <p class="card-text">{{ t('summary.planeVelocity', {params: flightParams?.planeVelocity}) }}</p>
-          <p class="card-text">{{ t('summary.flightLevel', {params: flightParams?.flightLevel}) }}</p>
-          <p class="card-text">{{ t('summary.planeType', {params: planeTypeInformation?.name}) }}</p>
-          <p class="card-text">{{ t('summary.fuel', {params: flightParams?.planeFuel}) }}</p>
-          <p
-            class="card-text">{{ t('summary.fuelTakeOff', {params: planeTypeInformation?.fuelConsumption?.takeoff}) }}</p>
-          <p
-            class="card-text">{{ t('summary.fuelConsumption', {params: planeTypeInformation?.fuelConsumption?.cruise}) }}</p>
-          <p class="card-text">{{ t('summary.maxHours', {})  }} {{(planeTypeInformation | maxHours:flightParams ) | time:true }} </p>
-          <hr>
-          <button class="btn btn-primary" (click)="editFlightParams()">{{ t('summary.editFParams') }}</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-3 mb-3  mb-sm-0 ">
-      <div class="card text-bg-dark column">
-        <img src="/assets/pictures/clouds.jpg" class="card-img-top picture" alt="clouds">
-        <div class="card-body">
-          <div class="card-body">
-            <h5 class="card-title text-center">{{ t('summary.weatherSummary') }}</h5>
+
+  <div class="container mt-4">
+    <div class="row display-flex">
+
+      <!--COLUMN-->
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card text-bg-dark tw-h-full ">
+          <img src="assets/pictures/plane.jpg" class="card-img-top picture " alt="plane">
+          <div class="card-body m-2">
+            <h5
+              class="tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-100">{{ t('summary.routeSummary') }}</h5>
             <hr>
-            <p class="card-text">{{ t('summary.windDirection', {params: weatherParams?.windSpeed}) }}</p>
-            <p class="card-text">{{ t('summary.windVelocity', {params: weatherParams?.directionOfWind}) }}</p>
-            <p class="card-text">{{ t('summary.temperature', {}) }}</p>
+            <p class="tw-card-text ">{{ t('summary.planeVelocity', {params: flightParams?.planeVelocity}) }}</p>
+            <p class="tw-card-text">{{ t('summary.flightLevel', {params: flightParams?.flightLevel}) }}</p>
+            <p class="tw-card-text">{{ t('summary.planeType', {params: planeTypeInformation?.name}) }}</p>
+            <p class="tw-card-text">{{ t('summary.fuel', {params: flightParams?.planeFuel}) }}</p>
+            <p
+              class="tw-card-text">{{ t('summary.fuelTakeOff', {params: planeTypeInformation?.fuelConsumption?.takeoff}) }}</p>
+            <p
+              class="tw-card-text">{{ t('summary.fuelConsumption', {params: planeTypeInformation?.fuelConsumption?.cruise}) }}</p>
+            <p
+              class="tw-card-text">{{ t('summary.maxHours', {})  }} {{(planeTypeInformation | maxHours:flightParams) | time:true }} </p>
+
           </div>
-          <hr>
-          <button class="btn btn-primary" (click)="editWeather()">{{ t('summary.editWParams') }}</button>
+          <div>
+            <hr class="m-2">
+            <button class="btn btn-primary tw-m-3 float-end"
+                    (click)="editFlightParams()">{{ t('summary.editFParams') }}</button>
+          </div>
         </div>
+      </div>
+
+      <!--COLUMN-->
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card text-bg-dark tw-h-full">
+          <img src="/assets/pictures/clouds.jpg" class="card-img-top picture " alt="clouds">
+          <div class="card-body m-2">
+            <h5
+              class="tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-100">{{ t('summary.weatherSummary') }}</h5>
+            <hr>
+            <p class="tw-card-text">{{ t('summary.windDirection', {params: weatherParams?.windSpeed}) }}</p>
+            <p class="tw-card-text">{{ t('summary.windVelocity', {params: weatherParams?.directionOfWind}) }}</p>
+            <p class="tw-card-text">{{ t('summary.temperature', {}) }}</p>
+          </div>
+
+          <div>
+            <hr class="m-2">
+            <button class="btn btn-primary tw-m-3 float-end"
+                    (click)="editWeather()">{{ t('summary.editWParams') }}</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!--COLUMN-->
+      <div class="col-lg-4 col-md-6 col-sm-12 ">
+        <!--LINE-->
+        <div
+          class="tw-card-line">
+          <h5 class="tw-card-line-title">PDF GENERATOR</h5>
+          <p class="tw-font-normal tw-text-gray-700 tw-italic"> {{ t('summary.endSummaryPDF') }}</p>
+          <div href="#" class="btn btn-primary float-end">{{ t('summary.endPDF') }}
+          </div>
+        </div>
+
+        <!--LINE-->
+        <div
+          class="tw-card-line">
+          <h5 class="tw-card-line-title">EDIT ROUTE</h5>
+          <p
+            class="tw-font-normal tw-text-gray-700  tw-italic">{{ t('summary.endSummaryEdit') }}</p>
+
+          <button [routerLink]="['/']"
+                  class="btn btn-primary float-end">{{ t('summary.endEdit') }}</button>
+
+
+        </div>
+
+        <!--LINE-->
+        <div
+          class="tw-card-line">
+          <h5 class="tw-card-line-title">GREAT ROUTE</h5>
+          <p class="tw-font-normal tw-text-gray-700 tw-italic">{{ t('summary.endSummarySave') }}</p>
+          <ng-container *ngIf="(userState | async) ===null">
+            <p class="tw-text-xm tw-text-red-600 tw-flex tw-items-center">
+              <small>  {{ t('summary.notLogged') }}</small></p>
+          </ng-container>
+          <button href="#" class="btn btn-primary float-end"
+                  [disabled]="!(userState | async)">{{ t('summary.endSave') }}</button>
+        </div>
+
       </div>
     </div>
-
-
-    <div class="col-sm-4 column">
-      <div class="card mb-3  text-bg-light " style="max-width: 540px;">
-        <div class="row g-0">
-          <div class="col-md-5">
-            <img src="/assets/pictures/x.jpg" class="img-fluid rounded-start h-100" alt="...">
-          </div>
-          <div class="col-md-7">
-            <div class="card-body">
-              <p><small> {{ t('summary.endSummaryPDF') }}</small></p>
-            </div>
-            <div class="card-footer text-bg-light text-start">
-              <a href="#" class="btn btn-primary">{{ t('summary.endPDF') }}</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card mb-3  text-bg-light" style="max-width: 540px;">
-        <div class="row g-0">
-          <div class="col-md-5">
-            <img src="/assets/pictures/flightPlan.jpg" class="img-fluid rounded-start h-100" alt="...">
-          </div>
-          <div class="col-md-7">
-            <div class="card-body">
-              <p><small> {{ t('summary.endSummaryEdit') }}</small></p>
-            </div>
-            <div class="card-footer text-bg-light text-start">
-              <div [routerLink]="['/']"
-                   class="btn btn-primary">{{ t('summary.endEdit') }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card text-bg-light column" style="max-width: 540px;">
-        <div class="row g-0">
-          <div class="col-md-5">
-            <img src="/assets/pictures/save.jpg" class="img-fluid rounded-start h-100" alt="...">
-          </div>
-          <div class="col-md-7">
-            <div class="card-body">
-              <p><small> {{ t('summary.endSummarySave') }}</small></p>
-              <ng-container *ngIf="(userState | async) ===null">
-                <p class="text-danger"><small> {{ t('summary.notLogged') }}</small></p>
-              </ng-container>
-            </div>
-
-            <div class="card-footer text-bg-light text-start">
-              <button href="#" class="btn btn-primary"
-                      [disabled]="!(userState | async)">{{ t('summary.endSave') }}</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
   </div>
 
 

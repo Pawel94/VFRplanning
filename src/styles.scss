@@ -1,5 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+//.button-form-accept{
+//  @apply bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none
+//}
+@layer components {
+  .btn-info {
+    @apply tw-bg-gradient-to-r tw-from-cyan-400 tw-via-cyan-500 tw-to-cyan-600 hover:tw-bg-gradient-to-br focus:tw-ring-4 focus:tw-outline-none
+  }
+
+  .btn-outline-success {
+    @apply tw-rounded-full  hover:tw-bg-emerald-800 tw-shadow-lg tw-shadow-emerald-500/20
+  }
+
+  .btn-outline-info {
+    @apply tw-rounded-full tw-bg-sky-500/20 hover:tw-bg-sky-700 tw-shadow-lg tw-shadow-cyan-500/40
+  }
+
+  .btn-primary {
+    @apply tw-rounded-full tw-bg-sky-500/80 hover:tw-bg-sky-400 tw-shadow-lg tw-shadow-cyan-500/40 tw-border-indigo-300
+  }
+
+  .btn-outline-danger {
+    @apply tw-rounded-full tw-bg-red-500/20 hover:tw-bg-red-400 tw-shadow-lg tw-shadow-red-500/40
+
+  }
+
+  .card-t {
+    @apply tw-h-fit tw-flex tw-flex-row tw-items-center tw-bg-gray-100 tw-border tw-border-gray-200 tw-rounded-lg tw-shadow hover:tw-bg-gray-200
+  }
+
+  .tw-card-body {
+    @apply tw-text-gray-900 tw-font-bold tw-text-sm tw-m-2
+  }
+
+  .tw-card-footer {
+    @apply tw-absolute tw-bottom-0 tw-m-2
+  }
+
+  .tw-card-text {
+    @apply tw-font-normal tw-text-blue-300 tw-font-sans hover:tw-text-blue-400 tw-p-1
+  }
+
+  .tw-card-line {
+    @apply tw-mt-4 tw-mb-4 tw-max-w-sm tw-p-6 tw-bg-blue-200/10 tw-border tw-border-gray-200 tw-rounded-lg tw-shadow hover:tw-bg-gray-100
+  }
+
+  .tw-card-line-title {
+    @apply tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-blue-500
+  }
+}

@@ -15,7 +15,7 @@ export class LoginStatusDirective implements OnChanges {
               private readonly renderer: Renderer2,
               private readonly translocoService: TranslocoService,
               private readonly router: Router,
-              private auth: AuthService
+              private readonly auth: AuthService
   ) {
   }
 
@@ -39,12 +39,10 @@ export class LoginStatusDirective implements OnChanges {
     const textNode = this.renderer.createText(text);
     if (this.isLoggedIn) {
       this.renderer.addClass(icon, "bi-person-fill-check");
-      this.renderer.addClass(icon, 'text-info')
       this.renderer.appendChild(icon, textNode);
       return
     }
     this.renderer.addClass(icon, "bi-person-fill-lock");
-    this.renderer.addClass(icon, 'text-danger')
     this.renderer.appendChild(icon, textNode);
   }
 }

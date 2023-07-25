@@ -26,13 +26,13 @@
       </span>
         <div class="row p-2">
           <div class="col text-center">
-            <button class="btn btn-outline-primary my-2 my-sm-0"
+            <button class="btn btn-outline-primary tw-rounded-full  hover:tw-bg-blue-800 tw-shadow-lg tw-shadow-blue-500/20"
                     data-bs-dismiss="offcanvas" [routerLink]="['/', 'summary']">
               {{ t('route.fly') }}
             </button>
           </div>
           <div class="col text-end">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas"
+            <button type="button" class="btn btn-outline-danger tw-rounded-full  hover:tw-bg-rose-800 tw-shadow-lg tw-shadow-rose-500/20" data-bs-dismiss="offcanvas"
                     (click)="clearAllPoints()">    {{ t('route.clearAll') }}
             </button>
           </div>
