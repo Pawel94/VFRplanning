@@ -3,22 +3,22 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-dark text-white">
       <div class="container-fluid">
         <div class="collapse navbar-collapse justify-content-start">
-          <a class="navbar-brand  tw-text-orange-500" href="#">{{ t('navbar.title')}}</a>
+          <a class="navbar-brand  tw-text-cyan-700 hover:tw-text-cyan-300" href="#">{{ t('navbar.title')}}</a>
         </div>
         <ng-container *ngIf="((activatedRoute$ |async)!=='/summary') ">
           <div class="collapse navbar-collapse justify-content-center">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               <li class="nav-item text-white p-1">
-                <button class="btn btn-outline-success my-2 my-sm-0"
+                <button class="btn btn-outline-info my-2 my-sm-0"
                         (click)="openWeatherModal()">    {{ t('navbar.weatherParams')}}</button>
               </li>
               <li class="nav-item text-white p-1">
-                <button class="btn btn-outline-success my-2 my-sm-0"
+                <button class="btn btn-outline-info my-2 my-sm-0"
                         (click)="openFlightParameterModal()">    {{ t('navbar.flightParams')}}
                 </button>
               </li>
               <li class="nav-item text-white p-1">
-                <button class="btn btn-outline-success my-2 my-sm-0"
+                <button class="btn btn-outline-info my-2 my-sm-0"
                         (click)="openAirportModal()">    {{ t('navbar.waypoint')}}
                 </button>
               </li>

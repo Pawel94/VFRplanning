@@ -2,22 +2,22 @@
   <div tabindex="-1" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Configure weather conditions</h5>
-        <button type="button" class="btn close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+        <h5 class="modal-title tw-modal-title" id="exampleModalLabel">Configure weather conditions</h5>
+        <button type="button" class="btn close tw-text-cyan-600" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs tw-text-cyan-600 hover:tw-text-cyan-500">
           <li [ngbNavItem]="1">
-            <a ngbNavLink>Automatic Weather</a>
+            <a ngbNavLink class="tw-text-cyan-600 hover:tw-text-cyan-500">Automatic Weather</a>
             <ng-template ngbNavContent>
               <vfr-automatic-weather (dataFromAutomaticForm) = "addNewWeatherPoint($event)">
               </vfr-automatic-weather>
             </ng-template>
           </li>
           <li [ngbNavItem]="2">
-            <a ngbNavLink>Manual Weather</a>
+            <a ngbNavLink class="tw-text-cyan-600 hover:tw-text-cyan-500">Manual Weather</a>
             <ng-template ngbNavContent>
               <vfr-manual-weather
                 (dataFromManualForm)="setWeatherConditions($event)">
@@ -27,7 +27,7 @@
         </ul>
 
         <div [ngbNavOutlet]="nav" class="mt-2"></div>
-        <div class="modal-footer">
+        <div>
           <table *ngIf="actualWeather$" class="table">
             <thead>
             <tr>

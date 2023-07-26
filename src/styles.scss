@@ -5,11 +5,20 @@
 @tailwind components;
 @tailwind utilities;
 
-
-//.button-form-accept{
-//  @apply bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none
+//:root {
+//  --dark-blue-100: rgba(23, 22, 22, 0.85);
 //}
+//.leaflet-control-layers-toggle{
+//  background-color: var(--dark-blue-100);
+//  border-color: black;
+//}
+//.leaflet-control-layers{
+//  border-color: red;
+//}
+
+
 @layer components {
+
   .btn-info {
     @apply tw-bg-gradient-to-r tw-from-cyan-400 tw-via-cyan-500 tw-to-cyan-600 hover:tw-bg-gradient-to-br focus:tw-ring-4 focus:tw-outline-none
   }
@@ -19,11 +28,11 @@
   }
 
   .btn-outline-info {
-    @apply tw-rounded-full tw-bg-sky-500/20 hover:tw-bg-sky-700 tw-shadow-lg tw-shadow-cyan-500/40
+    @apply tw-rounded-full tw-bg-cyan-500/20 hover:tw-bg-cyan-700 tw-shadow-lg tw-shadow-cyan-500/40
   }
 
   .btn-primary {
-    @apply tw-rounded-full tw-bg-sky-500/80 hover:tw-bg-sky-400 tw-shadow-lg tw-shadow-cyan-500/40 tw-border-indigo-300
+    @apply tw-rounded-full tw-bg-cyan-500/80 tw-border tw-border-cyan-100 hover:tw-bg-cyan-400 hover:tw-border-cyan-400 tw-shadow-lg tw-shadow-cyan-700 tw-border-cyan-500 disabled:tw-bg-cyan-600 disabled:tw-border-cyan-600
   }
 
   .btn-outline-danger {
@@ -44,14 +53,26 @@
   }
 
   .tw-card-text {
-    @apply tw-font-normal tw-text-blue-300 tw-font-sans hover:tw-text-blue-400 tw-p-1
+    @apply tw-font-normal tw-text-cyan-500 tw-font-sans hover:tw-text-cyan-600 tw-p-1
   }
 
   .tw-card-line {
-    @apply tw-mt-4 tw-mb-4 tw-max-w-sm tw-p-6 tw-bg-blue-200/10 tw-border tw-border-gray-200 tw-rounded-lg tw-shadow hover:tw-bg-gray-100
+    @apply tw-mt-4 tw-mb-4 tw-max-w-sm tw-p-6 tw-bg-cyan-100/10 tw-border tw-border-gray-200 tw-rounded-lg tw-shadow hover:tw-bg-gray-100
   }
 
   .tw-card-line-title {
-    @apply tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-blue-500
+    @apply tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-cyan-600
+  }
+  .tw-label-forms-modal{
+    @apply tw-text-cyan-600 tw-text-sm tw-font-bold tw-mb-2
+  }
+  .tw-error-text{
+    @apply tw-text-red-600 tw-text-sm tw-font-bold
+  }
+  .tw-form-input{
+    @apply tw-border-cyan-500 tw-text-cyan-600 tw-text-sm
+  }
+  .tw-modal-title{
+    @apply tw-text-cyan-600 tw-text-lg tw-font-bold
   }
 }

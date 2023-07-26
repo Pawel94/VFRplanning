@@ -2,21 +2,21 @@
   <form [formGroup]="waypointForm" [ngClass]="{
 'is-valid':(airportFormControl?.dirty || airportFormControl?.touched)
 }">
-    <div class="container ">
+    <div class="container">
       <div formGroupName="latAndLng" class="row p-2">
         <div class="col">
-          <label for="latitude">Latitude:</label>
-          <input id="latitude" type="number" class="form-control" formControlName="latitude"/>
+          <label for="latitude" class="tw-label-forms-modal">Latitude:</label>
+          <input id="latitude" type="number" class="form-control tw-form-input" formControlName="latitude"/>
         </div>
         <div class="col">
-          <label for="longitude">Longitude:</label>
-          <input id="longitude" type="number" class="form-control" formControlName="longitude"/>
+          <label for="longitude" class="tw-label-forms-modal">Longitude:</label>
+          <input id="longitude" type="number" class="form-control tw-form-input" formControlName="longitude"/>
         </div>
       </div>
       <div formGroupName="place" class="row p-2">
         <div class="col">
-          <label for="typeahead-basic">Find by name of city</label>
-          <input id="typeahead-basic" type="text" class="form-control"
+          <label for="typeahead-basic" class="tw-label-forms-modal">Find by name of city</label>
+          <input id="typeahead-basic" type="text" class="form-control tw-form-input"
                  formControlName="airport"
                  [(ngModel)]="inputModel"
                  [ngbTypeahead]="search"
@@ -25,36 +25,35 @@
       </div>
     </div>
 
-    <div class="text-danger"
+    <div class="tw-error-text"
          *ngIf="latFormControl&& latFormControl.errors ">
       {{ latFormControl.errors |errorValidationMessages}}
     </div>
 
-    <div class="text-danger"
+    <div class="tw-error-text"
          *ngIf="lngFormControl&& lngFormControl.errors ">
       {{ lngFormControl.errors |errorValidationMessages}}
     </div>
-    <div class="text-danger"
+    <div class="tw-error-text"
          *ngIf="latAndLngFormGroup && latAndLngFormGroup.dirty && latAndLngFormGroup.errors ">
 
       {{ latAndLngFormGroup.errors |errorValidationMessages}}
     </div>
 
-    <div class="text-danger"
+    <div class="tw-error-text"
          *ngIf="airportFormControl&& airportFormControl.touched && airportFormControl.errors&& airportFormControl.value !=''">
       {{ airportFormControl.errors |errorValidationMessages}}
 
     </div>
-    <br/>
 
-    <div class="modal-footer">
-      <button (click)="submitWaypointForm()" class="btn btn-info"
+
+      <button (click)="submitWaypointForm()" class="btn btn-info tw-m-3 float-end"
               [disabled]="latAndLngFormGroup?.errors ||airportFormControl?.errors ">
         <ng-container *ngIf="this.editedWaypoint else notEdit">
           {{ t('searchForm.buttonTextEdit')}}
         </ng-container>
       </button>
-    </div>
+
   </form>
 
   <ng-template #notEdit>

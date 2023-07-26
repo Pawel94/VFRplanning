@@ -3,7 +3,7 @@
     <div tabindex="-1" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{ t('flightParameters.title') }}</h5>
+          <h5 class="modal-title tw-modal-title" id="exampleModalLabel">{{ t('flightParameters.title') }}</h5>
           <button type="button" class="btn close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -13,32 +13,34 @@
             <div class="modal-body">
               <form [formGroup]="flightPramsForm">
                 <label for="planeVelocity"
-                       class="velocity">{{ t('flightParameters.velocity', {params: formValueVelocity}) }}</label>
+                       class="velocity tw-label-forms-modal">{{ t('flightParameters.velocity', {params: formValueVelocity}) }}</label>
                 <input type="range" step="10" class="form-range" min="60" max="300" id="planeVelocity"
                        formControlName="planeVelocity">
 
                 <label for="flightLevel"
-                       class="flightLevel">{{ t('flightParameters.flightLevel', {params: formValueFlightLevel}) }}</label>
+                       class="flightLevel tw-label-forms-modal">{{ t('flightParameters.flightLevel', {params: formValueFlightLevel}) }}</label>
                 <input type="range" step="100" class="form-range" min="500" max="10000" id="flightLevel"
                        formControlName="flightLevel">
                 <label for="planeFuel"
-                       class="planeFuel">{{ t('flightParameters.planeFuel', {params: formValuePlaneFuel}) }}</label>
+                       class="planeFuel tw-label-forms-modal">{{ t('flightParameters.planeFuel', {params: formValuePlaneFuel}) }}</label>
                 <input type="range" step="5" class="form-range" min="0" max="120" id="planeFuel"
                        formControlName="planeFuel">
                 <ng-container *ngIf="planesFromDateBase$ |async as planes">
-                  <label for="planeType"
-                         class="planeType">{{ t('flightParameters.planeType')}}</label>
-                  <select class="form-control" id="planeType" formControlName="planeType">
+                  <label for="planeTypeId"
+                         class="planeTypeId tw-label-forms-modal">{{ t('flightParameters.planeType')}}</label>
+                  <select class="form-select "
+                          id="planeTypeId" formControlName="planeTypeId">
                     <option *ngFor="let plane of planes"
-                            [value]="plane.id">
+                            [ngValue]="plane.id"
+                            >
                       {{plane.name}}
                     </option>
                   </select>
                 </ng-container>
               </form>
             </div>
-            <div class="modal-footer">
-                <button (click)="submitFlightParamsForm()" class="btn btn-info">{{ t('flightParameters.save') }}
+            <div>
+                <button (click)="submitFlightParamsForm()" class="btn btn-info tw-mb-2 float-end">{{ t('flightParameters.save') }}
                 </button>
             </div>
           </div>

@@ -1,15 +1,15 @@
 <ng-container *transloco="let t">
   <form [formGroup]="manualWeatherForm">
     <label for="windSpeed"
-           class="windSpeed">{{ t('weatherParameters.velocity', {params: formValueWindSpeed}) }} </label>
+           class="windSpeed tw-label-forms-modal">{{ t('weatherParameters.velocity', {params: formValueWindSpeed}) }} </label>
     <input type="range" step="1" class="form-range" min="0" max="100" id="windSpeed"
            formControlName="windSpeed">
 
     <label for="directionOfWind"
-           class="directionOfWind">{{ t('weatherParameters.direction', {params: formValueDirectionOfWind}) }} </label>
+           class="directionOfWind tw-label-forms-modal">{{ t('weatherParameters.direction', {params: formValueDirectionOfWind}) }} </label>
     <input type="range" step="1" class="form-range" min="0" max="360" id="directionOfWind"
            formControlName="directionOfWind">
-    <button (click)="addManualWeather()" class="btn btn-info">
+    <button (click)="addManualWeather()" class="btn btn-info tw-mb-2 float-end">
       {{ t('weatherParameters.save') }}
     </button>
   </form>

@@ -12,7 +12,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="tw-bg-white tw-border-b hover:tw-bg-gray-50 hover:tw-text-blue-400" *ngFor="let route of route?.listOfWaypoints">
+    <tr class="tw-bg-white tw-border-b hover:tw-bg-gray-50 hover:tw-text-cyan-500" *ngFor="let route of route?.listOfWaypoints">
       <th scope="row" class="tw-px-6 tw-py-4">{{route.nameOfPoint}}</th>
       <th scope="row"class="tw-px-6 tw-py-4">{{route?.getLatLng()?.lat | degree: true}} {{route?.getLatLng()?.lng | degree:false}}</th>
       <td class="tw-px-6 tw-py-4">{{route.bearing | degree:false: true }}</td>
@@ -26,8 +26,8 @@
       <tr class="tw-text-lg  tw-text-gray-700 tw-uppercase tw-bg-gray-50">
         <td colspan="2" class="tw-px-6 tw-py-4"></td>
         <td colspan="1" class="tw-px-6 tw-py-4"></td>
-        <td colspan="1" class="tw-px-6 tw-py-4 hover:tw-text-blue-400 ">{{ t('summary.totalDistance', {params: route.totalDistance}) }}</td>
-        <td colspan="1" class="tw-px-6 tw-py-4 hover:tw-text-blue-400 ">{{ t('summary.totalTime', {params: route.totalTime}) }}</td>
+        <td colspan="1" class="tw-px-6 tw-py-4 hover:tw-text-cyan-500 ">{{ t('summary.totalDistance', {params: route.totalDistance}) }}</td>
+        <td colspan="1" class="tw-px-6 tw-py-4 hover:tw-text-cyan-500">{{ t('summary.totalTime', {params: route.totalTime}) }}</td>
         <td>
 
         </td>
