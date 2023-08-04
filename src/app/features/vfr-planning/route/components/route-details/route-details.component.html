@@ -33,12 +33,12 @@
         <div class="container">
           <div class="row">
             <div class="col-sm text-start">
-              <button class="btn btn-outline-success my-2 my-sm-0 tw-rounded-full  hover:tw-bg-emerald-800 tw-shadow-lg tw-shadow-emerald-500/20" (click)="updateWaypoint(waypoint)" type="button">
+              <button class="btn btn-outline-success my-2 my-sm-0 tw-rounded-full  hover:tw-bg-emerald-800 tw-shadow-lg tw-shadow-emerald-500/20" (click)="updateWaypoint(waypoint)" type="button"><i class="bi bi-pen"></i>
                 {{ t('route.edit') }}
               </button>
             </div>
             <div class="col-sm text-end">
-              <button class="btn btn-outline-danger tw-rounded-full  hover:tw-bg-rose-800 tw-shadow-lg tw-shadow-rose-500/20" (click)="removeWaypoint(waypoint)" type="button">
+              <button class="btn btn-outline-danger tw-rounded-full  hover:tw-bg-rose-800 tw-shadow-lg tw-shadow-rose-500/20" (click)="removeWaypoint(waypoint)" type="button"><i class="bi bi-trash3-fill"></i>
                 {{ t('route.delete') }}
               </button>
             </div>

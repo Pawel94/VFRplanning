@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-dark text-white">
       <div class="container-fluid">
         <div class="collapse navbar-collapse justify-content-start">
-          <a class="navbar-brand  tw-text-cyan-700 hover:tw-text-cyan-300" href="#">{{ t('navbar.title')}}</a>
+          <a class="navbar-brand  tw-text-cyan-700 hover:tw-text-cyan-300" href="#"><i class="bi bi-globe-europe-africa"></i> {{ t('navbar.title')}}</a>
         </div>
         <ng-container *ngIf="((activatedRoute$ |async)!=='/summary') ">
           <div class="collapse navbar-collapse justify-content-center">
@@ -35,12 +35,16 @@
             </ul>
           </div>
         </ng-container>
+        <div class="inline-flex rounded-md shadow-sm collapse navbar-collapse justify-content-end">
         <ng-container *ngIf="((activatedRoute$ |async)!=='/login') ">
-          <div class="collapse navbar-collapse justify-content-end ">
-            <button class="btn btn-outline-success my-2 my-sm-0 tw-rounded-full  hover:tw-bg-emerald-800 tw-shadow-lg tw-shadow-emerald-500/20"><i class="bi bi-info-lg"></i></button>
-            <div class="m-2 btn btn-outline-success my-2 my-sm-0 " vfrLoginStatus [isLoggedIn]="(isLogged |async)"><i></i></div>
-          </div>
+            <button aria-current="page" class=" btn-about">
+              <i class="bi bi-info-lg"></i> About
+            </button>
+            <button class="btn-login" vfrLoginStatus [isLoggedIn]="(isLogged |async) ">
+              <i></i>
+            </button>
         </ng-container>
+          </div>
       </div>
     </nav>
   </ng-container>

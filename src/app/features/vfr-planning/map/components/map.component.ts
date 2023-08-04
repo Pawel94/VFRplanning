@@ -32,7 +32,7 @@ export class MapComponent implements OnInit, OnDestroy {
   private unsubscribeSignal: Subject<void> = new Subject();
 
 
-  routeBetweenMarkers: Polyline = polyline(([]));
+  routeBetweenMarkers: Polyline = polyline(([]),{color:'#F00', fillColor:'#F00'});
 
   mapLayers = MAP_LAYERS
   options = MAP_OPTIONS
@@ -65,7 +65,7 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   private calculateRouteBetweenMarkers(): void {
-    this.routeBetweenMarkers = polyline(([]))
+    this.routeBetweenMarkers = polyline(([]),{color:'#155e75cc'})
     this.listOfMarkers.forEach(marker => {
       this.routeBetweenMarkers.addLatLng(marker.getLatLng())
     })

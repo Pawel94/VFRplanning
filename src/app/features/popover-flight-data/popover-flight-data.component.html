@@ -1,6 +1,6 @@
 <ng-container *transloco="let t">
   <ng-container *ngIf="vw$ | async as vm">
-    <div class=" justify-content-end">
+    <div class="popover-info">
       <div class="row">
         {{ t('navbar.time', {params: vm.route.totalTime ?? '-'}) }}
       </div>

@@ -1,8 +1,11 @@
-<div class="container">
+
+  <div class="tw-card-table  tw-h-full ">
   <vfr-vfr-summary-table [route]="(route$ |async) ?? undefined"
                          (waypoints)="changeWaypoints($event)">
 
   </vfr-vfr-summary-table>
+  </div>
+  <div class="tw-card-table">
   <vfr-vfr-summary-panel
     [flightParams]="(flightParams$ |async) ?? undefined"
     [planeTypeInformation]="(planeTypeInformation$|async)?? undefined"
@@ -12,4 +15,5 @@
     (openWeatherDialog)="openWeatherDialog()">
     >
   </vfr-vfr-summary-panel>
-</div>
+
+

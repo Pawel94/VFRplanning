@@ -57,9 +57,11 @@
   }
 
   .tw-card-line {
-    @apply tw-mt-4 tw-mb-4 tw-max-w-sm tw-p-6 tw-bg-cyan-100/10 tw-border tw-border-gray-200 tw-rounded-lg tw-shadow hover:tw-bg-gray-100
+    @apply tw-mt-4 tw-mb-4 tw-max-w-sm tw-p-6 tw-bg-cyan-100/10 tw-border tw-border-gray-200 tw-rounded-lg tw-shadow hover:tw-bg-gray-100/50
   }
-
+  .tw-card-table {
+    @apply tw-m-6 tw-p-2 tw-bg-cyan-100/10 tw-border tw-border-gray-200 tw-rounded-lg tw-shadow
+  }
   .tw-card-line-title {
     @apply tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-cyan-600
   }
@@ -74,5 +76,14 @@
   }
   .tw-modal-title{
     @apply tw-text-cyan-600 tw-text-lg tw-font-bold
+  }
+  .btn-about{
+    @apply tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-text-cyan-600 tw-border tw-border-gray-100 tw-rounded-l-md tw-bg-cyan-100/80 tw-border  hover:tw-bg-cyan-400 hover:tw-border-cyan-200 tw-shadow-lg tw-shadow-cyan-700 tw-border-cyan-500 disabled:tw-bg-cyan-600 disabled:tw-border-cyan-600
+  }
+  .btn-login{
+    @apply tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-text-cyan-600 tw-border tw-border-gray-100 tw-rounded-r-md tw-bg-cyan-100/80 tw-border  hover:tw-bg-cyan-400 hover:tw-border-cyan-200 tw-shadow-lg tw-shadow-cyan-700 tw-border-cyan-500 disabled:tw-bg-cyan-600 disabled:tw-border-cyan-600
+  }
+  .popover-info{
+    @apply tw-px-4 tw-py-2 tw-text-base tw-font-medium tw-text-cyan-600
   }
 }

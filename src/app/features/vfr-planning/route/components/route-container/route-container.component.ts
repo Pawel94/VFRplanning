@@ -11,6 +11,7 @@ import {RouterLink} from '@angular/router';
 import {RouteDetailsComponent} from '../route-details/route-details.component';
 import {NgIf} from '@angular/common';
 import {TranslocoModule} from '@ngneat/transloco';
+import {NotificationService} from "../../../../../shared/services";
 
 
 @Component({
@@ -23,7 +24,8 @@ import {TranslocoModule} from '@ngneat/transloco';
 export class RouteContainerComponent implements OnInit, OnDestroy {
 
   constructor(private readonly routeService: RouteService,
-              public readonly modalService: NgbModal) {
+              public readonly modalService: NgbModal,
+              private readonly notification: NotificationService) {
   }
 
   private unsubscribe$ = new Subject<void>;
@@ -42,11 +44,13 @@ export class RouteContainerComponent implements OnInit, OnDestroy {
   }
 
   clearAllPoints(): void {
+    this.notification.getWarning('notification.infoRemoveAll', {})
     this.routeService.clearRoute();
   }
 
   removeMarkerFromRoute(marker: Marker) {
     removeElementFromList(this.actualRoute.listOfWaypoints, marker)
+    this.notification.getWarning('notification.infoRemove', {})
     this.routeService.setRoute(this.actualRoute);
   }
 

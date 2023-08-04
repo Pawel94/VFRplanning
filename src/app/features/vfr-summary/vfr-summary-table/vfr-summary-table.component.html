@@ -1,7 +1,7 @@
 <ng-container *transloco="let t">
-  <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg">
+  <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg m-2">
   <table class="tw-w-full tw-text-lg tw-text-left tw-text-gray-500" >
-    <thead class="tw-text-xl tw-text-gray-700 tw-uppercase tw-bg-gray-50">
+    <thead class="tw-text-xl tw-text-gray-700 tw-uppercase tw-bg-slate-50">
     <tr class="tw-text-lg tw-text-gray-700 tw-uppercase tw-bg-gray-50 hover:tw-bg-gray-50">
       <th scope="col" class="tw-px-6 tw-py-3">{{ t('summary.hash')}}</th>
       <th scope="col" class="tw-px-6 tw-py-3">{{ t('summary.cordinates')}}</th>
@@ -9,6 +9,7 @@
       <th scope="col" class="tw-px-6 tw-py-3">{{ t('summary.distance')}}</th>
       <th scope="col" class="tw-px-6 tw-py-3">{{ t('summary.time')}}</th>
       <th scope="col" class="tw-px-6 tw-py-3">{{ t('summary.actions')}}</th>
+
     </tr>
     </thead>
     <tbody>
@@ -19,7 +20,7 @@
       <td class="tw-px-6 tw-py-4">{{route.distanceToNextPoint | distance}}</td>
       <td class="tw-px-6 tw-py-4">{{route.timeToNextPoint|time}}</td>
       <td class="tw-px-6 tw-py-4">
-        <a type="button" class="tw-font-medium tw-text-red-600 hover:tw-underline hover:tw-text-red-800 " (click)="deleteWaypoint(route.id)">Delete</a>
+        <a type="button" class="tw-font-medium tw-text-red-600 hover:tw-underline hover:tw-text-red-800 " (click)="deleteWaypoint(route.id)"><i class="bi bi-trash-fill"> </i>Delete </a>
       </td>
     </tr>
     <ng-container *ngIf="route && route.totalTime else noData">
@@ -36,6 +37,7 @@
     </tbody>
   </table>
   </div>
+
 
   <ng-template #noData>
     <tr class="table-info tw-text-lg ">

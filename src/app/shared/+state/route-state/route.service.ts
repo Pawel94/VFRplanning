@@ -8,6 +8,7 @@ import {
   calculateTimeBetweenWaypoints,
   calculateTotalDistance
 } from "../../utils/utils";
+import {NotificationService} from "../../services";
 
 
 @Injectable({

@@ -1,7 +1,8 @@
 {
   "commonToast": {
     "success": "Success added",
-    "error": "Error!"
+    "error": "Error!",
+    "info": "Information"
   },
   "route": {
     "title": "Your route",
@@ -16,12 +17,12 @@
     "bearing": "Bearing to next waypoint",
     "time": "Time to next waypoint",
     "edit": " Edit waypoint",
-    "delete": "Delete waypoint"
+    "delete": "Remove"
   },
   "flightParameters": {
     "success": "Success added flight parameters",
     "error": "Error added flight parameters - check version",
-    "params": "Success added plane velocity {{planeVelocity}} knots and flight level: {{ flightLevel }}",
+    "params": "Success edited plane params: velocity {{planeVelocity}} knots and flight level: {{ flightLevel }}",
     "title": "Configure your flight",
     "save": "Save parameters",
     "velocity": "Velocity(TAS): {{params}}",
@@ -30,10 +31,16 @@
     "planeType": "Plane type:",
     "fuelConsumption": "Fuel consumption: {{params}}L/H"
   },
+  "notification":{
+    "successEditPoint": "Success edited existing waypoint {{params}}",
+    "successAddPoint": "Success added new waypoint {{params}}",
+    "infoRemove": "Removed waypoint {{params}}",
+    "infoRemoveAll": "Removed all waypoints {{params}}"
+  },
   "weatherParameters": {
     "success": "Success added weather parameters",
     "error": "Error added flight parameters - check version",
-    "params": "Success added wind velocity {{windSpeed}} m/s and direction of wind: {{ directionOfWind }}",
+    "params": "Success added wind velocity {{windSpeed}} m/s and direction of wind: {{ directionOfWind }}°",
     "successParamsCity": "Success get data for city: {{city}}",
     "title": "Configure your flight",
     "save": " Add weather conditions",
@@ -44,7 +51,7 @@
     "time": "Total time: {{params}}'",
     "distance": "Total distance: {{params}} km",
     "about": "About",
-    "title": "VFR-PLANING-FLIGHT",
+    "title": "VFR-FLIGHT",
     "flightParams": "Flight parameters",
     "weatherParams": "Weather parameters",
     "login": " Login ",
@@ -77,6 +84,7 @@
     "fuelConsumption": "Fuel consumption: {{params}} L/H",
     "planeType": "Plane type: {{params}} ",
     "maxHours": "Max hours in air: {{params}} ",
+    "totalConsumption": "Fuel consumption: ",
     "editFParams": "Edit plane parameters",
     "editWParams": "Edit weather parameters",
     "routeSummary": "Route summary",

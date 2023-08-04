@@ -3,7 +3,7 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 
 import {latAndLngFormGroup, WaypointForm} from "@features/vfr-planning";
 import {debounceTime, distinctUntilChanged, map, Observable, Subject} from "rxjs";
-import {CommonService} from "../../services";
+import {CommonService, NotificationService} from "../../services";
 import {Waypoint} from "@shared";
 import {v4 as uuid} from "uuid";
 import {correctValueIsRequaired, latitudeValueIsNotCorrect, longitudeValueIsNotCorrect} from '../../utils/utils-forms';
@@ -55,7 +55,8 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     },
   );
 
-  constructor(public readonly common: CommonService) {
+  constructor(public readonly common: CommonService,
+              private readonly notification: NotificationService) {
   }
   ngOnInit(): void {
     this.common.getCitiesFromDB()
@@ -72,11 +73,13 @@ export class SearchFormComponent implements OnInit, OnDestroy {
       this.editedWaypoint.city = this.inputModel;
       this.editedWaypoint?.setLatLng(latLng)
       this.addOrEditWaypoint.emit(this.editedWaypoint)
+      this.notification.getSuccess('notification.successEditPoint', {});
     } else {
       const markerToAdd = new Marker(latLng, markerIconDefault) as Waypoint;
       markerToAdd.city = this.inputModel;
       markerToAdd.id = uuid()
       this.addOrEditWaypoint.emit(markerToAdd)
+      this.notification.getSuccess('notification.successAddPoint', {});
     }
   }
 

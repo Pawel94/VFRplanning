@@ -1,7 +1,7 @@
 <ng-container *transloco="let t">
 
   <div class="container mt-4">
-    <div class="row display-flex">
+    <div class="row">
 
       <!--COLUMN-->
       <div class="col-lg-4 col-md-6 col-sm-12">
@@ -21,6 +21,12 @@
               class="tw-card-text">{{ t('summary.fuelConsumption', {params: planeTypeInformation?.fuelConsumption?.cruise}) }}</p>
             <p
               class="tw-card-text">{{ t('summary.maxHours', {})  }} {{(planeTypeInformation | maxHours:flightParams) | time:true }} </p>
+            <div
+              class="tw-card-text">{{ t('summary.totalConsumption', {})  }}
+            <div class="tw-w-full tw-bg-gray-200 tw-rounded-full">
+              <div class="tw-bg-cyan-600 hover:tw-bg-cyan-600/80 tw-text-xs ftw-ont-medium tw-text-cyan-100 tw-text-center tw-p-0.5 tw-leading-none tw-rounded-full" style="width: 45%"> 45%</div>
+            </div>
+            </div>
 
           </div>
           <div>
@@ -58,21 +64,21 @@
         <!--LINE-->
         <div
           class="tw-card-line">
-          <h5 class="tw-card-line-title">PDF GENERATOR</h5>
+          <h5 class="tw-card-line-title">{{ t('summary.endPDF') }}</h5>
           <p class="tw-font-normal tw-text-gray-700 tw-italic"> {{ t('summary.endSummaryPDF') }}</p>
-          <div href="#" class="btn btn-primary float-end">{{ t('summary.endPDF') }}
+          <div href="#" class="btn btn-primary float-end"><i class="bi bi-file-earmark-pdf-fill"></i>
           </div>
         </div>
 
         <!--LINE-->
         <div
           class="tw-card-line">
-          <h5 class="tw-card-line-title">EDIT ROUTE</h5>
+          <h5 class="tw-card-line-title">{{ t('summary.endEdit') }}</h5>
           <p
             class="tw-font-normal tw-text-gray-700  tw-italic">{{ t('summary.endSummaryEdit') }}</p>
 
           <button [routerLink]="['/']"
-                  class="btn btn-primary float-end">{{ t('summary.endEdit') }}</button>
+                  class="btn btn-primary float-end"><i class="bi bi-hammer"></i></button>
 
 
         </div>
@@ -80,14 +86,14 @@
         <!--LINE-->
         <div
           class="tw-card-line">
-          <h5 class="tw-card-line-title">GREAT ROUTE</h5>
+          <h5 class="tw-card-line-title">{{ t('summary.endSave') }}</h5>
           <p class="tw-font-normal tw-text-gray-700 tw-italic">{{ t('summary.endSummarySave') }}</p>
           <ng-container *ngIf="(userState | async) ===null">
             <p class="tw-text-xm tw-text-red-600 tw-flex tw-items-center">
               <small>  {{ t('summary.notLogged') }}</small></p>
           </ng-container>
           <button href="#" class="btn btn-primary float-end"
-                  [disabled]="!(userState | async)">{{ t('summary.endSave') }}</button>
+                  [disabled]="!(userState | async)"><i class="bi bi-cloud-arrow-up"></i></button>
         </div>
 
       </div>
