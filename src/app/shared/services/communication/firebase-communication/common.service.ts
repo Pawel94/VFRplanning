@@ -19,15 +19,18 @@ export class CommonService {
 
 
   getCitiesFromDB(): Observable<CityDto[]> {
-    return this.db.list<CityDto>('/cities').valueChanges()
+    // @ts-ignore
+      return this.db.list<CityDto>('/cities').valueChanges()
   }
 
   getPlanesFromDB(): Observable<PlaneTypeForSelect[]> {
-    return this.db.list<PlaneTypeForSelect>('/planes').valueChanges().pipe(shareReplay())
+    // @ts-ignore
+      return this.db.list<PlaneTypeForSelect>('/planes').valueChanges().pipe(shareReplay())
   }
 
   getDirectInfoAboutPlane(id: number): Observable<PlaneType | null> {
-    return this.db.object<PlaneType>(`planes/${id}`).valueChanges()
+    // @ts-ignore
+      return this.db.object<PlaneType>(`planes/${id}`).valueChanges()
   }
 
   getPlaneFromDB(): Observable<PlaneType | null> {

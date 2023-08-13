@@ -17,6 +17,7 @@ export interface Credentials {
   providedIn: 'root'
 })
 export class AuthService {
+  // @ts-ignore
   readonly authState$: Observable<User | null> = this.fireAuth.authState;
 
   constructor(private readonly fireAuth: AngularFireAuth,
