@@ -1,19 +1,22 @@
-
-  <div class="tw-card-table  tw-h-full ">
-  <vfr-vfr-summary-table [route]="(route$ |async) ?? undefined"
-                         (waypoints)="changeWaypoints($event)">
+<div class="tw-card-table  tw-h-full ">
+  <vfr-vfr-summary-table
+    #vfrTable
+    [route]="(route$ |async) ?? undefined"
+    (waypoints)="changeWaypoints($event)">
 
   </vfr-vfr-summary-table>
-  </div>
-  <div class="tw-card-table">
+</div>
+<div class="tw-card-table">
   <vfr-vfr-summary-panel
     [flightParams]="(flightParams$ |async) ?? undefined"
     [planeTypeInformation]="(planeTypeInformation$|async)?? undefined"
     [weatherParams]="(weatherParams$ |async) ?? undefined"
     [routeInformation]="(route$ |async) ?? undefined"
     (openFlightParamsDialog)="openFlightParamsDialog()"
-    (openWeatherDialog)="openWeatherDialog()">
+    (openWeatherDialog)="openWeatherDialog()"
+    (triggerGeneratePDF)="vfrTable.generatePDF()">
     >
   </vfr-vfr-summary-panel>
 
 
+</div>

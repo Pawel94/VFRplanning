@@ -1,4 +1,4 @@
-import { DistancePipe } from './distance.pipe';
+import { DistancePipe } from '@shared';
 
 describe('DistancePipe', () => {
   it('create an instance', () => {

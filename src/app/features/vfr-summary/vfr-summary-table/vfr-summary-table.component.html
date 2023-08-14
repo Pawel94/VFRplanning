@@ -1,6 +1,7 @@
 <ng-container *transloco="let t">
+
   <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg m-2">
-  <table class="tw-w-full tw-text-lg tw-text-left tw-text-gray-500" >
+  <table class="tw-w-full tw-text-lg tw-text-left tw-text-gray-500" id="pdfTable" >
     <thead class="tw-text-xl tw-text-gray-700 tw-uppercase tw-bg-slate-50">
     <tr class="tw-text-lg tw-text-gray-700 tw-uppercase tw-bg-gray-50 hover:tw-bg-gray-50">
       <th scope="col" class="tw-px-6 tw-py-3">{{ t('summary.hash')}}</th>
@@ -8,18 +9,18 @@
       <th scope="col" class="tw-px-6 tw-py-3">{{ t('summary.bearing')}}</th>
       <th scope="col" class="tw-px-6 tw-py-3">{{ t('summary.distance')}}</th>
       <th scope="col" class="tw-px-6 tw-py-3">{{ t('summary.time')}}</th>
-      <th scope="col" class="tw-px-6 tw-py-3">{{ t('summary.actions')}}</th>
+      <th *ngIf="isPDFGenerator" scope="col" class="tw-px-6 tw-py-3" id="lastElement" >{{ t('summary.actions')}}</th>
 
     </tr>
     </thead>
     <tbody>
     <tr class="tw-bg-white tw-border-b hover:tw-bg-gray-50 hover:tw-text-cyan-500" *ngFor="let route of route?.listOfWaypoints">
       <th scope="row" class="tw-px-6 tw-py-4">{{route.nameOfPoint}}</th>
-      <th scope="row"class="tw-px-6 tw-py-4">{{route?.getLatLng()?.lat | degree: true}} {{route?.getLatLng()?.lng | degree:false}}</th>
+      <th scope="row" class="tw-px-6 tw-py-4">{{route?.getLatLng()?.lat | degree: true}} {{route?.getLatLng()?.lng | degree:false}}</th>
       <td class="tw-px-6 tw-py-4">{{route.bearing | degree:false: true }}</td>
       <td class="tw-px-6 tw-py-4">{{route.distanceToNextPoint | distance}}</td>
       <td class="tw-px-6 tw-py-4">{{route.timeToNextPoint|time}}</td>
-      <td class="tw-px-6 tw-py-4">
+      <td class="tw-px-6 tw-py-4" *ngIf="isPDFGenerator">
         <a type="button" class="tw-font-medium tw-text-red-600 hover:tw-underline hover:tw-text-red-800 " (click)="deleteWaypoint(route.id)"><i class="bi bi-trash-fill"> </i>Delete </a>
       </td>
     </tr>

@@ -2,8 +2,8 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
 import {Observable} from "rxjs";
 import {Marker} from "leaflet";
 import {Waypoint} from "@shared";
-import { DistancePipe } from '../../../../../shared/pipes/distance-pipe/distance.pipe';
-import { DegreePipe } from '../../../../../shared/pipes/degree-pipe/degree.pipe';
+import { DistancePipe } from '@shared';
+import { DegreePipe } from '@shared';
 import { NgFor, NgIf, AsyncPipe } from '@angular/common';
 import { TranslocoModule } from '@ngneat/transloco';
 

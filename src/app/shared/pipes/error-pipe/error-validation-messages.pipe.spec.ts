@@ -1,4 +1,4 @@
-import { ErrorValidationMessagesPipe } from './error-validation-messages.pipe';
+import { ErrorValidationMessagesPipe } from '@shared';
 
 describe('ErrorValidationMessagesPipe', () => {
   it('create an instance', () => {

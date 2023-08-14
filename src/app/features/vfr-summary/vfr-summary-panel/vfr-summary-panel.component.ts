@@ -6,8 +6,8 @@ import {PlaneType, Weather} from "@features/vfr-parameters";
 import {AuthService} from "../../../shared/services";
 import {Observable} from "rxjs";
 import {RouterLink} from "@angular/router";
-import {MaxHoursPipe} from "../../../shared/pipes/max-hours/max-hours.pipe";
-import {TimePipe} from "../../../shared/pipes/time-pipe/time.pipe";
+import {MaxHoursPipe} from "@shared";
+import {TimePipe} from "@shared";
 
 @Component({
   selector: 'vfr-vfr-summary-panel',
@@ -23,17 +23,21 @@ export class VfrSummaryPanelComponent {
   @Input() weatherParams?: Weather;
   @Output() openWeatherDialog = new EventEmitter<void>();
   @Output() openFlightParamsDialog = new EventEmitter<void>();
+  @Output() triggerGeneratePDF: EventEmitter<void> = new EventEmitter<void>();
   userState: Observable<any> = this.auth.authState$;
 
   constructor(private readonly auth: AuthService) {
   }
 
-  editWeather(): void {
+  public editWeather(): void {
     this.openWeatherDialog.emit()
   }
 
-  editFlightParams(): void {
+  public editFlightParams(): void {
     this.openFlightParamsDialog.emit()
   }
 
+  public openPDF(): void {
+    this.triggerGeneratePDF.emit()
+  }
 }

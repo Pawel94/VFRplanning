@@ -13,7 +13,7 @@ import {CityDto} from "@shared";
 
 import {NgbTypeaheadModule} from "@ng-bootstrap/ng-bootstrap";
 import {CommonModule, NgClass} from "@angular/common";
-import {ErrorValidationMessagesPipe} from "../../pipes/error-pipe/error-validation-messages.pipe";
+import {ErrorValidationMessagesPipe} from "@shared";
 import {TranslocoRootModule} from "../../../transloco-root.module";
 
 @Component({

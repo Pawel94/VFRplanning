@@ -28,6 +28,7 @@
     "bootstrap-icons": "^1.10.5",
     "date-fns": "^2.29.3",
     "firebase": "^9.13.0",
+    "jspdf": "^2.5.1",
     "leaflet": "^1.9.2",
     "ngx-toastr": "^16.1.1",
     "rxjs": "~7.5.0",
