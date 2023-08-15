@@ -1,23 +1,69 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
+<!--<div class="container">-->
+<!--  <div class="row justify-content-center">-->
+<!--    <div class="col-md-6">-->
+<!--      <div class="card">-->
 
-        <div class="card-body">
-          <form [formGroup]="loginForm" (ngSubmit)="login()">
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" formControlName="email" required>
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" formControlName="password" required>
+<!--        <div class="card-body">-->
+<!--          <form [formGroup]="loginForm" (ngSubmit)="login()">-->
+<!--            <div class="form-group">-->
+<!--              <label for="email">Email</label>-->
+<!--              <input type="email" class="form-control" id="email" formControlName="email" required>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--              <label for="password">Password</label>-->
+<!--              <input type="password" class="form-control" id="password" formControlName="password" required>-->
 
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-          </form>
+<!--            </div>-->
+<!--            <button type="submit" class="btn btn-primary">Login</button>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  -->
+<!--</div>-->
+<ng-container *transloco="let t">
+<div class="tw-place-content-center tw-p-20">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+    <div class="tw-bg-white tw-shadow-md tw-rounded tw-place-content-center  tw-px-8 tw-pt-6 tw-pb-8 tw-mt-4 ">
+      <div class="mb-4">
+        <label for="email" class="tw-block tw-text-grey-darker tw-text-sm tw-font-bold tw-mb-2">
+          Email
+        </label>
+        <input type="email" id="email" formControlName="email" required class=" form-control tw-shadow tw-appearance-none tw-border tw-rounded tw-w-full tw-py-2 tw-px-3 tw-text-grey-darker"
+                 placeholder="E-mail">
+        <ng-container *ngIf="(!emailValid && emailTouched)">
+          <p class="tw-text-red-600 tw-text-xs tw-italic">
+            {{ t('login.errorEmail')}}</p>
+        </ng-container>
+      </div>
+
+      <div class="tw-mb-6">
+        <label class="tw-block tw-text-grey-darker tw-text-sm tw-font-bold tw-mb-2" for="password">
+          Password
+        </label>
+        <input
+          type="password"  id="password" formControlName="password" required
+          class=" form-control tw-shadow tw-appearance-none tw-border tw-border-red tw-rounded tw-w-full tw-py-2 tw-px-3 tw-text-grey-darker tw-mb-3"
+           placeholder="******************">
+      </div>
+      <div class="tw-flex tw-items-center tw-justify-between">
+        <button class="btn btn-primary tw-py-2 tw-px-4 tw-rounded"
+                type="submit">
+          Sign In
+        </button>
+        <div *ngIf="(!emailValid || !passwordValid) && (emailTouched && passwordTouched)">
+          <span class="tw-text-sm tw-text-red-600">{{ t('login.error')}} </span>
+
         </div>
+        <a class="tw-inline-block tw-align-baseline tw-font-bold tw-text-sm tw-text-blue hover:tw-text-blue-darker"
+           href="#">
+          Forgot Password?
+        </a>
       </div>
     </div>
-  </div>
+  </form>
+
 </div>
+</ng-container>
