@@ -1,13 +1,13 @@
-import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, DestroyRef, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {FlightParamsService} from "@state";
-import {Observable, Subject, takeUntil} from "rxjs";
+import {FlightParamsService, RouteService} from "@state";
+import {Observable} from "rxjs";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {RouteService} from "@state";
 import {CommonService} from "../../../../../shared/services";
 import {PlaneTypeForSelect} from "../../../types/plane";
 import {AsyncPipe, NgFor, NgIf} from '@angular/common';
 import {TranslocoModule} from '@ngneat/transloco';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'vfr-flight-parameters',
@@ -24,11 +24,10 @@ import {TranslocoModule} from '@ngneat/transloco';
     AsyncPipe,
   ],
 })
-export class FlightParametersComponent implements OnInit, OnDestroy {
-
+export class FlightParametersComponent implements OnInit {
 
   planesFromDateBase$: Observable<PlaneTypeForSelect[]> = this.dateBase.getPlanesFromDB();
-  private unsubscribe$ = new Subject<void>;
+
 
   flightPramsForm: FormGroup = new FormGroup<any>({
     planeVelocity: new FormControl<number | null>(0, {}),
@@ -40,14 +39,15 @@ export class FlightParametersComponent implements OnInit, OnDestroy {
   constructor(private readonly flightParams: FlightParamsService,
               private readonly roteService: RouteService,
               private readonly activeModal: NgbActiveModal,
-              public readonly dateBase: CommonService
+              private readonly dateBase: CommonService,
+              private readonly destroyRef: DestroyRef
   ) {
 
   }
 
   ngOnInit(): void {
     this.flightParams.selectFlightParams$
-      .pipe(takeUntil(this.unsubscribe$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(params => {
         this.flightPramsForm.setValue({
           planeVelocity: params.planeVelocity,
@@ -81,10 +81,5 @@ export class FlightParametersComponent implements OnInit, OnDestroy {
     this.flightParams.setParams(params)
     this.roteService.setVelocity(params.planeVelocity)
     this.closeModal()
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 }

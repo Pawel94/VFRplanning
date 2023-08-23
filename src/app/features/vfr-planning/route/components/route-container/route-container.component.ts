@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {map, Observable, Subject, takeUntil} from "rxjs";
+import {Component, DestroyRef, OnInit} from '@angular/core';
+import {map, Observable} from "rxjs";
 
 import {Marker} from "leaflet";
 import {Route, Waypoint} from "@shared";
@@ -12,6 +12,7 @@ import {RouteDetailsComponent} from '../route-details/route-details.component';
 import {NgIf} from '@angular/common';
 import {TranslocoModule} from '@ngneat/transloco';
 import {NotificationService} from "../../../../../shared/services";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 
 @Component({
@@ -21,27 +22,25 @@ import {NotificationService} from "../../../../../shared/services";
   standalone: true,
   imports: [TranslocoModule, NgIf, RouteDetailsComponent, RouterLink]
 })
-export class RouteContainerComponent implements OnInit, OnDestroy {
+export class RouteContainerComponent implements OnInit {
 
   constructor(private readonly routeService: RouteService,
               public readonly modalService: NgbModal,
-              private readonly notification: NotificationService) {
+              private readonly notification: NotificationService,
+              private readonly destroyRef: DestroyRef) {
   }
 
-  private unsubscribe$ = new Subject<void>;
   route$: Observable<Waypoint[]> = this.routeService.selectedRoute$.pipe(map(route => route.listOfWaypoints));
   actualRoute!: Route;
 
 
   ngOnInit(): void {
-    this.routeService.selectedRoute$.pipe(takeUntil(this.unsubscribe$.asObservable())).subscribe(route =>
+    this.routeService.selectedRoute$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(route =>
       this.actualRoute = route);
   }
 
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
 
   clearAllPoints(): void {
     this.notification.getWarning('notification.infoRemoveAll', {})

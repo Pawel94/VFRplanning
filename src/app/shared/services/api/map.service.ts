@@ -5,7 +5,7 @@ import {AirportsDTO} from "@features/vfr-planning"
 import {icon, Marker, marker, MarkerOptions} from "leaflet";
 import {markerAirportIcon} from "../../constant";
 import {AngularFireDatabase} from "@angular/fire/compat/database";
-import {map, Observable, shareReplay } from 'rxjs';
+import {map, Observable, shareReplay} from 'rxjs';
 
 
 @Injectable({
@@ -13,7 +13,8 @@ import {map, Observable, shareReplay } from 'rxjs';
 })
 export class MapService {
 
-  constructor(private readonly httpRequest: HttpClient, private readonly db: AngularFireDatabase,) {
+  constructor(private readonly httpRequest: HttpClient,
+              private readonly db: AngularFireDatabase,) {
   }
 
 
@@ -24,7 +25,7 @@ export class MapService {
     // @ts-ignore
     return this.db.list<AirportsDTO>('/airports').valueChanges()
       .pipe(
-          // @ts-ignore
+        // @ts-ignore
         map((airport) => this.extractMarker(airport)),
         shareReplay())
   }
@@ -39,9 +40,9 @@ export class MapService {
 
   }
 
-  private extractMarker(airport:AirportsDTO[]){
+  private extractMarker(airport: AirportsDTO[]) {
     return airport.map(data =>
-        marker([data.coordinates.latitude, data.coordinates.longitude], this.createMarkerOptions(data)))
+      marker([data.coordinates.latitude, data.coordinates.longitude], this.createMarkerOptions(data)))
 
   }
 }

@@ -4,6 +4,7 @@
     "error": "Error!",
     "info": "Information"
   },
+
   "route": {
     "title": "Your route",
     "details": "Show route details",
@@ -110,7 +111,8 @@
     "success": "Success log in: {{params.email}}",
     "fail": "Some errors",
     "errorEmail": "Give correct email",
-    "error": "These credentials do not match our records!"
+    "error": "These credentials do not match our records!",
+    "logged": "You are already logged"
   },
   "loginOut":{
     "success": "Success log out!",

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, DestroyRef, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 
 import {latAndLngFormGroup, WaypointForm} from "@features/vfr-planning";
@@ -10,7 +10,7 @@ import {correctValueIsRequaired, latitudeValueIsNotCorrect, longitudeValueIsNotC
 import {LatLng, Marker} from "leaflet";
 import {markerIconDefault} from "../../constant";
 import {CityDto} from "@shared";
-
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {NgbTypeaheadModule} from "@ng-bootstrap/ng-bootstrap";
 import {CommonModule, NgClass} from "@angular/common";
 import {ErrorValidationMessagesPipe} from "@shared";
@@ -56,10 +56,12 @@ export class SearchFormComponent implements OnInit, OnDestroy {
   );
 
   constructor(public readonly common: CommonService,
-              private readonly notification: NotificationService) {
+              private readonly notification: NotificationService,
+              private readonly destroyRef: DestroyRef) {
   }
   ngOnInit(): void {
     this.common.getCitiesFromDB()
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(element => {
         this.listOfCitiesFromDB = element;
       });

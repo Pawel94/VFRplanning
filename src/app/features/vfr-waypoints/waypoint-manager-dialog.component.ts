@@ -1,10 +1,11 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, DestroyRef, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap'
-import {Subject, takeUntil} from "rxjs";
+
 
 import {Route, Waypoint} from 'src/app/shared/model/waypoint';
 import {RouteService, TriggerService} from "@state";
 import {SearchFormComponent} from '../../shared/components/search-form/search-form.component';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 
 @Component({
@@ -14,23 +15,22 @@ import {SearchFormComponent} from '../../shared/components/search-form/search-fo
   standalone: true,
   imports: [SearchFormComponent]
 })
-export class WaypointManagerDialogComponent implements OnInit, OnDestroy {
+export class WaypointManagerDialogComponent implements OnInit {
   @Input() public updateMarker?: Waypoint;
 
 
   private actualRoute!: Route;
-  private unsubscribeSignal: Subject<void> = new Subject();
 
   constructor(private readonly activeModal: NgbActiveModal,
               private readonly routeService: RouteService,
-              private readonly trigger: TriggerService) {
+              private readonly trigger: TriggerService,
+              private readonly destroyRef: DestroyRef) {
 
   }
 
   ngOnInit(): void {
     this.routeService.selectedRoute$
-      .pipe(
-        takeUntil(this.unsubscribeSignal.asObservable()))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(route =>
         this.actualRoute = route
       );
@@ -54,11 +54,6 @@ export class WaypointManagerDialogComponent implements OnInit, OnDestroy {
     this.routeService.setRoute({...this.actualRoute});
     this.trigger.sendEvent({state: true});
     this.closeModal()
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribeSignal.next();
-    this.unsubscribeSignal.unsubscribe();
   }
 
 }

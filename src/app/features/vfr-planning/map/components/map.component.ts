@@ -1,15 +1,16 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, OnInit} from '@angular/core';
 import * as L from "leaflet";
 import {layerGroup, LeafletMouseEvent, marker, Polyline, polyline} from "leaflet";
 import {MAP_LAYERS, MAP_OPTIONS, markerIconDefault} from "../../../../shared/constant";
 
 import {Route, Waypoint} from "@shared";
 import {v4 as uuid} from 'uuid'
-import {map, Subject, takeUntil, tap} from "rxjs";
+import {map} from "rxjs";
 import {MapService} from "../../../../shared/services";
 import {CommonModule} from "@angular/common";
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 import {RouteService, TriggerService} from "@state";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 
 @Component({
@@ -22,15 +23,12 @@ import {RouteService, TriggerService} from "@state";
 })
 
 
-export class MapComponent implements OnInit, OnDestroy {
+export class MapComponent implements OnInit {
 
   mapLayers$ = this.mapService?.findAirportsFromDB().pipe(map(el => this.mapLayers.overlays = {
     ...this.mapLayers.overlays,
     'Airports': layerGroup(el),
   }))
-
-  private unsubscribeSignal: Subject<void> = new Subject();
-
 
   routeBetweenMarkers: Polyline = polyline(([]),{color:'#F00', fillColor:'#F00'});
 
@@ -44,12 +42,13 @@ export class MapComponent implements OnInit, OnDestroy {
   constructor(private readonly routeService: RouteService,
               private readonly mapService: MapService,
               private readonly trigger: TriggerService,
-              private changeDetector: ChangeDetectorRef) {
+              private readonly changeDetector: ChangeDetectorRef,
+              private readonly destroyRef: DestroyRef) {
   }
 
   ngOnInit(): void {
     this.routeService.selectedRoute$.pipe(
-      takeUntil(this.unsubscribeSignal.asObservable()))
+      takeUntilDestroyed(this.destroyRef))
       .subscribe(route => {
         this.actualRoute = route;
         this.listOfMarkers = this.actualRoute.listOfWaypoints;
@@ -87,7 +86,8 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   private detectChanges(): void {
-    this.trigger.triggered$.pipe(takeUntil(this.unsubscribeSignal.asObservable()))
+    this.trigger.triggered$
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         this.changeDetector.detectChanges();
         this.updateRouteOnMap()
@@ -97,10 +97,5 @@ export class MapComponent implements OnInit, OnDestroy {
 
   updateRouteOnMap(event?: any) {
     this.routeService.setRoute(this.actualRoute!)
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribeSignal.next();
-    this.unsubscribeSignal.unsubscribe();
   }
 }

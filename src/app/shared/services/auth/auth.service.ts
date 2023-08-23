@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import {Observable} from "rxjs";
+import {isEmpty, Observable} from "rxjs";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import firebase from "firebase/compat";
 import {Router} from "@angular/router";
@@ -21,7 +21,7 @@ export class AuthService {
   readonly authState$: Observable<User | null> = this.fireAuth.authState;
 
   constructor(private readonly fireAuth: AngularFireAuth,
-              private router: Router,
+              private readonly router: Router,
               private readonly notification: NotificationService,) {
   }
 
@@ -44,7 +44,9 @@ export class AuthService {
       .catch(() => {
         this.notification.getFailure('login.fail')
       });
-    ;
+  }
+  isLoggedIn():Observable<any>{
+  return this.authState$.pipe(isEmpty())
   }
 }
 
