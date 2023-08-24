@@ -18,7 +18,8 @@
     "bearing": "Bearing to next waypoint",
     "time": "Time to next waypoint",
     "edit": " Edit waypoint",
-    "delete": "Remove"
+    "delete": "Remove",
+    "successLoadData": "Success loaded data from {{params}}"
   },
   "flightParameters": {
     "success": "Success added flight parameters",
@@ -58,6 +59,7 @@
     "login": " Login ",
     "logout": " Logout! ",
     "waypoint": "Add new point",
+    "demoRoute": "Load demo",
     "flightInfo": "Flight info",
     "nrPoints": "Number of waypoints: {{params}}",
     "totalTime": "Total time: {{params}}'",
@@ -99,8 +101,9 @@
     "endSummaryEdit": "Are you not sure with flight plan? Go back and change waypoints.",
     "endSave": "Save route",
     "endSummarySave": "This is great flight plan - save it, and reload it letter.",
-    "notLogged": "To continue this action you have to login"
-
+    "notLogged": "To continue this action you have to login",
+    "pushSuccess": "Saved route in date base",
+    "pushError": "Some errors with saving route. Error details: {{params}} xD"
   },
   "searchForm":{
     "buttonTextEdit": "Edit waypoint",

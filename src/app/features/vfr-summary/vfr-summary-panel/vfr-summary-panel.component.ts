@@ -24,7 +24,9 @@ export class VfrSummaryPanelComponent {
   @Output() openWeatherDialog = new EventEmitter<void>();
   @Output() openFlightParamsDialog = new EventEmitter<void>();
   @Output() triggerGeneratePDF: EventEmitter<void> = new EventEmitter<void>();
+  @Output() triggerSaveRoute: EventEmitter<void> = new EventEmitter<void>();
   userState: Observable<any> = this.auth.authState$;
+
 
   constructor(private readonly auth: AuthService) {
   }
@@ -39,5 +41,9 @@ export class VfrSummaryPanelComponent {
 
   public openPDF(): void {
     this.triggerGeneratePDF.emit()
+  }
+
+  public saveRoute(): void {
+    this.triggerSaveRoute.emit()
   }
 }

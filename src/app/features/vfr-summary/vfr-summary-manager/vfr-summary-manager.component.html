@@ -14,7 +14,8 @@
     [routeInformation]="(route$ |async) ?? undefined"
     (openFlightParamsDialog)="openFlightParamsDialog()"
     (openWeatherDialog)="openWeatherDialog()"
-    (triggerGeneratePDF)="vfrTable.generatePDF()">
+    (triggerGeneratePDF)="vfrTable.generatePDF()"
+    (triggerSaveRoute)="saveRoute()">
     >
   </vfr-vfr-summary-panel>
 

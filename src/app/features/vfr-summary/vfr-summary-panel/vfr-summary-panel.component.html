@@ -93,7 +93,7 @@
               <small>  {{ t('summary.notLogged') }}</small></p>
           </ng-container>
           <button href="#" class="btn btn-primary float-end"
-                  [disabled]="!(userState | async)"><i class="bi bi-cloud-arrow-up"></i></button>
+                  [disabled]="!(userState | async)" (click)="saveRoute()"><i class="bi bi-cloud-arrow-up"></i></button>
         </div>
 
       </div>

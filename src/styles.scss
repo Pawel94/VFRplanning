@@ -26,7 +26,10 @@
   .btn-outline-success {
     @apply tw-rounded-full  hover:tw-bg-emerald-800 tw-shadow-lg tw-shadow-emerald-500/20
   }
+.btn-outline-warning{
+  @apply tw-rounded-full  hover:tw-bg-amber-300 tw-shadow-lg tw-shadow-amber-500/20
 
+}
   .btn-outline-info {
     @apply tw-rounded-full tw-bg-cyan-500/20 hover:tw-bg-cyan-700 tw-shadow-lg tw-shadow-cyan-500/40
   }
